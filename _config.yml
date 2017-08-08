@@ -24,7 +24,7 @@ github_username:  laydros
 
 # Build settings
 markdown: kramdown
-theme: "ed."
+theme: jekyll-theme-tactile
 plugins:
   - jekyll-feed
 
