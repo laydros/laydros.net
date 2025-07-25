@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header><h2>Search</h2></header>
+
+<input type="search" id="search" placeholder="Search content...">
+<div id="results"></div>
+
+<script>
+// Simple search functionality using Zola's search index
+const search = document.getElementById('search');
+const results = document.getElementById('results');
+
+// Load search index
+let searchIndex;
+fetch('/search_index.en.json')
+  .then(response => response.json())
+  .then(data => {
+    searchIndex = data;
+  });
+
+search.addEventListener('input', function() {
+  const query = this.value.toLowerCase().trim();
+  
+  if (query.length < 2) {
+    results.innerHTML = '';
+    return;
+  }
+  
+  const matches = searchIndex.filter(item => 
+    item.title.toLowerCase().includes(query) || 
+    item.body.toLowerCase().includes(query)
+  ).slice(0, 10); // Limit to 10 results
+  
+  if (matches.length === 0) {
+    results.innerHTML = '<p>No results found.</p>';
+    return;
+  }
+  
+  results.innerHTML = matches.map(item => 
+    `<div style="margin-bottom: 1em;">
+      <h3><a href="${item.permalink}">${item.title}</a></h3>
+      <p>${item.body.substring(0, 150)}...</p>
+    </div>`
+  ).join('');
+});
+</script>
+{% endblock content %}
