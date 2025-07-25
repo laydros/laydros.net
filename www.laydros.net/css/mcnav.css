@@ -1,0 +1,98 @@
+/* On large devices, use a slightly large margin and a maximum width. */
+@media screen and (min-device-width: 47em) {
+  body {
+    max-width: 70ch;
+    margin-left: 5%;
+  }
+}
+
+/* On smaller devices, skip margins. */
+@media screen (max-device-width: 47em) {
+    margin-right: 1%;
+    margin-left: 1%;
+}
+
+body {
+  font-size: 14pt;
+  line-height: 1.4;
+  color: #000;
+  background: #fff;
+  font-family: Monospace;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1ex;
+}
+
+nav ul {
+  margin-left: 0;
+  padding: 0;
+  max-width: none;
+}
+
+nav ul li {
+  display: inline-block;
+}
+
+nav li + li:before {
+  content: " | ";
+  padding: 0 1ch;
+}
+
+/*
+ * Use a border around tables, but don't draw lines around individual
+ * cells.
+ */
+table
+{
+  border-style: solid;
+  border-collapse: collapse;
+  border-width: thin;
+  font-size: 100%;
+}
+
+th, td
+{
+  border-style: solid;
+  border-width: thin;
+}
+
+
+a {
+  color: #000;
+  text-decoration: underline;
+}
+
+h1 {
+  clear: left;
+}
+
+h1,h2,h3 {
+    line-height: 1.2;
+}
+pre {
+    overflow-x: auto;
+    background: #ccc;
+}
+
+pre code {
+    font-family: Monospace;
+    color: #000;
+}
+
+img {
+    max-width: 70ch;
+    margin: 0;
+    border: solid;
+    border-width: 1px;
+}
+
+/* Very clean ruler with no shadows. */
+hr
+{
+    border: none;
+    color: #000;
+    height: 1px;
+    background-color: #000;
+}

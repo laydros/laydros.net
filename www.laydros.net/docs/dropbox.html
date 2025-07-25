@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<head>
+  <style>
+    code {
+    font-family: 'Courier New',Courier,Fixed;
+    font-size: 17px !important;
+    background-color: #f3fbfe;
+    color: #3d464d;
+    padding: 2px 5px;
+    border: 1px solid #D5DFE3;
+    border-radius: 3px;
+    }
+    .code-block-7{
+    display: inline-flex;
+    }
+    pre {
+    border: 1px solid #ccc;
+    padding: 9.5px;
+    display: block;
+    }
+    body {
+    line-height: 1.200
+    }
+    #primary {
+    float: left;
+    margin: 10px;
+    padding: 0;
+    width: 80%;
+    }
+  </style>
+</head>
+<body>
+  <div id="primary" class="entry-content" itemprop="text">
+
+    <p>Stolen from <a href="https://linoxide.com/linux-how-to/install-dropbox-ubuntu/">linoxide.com</a></p>
+    
+    <h2>Step 1) Installing Dropbox from Command Line</h2>
+    <p>We will install the <code>wget</code> package using the <code>apt</code> command.</p>
+    
+    <pre>    $ sudo apt-get update
+      $ sudo apt-get install wget
+    </pre>
+    <p>Dropbox cli version is available for both 32 and 64 bit editions, we will download Dropbox upon out version.</p>
+    <div class='code-block code-block-2 ai-viewport-2 ai-viewport-3' style='margin: 8px auto; text-align: center; display: block; clear: both;'>
+    </div>
+    <pre>    32-bit
+      $ cd ~ &amp;&amp; wget -O - "https://www.dropbox.com/download?plat=lnx.x86" | tar xzf -
+    </pre>
+    <pre>    64-bit
+      $ cd ~ &amp;&amp; wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+    </pre>
+    <p>After executing this command, It will create a new hidden folder named <code>.dropbox-dist</code> in our <code>$HOME</code> directory.</p><p>Run the following command to start the Dropbox from <code>.dropbox-dist</code> folder.</p>
+    <pre>$ ~/.dropbox-dist/dropboxd</pre>
+    <pre>    Output
+      This computer isn't linked to any Dropbox account...
+      Please visit https://www.dropbox.com/cli_link_nonce?nonce=35ff549233f01a5d4e699826b0ab6ffb to link this device.
+    </pre>
+    <p>Now open the browser and navigate to the above link to connect system with your dropbox account.</p>
+    <p>Enter Dropbox username, password and click Sign-in.</p>
+    <div class='code-block code-block-8 ai-viewport-1' style='margin: 8px auto; text-align: center; display: block; clear: both;'>
+    </div>
+    <p>The server is connected to our dropbox account, we should see a message like below.</p><pre>This computer is now linked to Dropbox. Welcome Smart</pre><p>Folder named <code>Dropbox</code> will be created in our home directory. keep the data in this folder to access it from any devices.</p>
+    <pre>$ ls Dropbox/</pre>
+    <pre>    Output
+      'Get Started with Dropbox.pdf'
+      python3_tutorial.pdf
+      Screenshots
+      'Simply Raspberry Pi.pdf'
+      smart.zip
+    </pre>
+    <p>Congratulations! The Ubuntu server has been linked to our dropbox account. The dropbox will keep running until we stop it by pressing <code>CTRL + C</code>. We should start it manually every time<br /> when we want to use dropbox.</p>
+    
+    <h2>Step 2) Installing Dropbox CLI</h2>
+    <p>Frist thing we will install Python using command below.</p><pre>sudo apt install python</pre><p>Now, Download the dropbox python script and put it in our PATH, for example <code>/usr/local/bin/</code>.</p><pre>$ sudo wget -O /usr/local/bin/dropbox "https://www.dropbox.com/download?dl=packages/dropbox.py"</pre><p>Make it executable:</p>
+    <pre>$ sudo chmod +x /usr/local/bin/dropbox</pre>
+    <p>Now we can start using the dropbox cli. To display help, simply run:</p>
+    <pre>$ dropbox</pre><pre>    Output
+      Dropbox command-line interface
+      
+      commands:
+      
+      Note: use dropbox help &lt;<span style="color: green;">command</span>&gt; to view usage for a specific command.
+      
+      status       get current status of the dropboxd
+      throttle     set bandwidth limits for Dropbox
+      help         provide help
+      stop         stop dropboxd
+      running      return whether dropbox is running
+      start        start dropboxd
+      filestatus   get current sync status of one or more files
+      ls           list directory contents with current sync status
+      autostart    automatically start dropbox at login
+      exclude      ignores/excludes a directory from syncing
+      lansync      enables or disables LAN sync
+      sharelink    get a shared link for a file in your dropbox
+      proxy        set proxy settings for Dropbox
+    </pre>
+    <p>To view the usage of a specific command, for example <code>running</code>, run:</p><pre>$ dropbox help running</pre><pre>    output
+      dropbox running
+      
+      Returns 1 if running 0 if not running.
+    </pre>
+    <p>To see if dropbox service is running or not. Type command below.</p>
+    <pre>$ dropbox status</pre>
+    <pre>    Output
+      Dropbox isn't running!
+    </pre>
+    <p>To start dropbox service. Type command below.</p><pre>$ dropbox start</pre><p>Let us again check if it is running using command.</p><pre>$ dropbox status</pre>
+    <pre>    Output
+      Up to date
+    </pre>
+    <p>It will keep running until we reboot the system.</p><p>To stop dropbox service. Type command below.</p><pre>$ dropbox stop</pre><pre>    output
+      Dropbox daemon stopped.
+    </pre>
+    <p>To get the current sync status of a file, Type command below.</p><pre>$ dropbox filestatus Dropbox/smart.txt</pre><pre>    Output
+      Dropbox/smart.txt: up to date
+    </pre>
+    <p>we can exclude a directory from syncing. For instance, We will exclude <code>dir1</code> folder using command below.</p><pre>$ dropbox exclude add dir1</pre>
+    <p>We can add multiple directories with space separated values to exclude them from syncing like below.</p><pre>$ dropbox exclude add dir1 dir2</pre><p>To view the list of directories currently excluded from syncing, Type command below.</p>
+    <pre>$ dropbox exclude list</pre><p>To remove a directory from the exclusion list, Type command below.</p><pre>$ dropbox exclude remove dir2</pre><p>To get a shared link for a file, for example smart.txt, in our dropbox folder, Type command below.</p>
+    <pre>$ dropbox sharelink Dropbox/smart.txt</pre>
+    <pre>    Output
+      https://www.dropbox.com/s/rqteaol58c1zlkw/smart.txt?dl=0
+    </pre>
+    <p>We can now pass the above URL to anyone.</p><p>To enable lansync, Type command below.</p><pre>$ dropbox lansync y</pre><p>To disable lansync, Type command below.</p>
+    <pre>$ dropbox lansync n</pre>
+    <h2>Step 3) Starting Dropbox Automatically Every Reboot</h2>
+    <p>We can make Dropbox service to automatically start on every reboot. Create a systemd service unit for Dropbox.</p><pre>$ sudo nano /etc/systemd/system/dropbox.service</pre>
+    <p>Add the following lines:</p><pre>[Unit]
+      Description=Dropbox Service
+      After=network.target
+      
+      [Service]
+      ExecStart=/bin/sh -c '/usr/local/bin/dropbox start'
+      ExecStop=/bin/sh -c '/usr/local/bin/dropbox stop'
+      PIDFile=${HOME}/.dropbox/dropbox.pid
+      User=<span style="color: green;">smart</span>
+      Group=<span style="color: green;">smart</span>
+      Type=forking
+      Restart=on-failure
+      RestartSec=5
+      StartLimitInterval=60s
+      StartLimitBurst=3
+      
+      [Install]
+      WantedBy=multi-user.target
+    </pre>
+    <p>Replace User, Group and dropbox cli path <code>/usr/local/bin/</code> with our own values. Save and quite the file.</p>
+    <p>Reload daemon using command below.</p>
+    <pre>$ sudo systemctl daemon-reload</pre><p>Enable dropbox service using command below.</p>
+    <pre>$ sudo systemctl enable dropbox</pre>
+    <p>Start dropbox service using command below.</p>
+    <pre>$ sudo systemctl start dropbox</pre>
+    <p>Now dropbox service will automatically start at every reboot.</p>
+    <p>Check running of the service using command below.</p><pre>$ sudo systemctl status dropbox</pre>
+  </div>
+</body>
+</html>

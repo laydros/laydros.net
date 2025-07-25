@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width" />
+  <title>Some links</title>
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/sakura.css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="/">home</a></li>
+      <li><a href="/docs/">docs</a></li>
+      <li><a href="http://git.laydros.net">repo</a></li>
+      <li><a href="/about.html">about</a></li>
+    </ul>
+  </nav>
+  <br />
+  <main>
+  <h2>links</h2>
+  <div id="intro">
+    <p>Just some personal bookmarks</p>
+  </div>
+  <div id="list">
+    <ul>
+			<li><a href="https://jdebp.eu/FGA/legacy-is-not-a-pejorative.html">Legacy is not a pejorative</a></li>
+      <li><a href="https://blog.kennard.dev/2019-06-19-git-debug-gitignore/">debugging gitignore</a></li>
+      <li><a href="https://edwardtufte.github.io/tufte-css/">Tufte CSS</a></li>
+			<li><a href="https://old.reddit.com/r/AskNetsec+Intelligence+SocialEngineering+computerforensics+hacking+netsec+netsecstudents+physec+privacy+privacytoolsIO+privatelife+pwned+technology/">Reddit Security multi-reddit</a></li>
+			<li><a href="https://old.reddit.com/r/FreeGaming+NOGOOGLE+UsabilityPorn+degoogleyourlife+fossdroid+freeculture+freesoftware+librelife+openbsd+openbsd_gaming+opensource+opensourcegames+opensourcehardware+privacy+privacytoolsIO+privatelife+tinycode/">Reddit FOSS multi-reddit</a></li>
+      <li><a href="https://www.gnu.org/software/gawk/manual/gawk.html">GNU Awk Handbook</a></li>
+      <li><a href="https://duckduckgo.com/?kp=-1&amp;kz=-1&amp;kc=-1&amp;kaj=u&amp;kam=here-maps&amp;kak=-1&amp;kal=-1&amp;kae=c&amp;kt=n&amp;ks=m&amp;kw=w&amp;ka=n&amp;kd=-1">Fancy DDG</a></li>
+      <li><a href="https://wiki.xxiivv.com/#computer">Devine Lu Linveag computer setup</a></li>
+      <li><a href="https://pragha-music-player.github.io">Prahga linux music player-GTK, written in C</a></li>
+      <li><a href="https://digdeeper.neocities.org/ghost/ninja.html">Ninja's internet guide</a></li>
+      <li><a href="https://yoshuawuyts.gitbooks.io/knowledge/content/">Yoshua Wuyts knowledge database</a></li>
+      <li><a href="https://forums.bunsenlabs.org/viewtopic.php?id=3371">Taming font overload</a></li>
+      <li><a href="https://github.com/Lucy/tewi-font">tewi small font</a></li>
+      <li><a href="http://eradman.com/entrproject/">entr - run when files change</a></li>
+      <li><a href="https://likegeeks.com/write-shell-script/">practical shell scripts</a></li>
+      <li><a href="https://jeffhuang.com/designed_to_last/">This page is designed to last</a></li>
+      <li><a href="https://www.adelielinux.org">Adelie Linux</a></li>
+      <li><a href="https://dataswamp.org/~solene/2017-03-17-integrity.html">bitrot - Solene Rapenne</a></li>
+      <li><a href="https://mtlynch.io/status-updates-to-nobody/">staying motivated by sending updates to nobody</a></li>
+      <li><a href="https://www.duckware.com/tech/wifi-in-the-us.html">Guide to Wifi</a></li>
+			<li><a href="https://brython.info/">Brython - client side web python</a></li>
+			<li><a href="https://www.bfi.org/about-fuller/resources/everything-i-know">Buckminster Fuller - Everything I Know</a></li>
+      <li><a href="http://ʞ.cc/irl/term.html">everything you ever wanted to know about terminals</a></li>
+      <li><a href="https://www.debian.org/social_contract">Debian Social Contract</a></li>
+      <li><a href="https://inconsolation.wordpress.com/">Inconsolation</a></li>
+      <li><a href="https://lychee.electerious.com/">Lychee - photo management</a></li>
+      <li><a href="https://begriffs.com/posts/2017-05-17-openbsd-workstation-guide.html">begriffs OpenBSD Workstation</a></li>
+      <li><a href="https://bytecellar.com/2007/07/21/apple_c_as_text/">BYTECellar - Apple //c as a dumb terminal</a></li>
+			<li><a href="https://support.lenovo.com/co/en/solutions/ht505031">Official Thinkpad Repair Videos</a></li>
+			<li><a href="http://www.kostis.it/hints/vi-editor.htm">vi pocket reference</a></li>
+			<li><a href="http://www.chiark.greenend.org.uk/doc/alpine-doc/tech-notes/config.html">Alpine notes no longer at Wash U</a></li>
+			<li><a href="https://dwm.suckless.org/customisation/patches_in_git/">Maintaining dwm configuration and customization in git</a></li>
+      <li><a href="https://njal.la/">njalla - privacy focused domain registrar</a></li>
+			<li>Open Alternatives</li>
+			Name - alternative of
+			<ul>
+				<li><a href="https://www.wallabag.org/en">Wallabag - bookmarking</a></li>
+				<li><a href="https://sr.ht/">sourcehut - git hosting</a></li>
+				<li><a href="https://librespeed.org/">LibreSpeed - Speedtest</a></li>
+				<li><a href="https://pixelfed.org/">Pixelfed - instagram alternative</a></li>
+				<li><a href="https://raddle.me">Raddle - more open reddit I think</a></li>
+			</ul>
+		<li>Open Alternative Lists</li>
+    <ul>
+      <li><a href="https://opensource.builders/">Opensource Builders - dev targeted</a></li>
+			<li><a href="https://www.privacytools.io/">PrivacyTools</a></li>
+			<li><a href="https://prism-break.org/en/">Prism Break</a></li>
+			<li><a href="https://securitycheckli.st/">Security Checklist - less FOSS focused</a></li>
+			<li><a href="https://ssd.eff.org/en">EFFs Surveillance Self-Defense</a></li>
+			<li><a href="https://switching.software/">switching.software</a></li>
+			<li><a href="https://drewdevault.com/2020/06/19/Mail-service-provider-recommendations.html">Drew DeVault Email provider suggestions</a></li>
+		</ul>
+		<li>Open Games</li>
+		<ul>
+			<li><a href="https://www.openttd.org/">OpenTDD</a></li>
+			<li><a href="https://openxcom.org/">OpenXcom</a></li>
+			<li><a href="http://www.thief2x.com/">Thief 2X</a></li>
+			<li><a href="https://unvanquished.net/">Unvanquished</a></li>
+			<li><a href="https://opendiablo2.com/">OpenDiablo2</a></li>
+			<li><a href="https://wargus.github.io/">Wargus - Warcraft 2</a></li>
+		</ul>
+		<li>Setups</li>
+		<ul>
+			<li><a href="https://imgur.com/a/skK1f">Loft Minimalism - with neo geo cab</a></li>
+			<li><a href="https://imgur.com/a/badwC">The Hipsterstation</a></li>
+	
+		</ul>
+		<li>Follow - A few blogs/people that I like to check occasionally</li>
+		<ul>
+      <li><a href="https://infosec-handbook.eu/">Infosec Handbook</a></li>
+			<li><a href="http://bloerg.net/">Bloerg</a></li>
+			<li><a href="https://jcs.org/">JCS</a></li>
+			<li><a href="https://bitcannon.net/">Bit Cannon</a></li>
+			<li><a href="https://nullprogram.com/">Null Program</a></li>
+			<li><a href="https://github.com/cmacrae">Calum MacRae</a></li>
+			<li><a href="http://whois.xero.nu/">xero</a></li>
+			<li><a href="http://joeyh.name/">Joey Hess</a></li>
+			<li><a href="https://justin.abrah.ms/">Justin Abrams</a></li>
+			<li><a href="http://calummacrae.blogspot.com/2012/07/being-green-with-penguins-apples-part.html">Phynre-Calum MacRae- not there anymore, but can probably use wayback</a></li>
+			<li><a href="https://upsilon.cc/~zack/">zacchiroli - one time debian president</a></li>
+			<li><a href="https://blog.filippo.io/">fillippo.io - secutiry</a></li>
+			<li><a href="https://postwarjapan.tumblr.com/post/104277575182">Postwar Japan - photo tumblr</a></li>
+			<li><a href="https://vxlabs.com/">vxlabs</a></li>
+			<li><a href="https://journeymantoolbox.pt/">Journeyman's Toolbox</a></li>
+			<li><a href="https://begriffs.com/">begriffs</a></li>
+			<li><a href="https://tylercipriani.com/">Tyler Cipriani</a></li>
+			<li><a href="https://www.cca.org/">CCA</a></li>
+			<li><a href="https://blog.patshead.com/">Pat's Head</a></li>
+			<li><a href="https://git.2f30.org/">...made with strange alien technology</a></li>
+			<li><a href="https://theimpossiblecool.tumblr.com/">The Impossible Cool</a></li>
+			<li><a href="https://cpbotha.net/">cpbotha</a></li>
+			<li><a href="https://jpmens.net/">Jan-Piet Mens </a></li>
+			<li><a href="http://exple.tive.org/blarg/"></a>blarg?</li>
+			<li><a href="https://utcc.utoronto.ca/~cks/">Chris Siebenmann - U Toronto</a></li>
+			<li><a href="https://blog.haschek.at/">Futurelopment</a></li>
+			<li><a href="https://xxiivv.com">XXIIVV</a></li>
+			<li><a href="https://wiki.xxiivv.com/site/computer.html">XXIIVV - computer</a></li>
+			<li><a href="https://golb.hplar.ch/index.html">Ralph's Blog</a></li>
+      <li><a href="https://computableverse.com/">computableverse</a></li>
+			<li><a href="http://z3bra.org/">z3bradotorg</a></li>
+			<li><a href="http://blog.z3bra.org/">z3bra's blog</a></li>
+			<li><a href="http://leahneukirchen.org/blog/">leah blogs</a></li>
+			<li><a href="https://christine.website/">Christine Dodrill</a></li>
+			<li><a href="https://bash-prompt.net/guides/">Bash Prompt Guides</a></li>
+			<li><a href="https://www.zachary.com/posts/how-to-data/">dcreemer rants</a></li>
+			<li><a href="https://zachholman.com/">Zach Holman</a></li>
+			<li><a href="https://jvns.ca/">Julia Evans</a></li>
+			<li><a href="https://drawings.jvns.ca/">Julia's drawings</a></li>
+			<li><a href="https://stevelosh.com/blog/">Steve Losh</a></li>
+			<li><a href="https://pthree.org/">Aaron Toponce - pthree</a></li>
+			<li><a href="https://blog.jessfraz.com/">Jessie Frazelle</a></li>
+			<li><a href="http://news.dieweltistgarnichtso.net">Hipster News</a></li>
+			<li><a href="https://eklitzke.org/">Evan Klitzke</a></li>
+			<li><a href="https://karl-voit.at/">Karl Voit - emacs</a></li>
+			<li><a href="http://www.howardabrams.com/">Howard Abrams - emacs</a></li>
+			<li><a href="https://kevq.uk/">Kevin Quirk</a></li>
+			<li><a href="https://www.romanzolotarev.com/">Roman Zolotarev</a></li>
+		</ul>
+		<li>Linux journal
+		<ul>
+			<li><a href="https://www.linuxjournal.com/content/so-long-and-thanks-all-bash">2017-12-First LJ close - so long and thanks for all the bash</a></li>
+			<li><a href="https://www.linuxjournal.com/content/what-linux-journals-resurrection-taught-me-about-foss-community">2019-04-What LJ resurrection taught me</a></li>
+			<li><a href="https://www.linuxjournal.com/content/linux-journal-ceases-publication-awkward-goodbye">2019-08-LJ ceases publication - awkward goodbye</a></li>
+		</ul>
+		</li>
+		<li>Emacs
+		<ul>
+			<li><a href="https://notmuchmail.org">Notmuch mail client I would like to be using</a></li>
+			<li><a href="https://sachachua.com/blog/2014/01/tips-learning-org-mode-emacs/">Sacha Chua on org-mode</a></li>
+			<li><a href="https://www.reddit.com/r/emacs/comments/9v7ut1/screenshot_showcase_2018/">reddit - emacs screenshots 2018</a></li>
+			<li><a href="http://members.optusnet.com.au/~charles57/GTD/gtd_workflow.html">Charles Cave org-mode GTD</a></li>
+			<li><a href="http://tech.memoryimprintstudio.com/the-ultimate-emailing-agent-with-mu4e-and-emacs/">Ultimate Mail agent with mu4e and emacs</a></li>
+			<li><a href="https://github.com/caiorss/Emacs-Elisp-Programming">caioss elisp tutorial</a></li>
+		</ul>
+		</li>
+		<li>Mac
+		<ul>
+			<li><a href="https://github.com/kholia/OSX-KVM">OSX-KVM</a></li>
+			<li><a href="https://www.farces.com/wikis/naked-server/">Mac Mini Naked Server Guide</a></li>
+		</ul>
+		</li>
+		<li>Retro Computing
+		<ul>
+			<li><a href="https://www.gryphel.com/c/minivmac/">Mini vMac</a></li>
+			<li><a href="https://archive.org/details/softwarelibrary">Archive.org Software Library</a></li>
+		</ul>
+		</li>
+		<li>BSD
+		<ul>
+			<li><a href="https://vermaden.wordpress.com/2018/06/21/freebsd-desktop-part-6-key-components-task-bar/">Vermaden BSD Desktop</a></li>
+			<li><a href="https://www.c0ffee.net/">c0ffee.net</a></li>
+			<li><a href="https://rgz.ee/">Roman Zolotarev</a></li>
+      <li><a href="https://dataswamp.org/~solene/">Solene's percent</a></li>
+			<li><a href="https://twitter.com/romanzolotarev/status/1057130041165955074">Roman's list of BSD folks</a></li>
+		</ul>
+		</li>
+	</ul>
+</div>
+</main>
+</body>
+</html>
