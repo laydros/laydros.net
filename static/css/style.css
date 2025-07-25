@@ -6,6 +6,12 @@ nav li {
   font-family: Courier New, Courier, monospace;
 }
 
+nav:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 #footer {
   margin-top: 2em;
   font-size:0.8em;
