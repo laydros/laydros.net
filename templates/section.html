@@ -3,4 +3,42 @@
 {% block content %}
 <header><h2>{{ section.title }}</h2></header>
 {{ section.content | safe }}
+
+{% if section.path == "blog/" %}
+  {% if section.pages %}
+    <div class="blog-posts">
+      {% for page in section.pages %}
+        <article class="blog-post-preview">
+          <h3><a href="{{ page.permalink }}">{{ page.title }}</a></h3>
+          <div class="meta">
+            <time datetime="{{ page.date }}">{{ page.date | date(format="%B %d, %Y") }}</time>
+            {% if page.taxonomies.tags %}
+              <div class="tags">
+                {% for tag in page.taxonomies.tags %}
+                  <a href="{{ get_taxonomy_url(kind="tags", name=tag) }}" class="tag">#{{ tag }}</a>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+          {% if page.summary %}
+            <p>{{ page.summary | safe }}</p>
+          {% endif %}
+        </article>
+      {% endfor %}
+    </div>
+    
+    {% if paginator %}
+      <nav class="pagination">
+        {% if paginator.previous %}
+          <a href="{{ paginator.previous }}" class="prev">← Newer posts</a>
+        {% endif %}
+        {% if paginator.next %}
+          <a href="{{ paginator.next }}" class="next">Older posts →</a>
+        {% endif %}
+      </nav>
+    {% endif %}
+  {% else %}
+    <p><em>No blog posts yet. Check back soon!</em></p>
+  {% endif %}
+{% endif %}
 {% endblock content %}

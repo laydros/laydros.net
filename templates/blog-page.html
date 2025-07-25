@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<article>
+  <header>
+    <h1>{{ page.title }}</h1>
+    <div class="meta">
+      <time datetime="{{ page.date }}">{{ page.date | date(format="%B %d, %Y") }}</time>
+      {% if page.taxonomies.tags %}
+        <div class="tags">
+          {% for tag in page.taxonomies.tags %}
+            <a href="{{ get_taxonomy_url(kind="tags", name=tag) }}" class="tag">#{{ tag }}</a>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </header>
+  
+  <div class="content">
+    {{ page.content | safe }}
+  </div>
+</article>
+
+<nav class="post-nav">
+  {% if page.earlier %}
+    <a href="{{ page.earlier.permalink }}" class="prev">← {{ page.earlier.title }}</a>
+  {% endif %}
+  {% if page.later %}
+    <a href="{{ page.later.permalink }}" class="next">{{ page.later.title }} →</a>
+  {% endif %}
+</nav>
+{% endblock content %}
