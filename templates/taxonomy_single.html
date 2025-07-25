@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header><h2>Posts tagged with "{{ term.name }}"</h2></header>
+
+<div class="blog-posts">
+  {% for page in term.pages %}
+    <article class="blog-post-preview">
+      <h3><a href="{{ page.permalink }}">{{ page.title }}</a></h3>
+      <div class="meta">
+        <time datetime="{{ page.date }}">{{ page.date | date(format="%B %d, %Y") }}</time>
+      </div>
+      {% if page.summary %}
+        <p>{{ page.summary | safe }}</p>
+      {% endif %}
+    </article>
+  {% endfor %}
+</div>
+{% endblock content %}

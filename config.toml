@@ -6,6 +6,11 @@ compile_sass = true
 minify_html = false
 generate_feeds = true
 
+taxonomies = [
+  {name = "tags"},
+  {name = "categories"},
+]
+
 [markdown]
 highlight_code = true
 
