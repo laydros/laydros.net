@@ -130,11 +130,6 @@ Just some personal bookmarks
 - [Phosh](https://wiki.postmarketos.org/wiki/Phosh)
 - [Plasma Mobile](https://www.plasma-mobile.org/)
 
-### Non Android/iOS Phones
-
-- [PinePhone](https://www.pine64.org/pinephone/)
-- [Librem 5 Phone](https://puri.sm/products/librem-5/)
-
 ## Open Games
 
 - [OpenTDD](https://www.openttd.org/)

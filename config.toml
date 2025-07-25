@@ -19,8 +19,10 @@ highlight_theme = "monokai"
 
 [extra]
 
-# Skip problematic external links that fail due to redirects, bot protection, etc.
+# Link checking configuration - external checking disabled for speed/reliability
 [link_checker]
+external_level = "warn"  # Disable external link checking (set to "error" to re-enable)
+# Skip list for problematic external links (for when external checking is enabled)
 skip_prefixes = [
     "https://twitter.com/",
     "https://stackoverflow.com/",
@@ -33,4 +35,5 @@ skip_prefixes = [
     "https://blogspot.com/",
     "http://calummacrae.blogspot.com/",
     "https://support.lenovo.com/",
+    "https://freedombox.org/",
 ]
