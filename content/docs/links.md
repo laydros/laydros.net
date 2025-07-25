@@ -24,9 +24,7 @@ Just some personal bookmarks
 - [begriffs OpenBSD Workstation](https://begriffs.com/posts/2017-05-17-openbsd-workstation-guide.html)
 - [Official Thinkpad Repair Videos](https://support.lenovo.com/co/en/solutions/ht505031)
 - [vi pocket reference](http://www.kostis.it/hints/vi-editor.htm)
-- [Alpine notes no longer at Wash U](http://www.chiark.greenend.org.uk/doc/alpine-doc/tech-notes/config.html)
 - [Maintaining dwm configuration and customization in git](https://dwm.suckless.org/customisation/patches_in_git/)
-- [Destination Linux videos](https://odysee.com/@destinationlinux:9)
 - [Stingle encrypted photo storage](https://stingle.org/)
 
 ## Self-Hosting Platforms
@@ -50,7 +48,6 @@ Just some personal bookmarks
 - [Brython - client side web python](https://brython.info/)
 - [Goal kicker - programming cheat sheets](https://goalkicker.com/)
 - [GNU Awk Handbook](https://www.gnu.org/software/gawk/manual/gawk.html)
-- [debugging gitignore](https://blog.kennard.dev/2019-06-19-git-debug-gitignore/)
 - [This page is designed to last](https://jeffhuang.com/designed_to_last/)
 
 ## Terminal
@@ -59,25 +56,22 @@ Just some personal bookmarks
 - [tewi small font](https://github.com/Lucy/tewi-font)
 - [everything you ever wanted to know about terminals](http://ʞ.cc/irl/term.html)
 - [Inconsolation](https://inconsolation.wordpress.com/)
-- [practical shell scripts](https://likegeeks.com/write-shell-script/)
 
 ## Security and Privacy
 
 - [Person Generator](https://www.fakepersongenerator.com/)
 - [Reddit Username Generator](https://perchance.org/reddit-username)
 - [njalla - privacy focused domain registrar](https://njal.la/)
-- [Ninja's internet guide](https://digdeeper.neocities.org/ghost/ninja.html)
 - [How to encrypt everything](https://failsafe.writeas.com/how-to-encrypt-everything)
-- [The New Oil](https://thenewoil.xyz/)
+- [The New Oil](https://thenewoil.org/)
 - [Spyware Watchdog - browser info](https://spyware.neocities.org/index.html)
   - [Firefox](https://spyware.neocities.org/articles/firefox.html)
-- [Shadow Wiki on browsers](https://tilde.club/~acz/shadow_wiki/browsers.xhtml)
 - [Kristall small internet browser](https://kristall.random-projects.net/)
 - [Dig Deeper on browsers, etc](https://digdeeper.neocities.org/)
 
 ## Open Alternatives
 
-- [Wallabag - bookmarking](https://www.wallabag.org/en)
+- [Wallabag - bookmarking](https://www.wallabag.org/)
 - [sourcehut - git hosting](https://sr.ht/)
 - [LibreSpeed - Speedtest](https://librespeed.org/)
 - [Pixelfed - instagram alternative](https://pixelfed.org/)
@@ -99,7 +93,7 @@ Just some personal bookmarks
 - [libreddit](https://github.com/spikecodes/libreddit)
   - [official libreddit instance](https://libredd.it/)
 - [invidious - youtube](https://github.com/iv-org/invidious)
-  - [invidious instances](https://docs.invidious.io/Invidious-Instances.md)
+  - [invidious instances](https://docs.invidious.io/instances/)
 - [nitter - twitter](https://github.com/zedeus/nitter)
   - [nitter official instance](https://nitter.net)
 - [bibliogram - instagram](https://sr.ht/~cadence/bibliogram/)
@@ -114,7 +108,6 @@ Just some personal bookmarks
 ## Android without Google
 
 - [F-Droid FOSS App Catalog](https://f-droid.org/)
-- [Verummeum - Google Free Android](https://verummeum.com/google-free-android/)
 - [Bromite Browser - Chromium Fork](https://www.bromite.org/)
 - [Prism Break Android](https://prism-break.org/en/categories/android/)
 - [Android Hardening Guide](https://blog.torproject.org/mission-impossible-hardening-android-security-and-privacy)
@@ -167,7 +160,7 @@ Just some personal bookmarks
 
 - [Loft Minimalism - with neo geo cab](https://imgur.com/a/skK1f)
 - [The Hipsterstation](https://imgur.com/a/badwC)
-- [Devine Lu Linveag computer setup](https://wiki.xxiivv.com/#computer)
+- [Devine Lu Linveag computer setup](https://wiki.xxiivv.com/)
 
 ## Follow - A few blogs/people that I like to check occasionally
 
@@ -179,7 +172,6 @@ Just some personal bookmarks
 - [Bit Cannon](https://bitcannon.net/)
 - [Null Program](https://nullprogram.com/)
 - [Calum MacRae](https://github.com/cmacrae)
-- [xero](http://whois.xero.nu/)
 - [Winny's Blog](https://blog.winny.tech/)
 - [Mat Duggan](https://matduggan.com)
 - [Joey Hess](http://joeyh.name/)
@@ -190,7 +182,6 @@ Just some personal bookmarks
 - [Steven Van Bael](https://stevenvanbael.com/)
 - [Postwar Japan - photo tumblr](https://postwarjapan.tumblr.com/post/104277575182)
 - [vxlabs](https://vxlabs.com/)
-- [Journeyman's Toolbox](https://journeymantoolbox.pt/)
 - [begriffs](https://begriffs.com/)
 - [Tyler Cipriani](https://tylercipriani.com/)
 - [CCA](https://www.cca.org/)
@@ -199,7 +190,6 @@ Just some personal bookmarks
 - [The Impossible Cool](https://theimpossiblecool.tumblr.com/)
 - [cpbotha](https://cpbotha.net/)
 - [Jan-Piet Mens](https://jpmens.net/)
-- [blarg?](http://exple.tive.org/blarg)
 - [Chris Siebenmann - U Toronto](https://utcc.utoronto.ca/~cks/)
 - [Futurelopment](https://blog.haschek.at/)
 - [XXIIVV](https://xxiivv.com)
@@ -209,7 +199,6 @@ Just some personal bookmarks
 - [z3bradotorg](http://z3bra.org/)
 - [z3bra's blog](http://blog.z3bra.org/)
 - [leah blogs](http://leahneukirchen.org/blog/)
-- [Christine Dodrill](https://christine.website/)
 - [Bash Prompt Guides](https://bash-prompt.net/guides/)
 - [dcreemer rants](https://www.zachary.com/posts/how-to-data/)
 - [Zach Holman](https://zachholman.com/)
@@ -217,7 +206,6 @@ Just some personal bookmarks
 - [Michael Stapelberg](https://michael.stapelberg.ch/)
 - [Julia's drawings](https://drawings.jvns.ca/)
 - [Steve Losh](https://stevelosh.com/blog/)
-- [Aaron Toponce - pthree](https://pthree.org/)
 - [Jessie Frazelle](https://blog.jessfraz.com/)
 - [Hipster News](http://news.dieweltistgarnichtso.net)
 - [Evan Klitzke](https://eklitzke.org/)
@@ -237,8 +225,6 @@ Just some personal bookmarks
 - [Notmuch mail client I would like to be using](https://notmuchmail.org)
 - [Sacha Chua on org-mode](https://sachachua.com/blog/2014/01/tips-learning-org-mode-emacs/)
 - [reddit - emacs screenshots 2018](https://www.reddit.com/r/emacs/comments/9v7ut1/screenshot_showcase_2018/)
-- [Charles Cave org-mode GTD](http://members.optusnet.com.au/~charles57/GTD/gtd_workflow.html)
-- [Ultimate Mail agent with mu4e and emacs](http://tech.memoryimprintstudio.com/the-ultimate-emailing-agent-with-mu4e-and-emacs/)
 - [libvterm](https://github.com/akermu/emacs-libvterm) - better terminal in emacs
 - [caioss elisp tutorial](https://github.com/caiorss/Emacs-Elisp-Programming)
 - [Plainorg subreddit](https://www.reddit.com/r/plainorg/) - iOS Org-Mode
@@ -252,7 +238,7 @@ Just some personal bookmarks
 ## Mac
 
 - [OSX-KVM](https://github.com/kholia/OSX-KVM)
-- [Mac Mini Naked Server Guide](https://www.farces.com/wikis/naked-server/)
+- [Mac Mini Naked Server Guide](https://web.archive.org/web/20190414143407/https://www.farces.com/wikis/naked-server/)
 
 ## Retro Computing
 
@@ -266,13 +252,11 @@ Just some personal bookmarks
 - [c0ffee.net](https://www.c0ffee.net/)
 - [Roman Zolotarev](https://rgz.ee/)
 - [Solene's percent](https://dataswamp.org/~solene/)
-- [Roman's list of BSD folks](https://twitter.com/romanzolotarev/status/1057130041165955074)
 - [Antranigv](https://antranigv.am/)
 - [xosc](https://xosc.org/articles.html)
 - [Rubenerd - FreeBSD & Mac](https://rubenerd.com/)
 - [Rube's dotfiles](https://gitlab.com/rubenerd/dotfiles-desu)
-- [auto-admin tool, tied with desktop installer](http://acadix.biz/auto-admin.php)
-- [Dan Schmid FreeBSD Tutorials](https://danschmid.de/en/freebsd-tutorials)
+- [auto-admin tool, tied with desktop installer](http://acadix.biz/)
 - [Calomel](https://calomel.org/)
 - [awesome openbsd](https://ligurio.github.io/awesome-openbsd/)
 - [high5 nl dotfiles](https://git.high5.nl/dotfiles/tree/)

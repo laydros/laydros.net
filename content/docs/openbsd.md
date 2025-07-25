@@ -7,7 +7,7 @@ template = "page.html"
 
 There are a few things I do on any OpenBSD desktop, I'm collecting many of them here. This is borrowed from several sources including:
 
-- [rgz.ee](https://rgz.ee/openbsd/install.html)
+- [romanzolotarev.com](https://romanzolotarev.com/openbsd/install.html)
 - [c0ffee.net](https://www.c0ffee.net/blog/openbsd-on-a-laptop)
 
 ## Set Caps as Ctrl
@@ -142,7 +142,7 @@ rcctl restart sshd
 
 ### Update/Patch System
 
-Update the base system with [syspatch(8)](https://man.openbsd.org/OpenBSD-7.4/syspatch.8):
+Update the base system with [syspatch(8)](https://man.openbsd.org/syspatch.8):
 
 ```bash
 # syspatch
@@ -150,7 +150,7 @@ Update the base system with [syspatch(8)](https://man.openbsd.org/OpenBSD-7.4/sy
 
 ### Update Packages
 
-Update packages with [pkg_add(1)](https://man.openbsd.org/OpenBSD-7.4/pkg_add(1)) -u:
+Update packages with [pkg_add(1)](https://man.openbsd.org/pkg_add) -u:
 
 ```bash
 # pkg_add -u
@@ -160,13 +160,13 @@ Update packages with [pkg_add(1)](https://man.openbsd.org/OpenBSD-7.4/pkg_add(1)
 
 First check the upgrade guide for the version you are upgrading too. Sometimes there are manual changes that must be done.
 
-Then simply run [sysupgrade(8)](https://man.openbsd.org/OpenBSD-7.4/sysupgrade.8):
+Then simply run [sysupgrade(8)](https://man.openbsd.org/sysupgrade.8):
 
 ```bash
 # sysupgrade
 ```
 
-After the upgrade is complete, make sure to run [sysmerge(8)](https://man.openbsd.org/OpenBSD-7.4/sysmerge.8) in case any config files have changed:
+After the upgrade is complete, make sure to run [sysmerge(8)](https://man.openbsd.org/sysmerge.8) in case any config files have changed:
 
 ```bash
 # sysmerge

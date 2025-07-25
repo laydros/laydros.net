@@ -13,6 +13,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Check site
+        uses: shalzz/zola-deploy-action@v0.17.2
+        env:
+          BUILD_ONLY: true
+          BUILD_FLAGS: check
       - name: Build with Zola
         uses: shalzz/zola-deploy-action@v0.17.2
         env:
@@ -24,6 +29,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Check site before deploy
+        uses: shalzz/zola-deploy-action@v0.17.2
+        env:
+          BUILD_ONLY: true
+          BUILD_FLAGS: check
       - name: Build and deploy
         uses: shalzz/zola-deploy-action@v0.17.2
         env:
