@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="/css/nav.css">
+<title>OS X survival guide
+</title>
+</head>
+<body>
+
+<nav>
+  <ul>
+    <li><a href="/mc/">Home</a></li>
+    <li><a href="/mc/bio.html">About</a></li>
+    <li><a href="/mc/now.html">Now</a></li>
+    <li><a href="/mc/writings.html">Writings</a></li>
+    <li><a href="/mc/blog/">Blog</a></li>
+    <li><a href="/mc/projects/">Projects</a></li>
+    <li><a href="/mc/contact.html">Contact</a></li>
+  </ul>
+</nav>
+  <h3>Stolen from MC at <a href="https://hack.org/mc/writings/mac-survival.html">hack.org</a></h3>
+<h1>OS X survival guide
+</h1>
+<p>Some notes about setting up OS X to my liking.</p>
+<h2>Introduction</h2>
+<p>I'm fairly new to the OS X universe. I started using a Macbook Air as
+my main computer in the summer of 2013, coming from a FreeBSD
+background. OS X, in my view, is a pretty decent Unix, especially
+combined with <a href="http://brew.sh/">Homebrew</a>. However, it's mostly
+plumbing for Emacs anyway.</p>
+<h2>Shell</h2>
+<p>The default shell is bash but zsh is already installed! Change the
+login shell with <code>chsh(1)</code>.</p>
+<p>Some of the installed programs end up in <code>/usr/local/bin</code>. The default
+PATH doesn't include that, so add that.</p>
+<h2>Hostname</h2>
+<p>On a fresh install a Mac sets your hostname to something boring like
+“Michaels-MacBookAir”. To change it, use:</p>
+<pre><code>% sudo scutil --set HostName jsb.hack.org
+% sudo scutil --set LocalHostName jsb
+% sudo scutil --set ComputerName &quot;Johann Sebastian Bach&quot;
+</code></pre>
+<p>“HostName” is the ordinary hostname. “LocalHostName” is the Bonjour
+host name. ”ComputerName” is a user friendly version of the above.</p>
+<h2>Keyboard</h2>
+<p>First, turn off the unnecessary backlight completely:</p>
+<ul>
+<li>System Preferences-&gt;Keyboard</li>
+</ul>
+<p>and uncheck “Adjust keyboard brightness in low light”. Then lower the
+brightness with F5 until it's completely switched off.</p>
+<p>Then turn Caps Lock into another Control key:</p>
+<ul>
+<li>System Preferences-&gt;Keyboard-&gt;Modifier Keys…</li>
+</ul>
+<p>Enable extra keyboard layouts:</p>
+<ul>
+<li>System Preferences-&gt;Keyboard-&gt;Input Sources</li>
+</ul>
+<p>and check the layouts you need. If you mark more than one, say “US”
+and “Swedish Pro” like I do, you can change between layouts with
+Command-Space. If you mark “Show input menu in menu bar” you can
+easily see what layout is currently active. Also check “Automatically
+switch to a document's input source” so your Mac remembers what input
+source is active in a window.</p>
+<p>While you're in the “Language &amp; Text” window you can change to the
+“Text” tab and uncheck both “Correct spelling automatically” and “Use
+symbol and text substitution”.</p>
+<p>So far I'm using a US keyboard layout for programming and writing in
+English and Swedish Pro for writing in Swedish. If I ever want to
+define my own layout here's something to get me started:</p>
+<ul>
+<li>
+<p><a href="http://developer.apple.com/library/mac/technotes/tn2056/_index.html">Apple's keyboard layout specification</a>.
+Place the new keyboard layout in <code>~/Library/Keyboard Layouts/</code>.</p>
+</li>
+<li>
+<p>There's a free program called
+<a href="http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&amp;item_id=ukelele">Ukelele</a>
+that might help define the layout instead of trying to write that
+pesky XML.</p>
+</li>
+</ul>
+<h2>Keyboard shortcuts for window operations</h2>
+<p>As the author of <a href="/mc/projects/mcwm/">mcwm</a>, I wouldn't want to leave
+that comfortable environment just because I'm using another window
+system. Enter <a href="https://github.com/jigish/slate">Slate</a>.
+<a href="/mc/files/.slate">My Slate config</a> tries to mimic mcwm at least a
+bit.</p>
+<h2>Display and Desktops</h2>
+<p>Set an external screen as primary display:</p>
+<ul>
+<li>System Preferences-&gt;Display-&gt;Arrangements</li>
+</ul>
+<p>then click and hold on the white bar. Drag to other display.</p>
+<p>Easy access to virtual desktops:</p>
+<ul>
+<li>System Preferences-&gt;Keyboard-&gt;Keyboard Shortcuts</li>
+</ul>
+<p>Enable Switch to Desktop N. Hit Control-1, Control-2, et cetera, to
+change desktop.</p>
+<p>Turn off desktop icons:</p>
+<pre><code>% defaults write com.apple.finder CreateDesktop -bool false
+% killall Finder
+</code></pre>
+<p>Turn off the silly Dashboard:</p>
+<pre><code>% defaults write com.apple.dashboard mcx-disabled -bool true
+% killall Dock
+</code></pre>
+<h2>Finder</h2>
+<p>The Finder creates <code>.DS_Store</code> files whenever it accesses a directory
+<em>even on remote filesystems</em>. This might not be what you, or your
+colleagues, want. To turn it off, at least on mounted remote
+filesystems:</p>
+<pre><code>% defaults write com.apple.desktopservices DSDontWriteNetworkStores true
+</code></pre>
+<p>and logout and back in again. The <code>.DS_Store</code> are created as invisible
+in a Windows share, yet using find to find directories that has
+changed recently will show the ones which has had such a file created.
+Annoying!</p>
+<h2>Whole-disk encryption</h2>
+<ul>
+<li>System Preferences-&gt;Security &amp; Privacy-&gt;FileVault-&gt;Turn on FileVault</li>
+</ul>
+<p>Might at least protect against petty thieves. Encrypt sensitive data
+separetely!</p>
+<p>Destroy the FileVault key when hibernating and write RAM to disk when
+hibernating:</p>
+<pre><code> # pmset -a destroyfvkeyonstandby 1 hibernatemode 25
+</code></pre>
+<p>See <code>pmset(1)</code>.</p>
+<h2>Firewall</h2>
+<ul>
+<li>System Preferences-&gt;Security &amp; Privacy-&gt;Firewall-&gt;Turn On Firewall</li>
+</ul>
+<p>Note that the default firewall also filters out ICMP ECHO.</p>
+<p>The firewall is based on OpenBSD's pf. Ordinary <code>pfctl(8)</code> is
+available, so you can write your own <code>pf.conf</code>.</p>
+<p>There is also a graphical frontend to pf called
+<a href="http://www.hanynet.com/icefloor/">IceFloor</a>.</p>
+<h2>Install necessary programs</h2>
+<p>Python, Perl, ssh, rsync and a number of other necessary tools are
+already installed. Proceed to install missing stuff.</p>
+<p>There's a nice Ruby based package manager called
+<a href="http://brew.sh/">Homebrew</a> to install third party programs.</p>
+<p>You install stuff with <code>brew install foo</code>.</p>
+<p>To see if Homebrew has a formula for your favourite program, search
+with <code>brew search foo</code>.</p>
+<p>Other package management systems for OS X are
+<a href="http://www.macports.org/">MacPorts</a> and NetBSD's
+<a href="http://www.pkgsrc.org/">pkgsrc</a>.</p>
+<ul>
+<li>
+<p>Emacs. OK, there's a non-graphical Emacs 22 in base, but I need
+the real thing.</p>
+<p>If you want Emacs from Homebrew linked with gnutls you add
+<code>--with-gnutls</code>.</p>
+<p>It's not possible to build Emacs from Homebrew with libxml. If you
+want to do that it seems the <code>pkg-config</code> config file for libxml2 is
+missing from OS X. Using libxml2 from Homebrew and compiling your
+Emacs against that works.</p>
+<p>To run the right version of emacsclient after installing your own
+Emacs, use this path:</p>
+<pre><code>/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -t
+</code></pre>
+<p>If you for some reason want a second Emacs process running, just
+starting a new /Applications/Emacs.app/Contents/MacOS/Emacs is not
+the way to do it. This creates another process, alright, but things
+like cut and paste won't work. Instead, use:</p>
+<pre><code>% open -n -a /Applications/Emacs.app
+</code></pre>
+<p>You can make an AppleScript of it with the AppleScript Editor and
+use:</p>
+<pre><code>do shell script &quot;open -n -a /Applications/Emacs.app&quot;
+</code></pre>
+<p>if you want something to click on.</p>
+</li>
+<li>
+<p><a href="http://www.iterm2.com/">iTerm2.</a></p>
+<p>A really nice terminal emulator replacement instead of OS X's own.
+Works wonders together with <code>tmux -CC</code>.</p>
+</li>
+<li>
+<p><a href="http://firefox.com/">Firefox.</a></p>
+</li>
+<li>
+<p><a href="https://www.romab.com/ironfox/">Ironfox.</a></p>
+<p>Andreas Jonsson et al at <a href="https://www.romab.com/">Romab</a> has written
+a sandbox environment for Firefox on OS X. On FreeBSD I usually run
+<a href="/mc/writings/firefox-another-user.html">Firefox as another user</a>,
+sort of a sandbox lite, but this is the real thing.</p>
+<p>Check under</p>
+<pre><code>  /Applications/IronFox.app/Contents/Resources/
+</code></pre>
+<p>and read <code>README</code> and <code>design.txt</code> for more. A configuration file is
+available as <code>IronFox.config</code>.</p>
+<p>Note that there's some more sandbox profiles, as provided by Apple,
+under <code>/usr/share/sandbox</code>.</p>
+<p><a href="http://reverse.put.as/wp-content/uploads/2011/09/Apple-Sandbox-Guide-v1.0.pdf">Apple Sandbox Guide</a></p>
+</li>
+<li>
+<p><a href="https://gpgtools.org/">GPG Tools.</a></p>
+<p>Essential support for PGP signing and encryption. Integrates well
+with other tools.</p>
+</li>
+<li>
+<p><a href="http://www.gnu.org/software/emms/">EMMS</a>, Emacs Multimedia System,
+an Emacs frontend to several different media players.</p>
+<p>Given the company I keep I guess I should be running
+<a href="https://xmms2.org/wiki/Main_Page">XMMS2</a> instead, but I haven't
+tried to build it under OS X yet.</p>
+<p>Install <code>mpg321</code>, <code>flac123</code> and <code>libtag</code> from Homebrew.</p>
+<p>Clone latest version of EMMS from git.</p>
+<p>Copy the <code>emms-print-metadata program</code> (that uses libtag to be able
+to edit music metadata) to my <code>bin</code> directory.</p>
+<pre><code>  ; Emacs Multimedia System (EMMS)
+  (add-to-list 'load-path &quot;~/hacks/emms/lisp&quot;)
+  (require 'emms-setup)
+  (emms-standard)
+  (require 'emms-tag-editor)
+  (require 'emms-info)
+
+  ; Use only libtag for tagging.
+  (require 'emms-info-libtag)
+  (setq emms-info-functions '(emms-info-libtag))
+  (setq emms-info-libtag-program-name &quot;/Users/mc/bin/emms-print-metadata&quot;)
+
+  (emms-default-players)
+  (setq emms-source-file-default-directory &quot;~/Music/&quot;)
+
+  ; Play FLAC with flac123.
+  (define-emms-simple-player flac123 '(file)
+    &quot;\\.flac$&quot; &quot;/usr/local/bin/flac123&quot;)
+  (add-to-list 'emms-player-list emms-player-flac123)
+
+  ; Add music file or directory to EMMS playlist on ! in dired.
+  (define-key dired-mode-map &quot;!&quot; 'emms-add-dired)
+</code></pre>
+<p><em>Note well</em>: Tag information won't work if you have spaces in file
+names.</p>
+<p>If you really need to change large amount of files and directories,
+like I did, consider using the Perl <code>rename</code> script from Homebrew
+and then do:</p>
+<pre><code>  % find . -depth -name &quot;* *&quot; -execdir rename 's/ /_/g' &quot;{}&quot; \;
+</code></pre>
+<p>over your music collection.</p>
+<p>Also, note that there's a command-line audio player distributed with
+OS X! <code>/usr/bin/afplay</code> is quite usable from scripts. I use it to
+play a sound bite (a quiet ”Hrmph!” I recorded with QuickTime) from
+Emacs when my Pomodoro state changes.</p>
+</li>
+<li>
+<p><a href="http://tmux.sf.net/">tmux</a></p>
+<p>Installed with Homebrew. Works with the iTerm2 magic to attach the
+terminal emulator to an existing tmux session, <code>tmux -CC</code>. I mostly
+use tmux on remote servers, though.</p>
+</li>
+<li>
+<p>sshfs – to mount remote directories over SSH's SFTP</p>
+<p>Installs fine from Homebrew. Also needs the kernel extension
+<code>osxfuse</code>. Installs automatically by Homebrew but needs handholding
+to complete the installation. Read output carefully.</p>
+</li>
+</ul>
+<h2>Emacs configuration</h2>
+<p>My ordinary <code>.emacs.el</code> mostly worked.</p>
+<p>Gnus and emacs-jabber worked but I sometimes had problems with not
+being able to authenticate through <code>.authinfo</code>. If I added the IPv6
+address of one of the servers explicitly in the file the problems
+disappeared. Weird.</p>
+<p>I had some strange problems with OS X's openssl client. Using
+<code>gnutls-cli</code> instead worked fine. When I later built an Emacs directly
+linked with gnutls that worked too.</p>
+<p>Set a nice font and colours for all frames:</p>
+<pre><code>;;; On OS X
+(when (eq system-type 'darwin)
+  ;; Monaco for the buffers. Futura for the mode line.
+  (set-face-attribute 'default nil :family &quot;Monaco&quot; :height 120)
+  (set-face-attribute 'mode-line nil :family &quot;Futura&quot; :height 160)
+  ;; Command keys as Meta and Option keys for extra characters.
+  (setq mac-command-modifier 'meta)
+  (setq mac-option-modifier nil)
+
+  ;; Colour
+  (setq default-frame-alist
+    (append default-frame-alist
+        '((foreground-color . &quot;white&quot;)
+          (background-color . &quot;black&quot;)
+          (cursor-color . &quot;#dd9900&quot;)))))
+</code></pre>
+<p>The OS X window system works in a very program-oriented way rather
+than the window-oriented X window managers I'm used to, so I had to
+define a way of quickly moving to another Emacs frame:</p>
+<pre><code>;; Cycle through open frames.
+(define-key global-map (kbd &quot;C-.&quot;) 'other-frame)
+</code></pre>
+<p>I do the same thing with iTerm windows.</p>
+<h2>Gnus</h2>
+<p>My old configuration worked OK. One snag is that the connection to the
+GPG Tools native GPG Agent dies sometimes. If that happens a</p>
+<pre><code>% killall gpg-agent
+</code></pre>
+<p>usually fixes things.</p>
+<h2>Tunnelblick OpenVPN</h2>
+<p><a href="https://code.google.com/p/tunnelblick/">Tunnelblick</a> is a front end
+to <a href="http://openvpn.net/">OpenVPN</a>.</p>
+<h2>IPsec</h2>
+<p>OS X supports IPsec but only IKEv1 (with racoon).</p>
+<p>To get IKEv2 support, use <a href="http://www.openiked.org/">Openiked</a>.</p>
+<h2>Huawei E3276s-150 LTE dongle</h2>
+<p>I worked over LTE for a few weeks in the summer of 2013 with a Huawei
+E3276s-150 LTE dongle. It worked under OS X for only a few seconds at
+a time in NDIS mode. When I changed it to the modem mode it worked
+fine with PPP.</p>
+<h2>troff</h2>
+<p>The built-in troff is GNU groff 1.19.2. A little old and didn't work
+too good with my Unicode files, but nothing that the built-in <code>iconv</code>
+couldn't fix. Here's a typical part of a Makefile for my workflow to
+generate PDFs that works with the built-in OS X tools <code>iconv</code>, <code>groff</code>
+and <code>pstopdf</code>:</p>
+<pre><code>.SUFFIXES: .ms .pdf
+
+.ms.pdf:
+        iconv -t ISO-8859-1 $&lt; | groff -ms - | pstopdf -i -o $@
+</code></pre>
+<p>A more modern groff is available through Homebrew and I use that
+nowadays, but I'll leave this as is if someone needs it.</p>
+<p>Apple's pstopdf doesn't crop to the Postscript bounding box properly.
+I discovered this when using
+<a href="http://www.science.uva.nl/%7Ebobd/useful/gpresent/">gpresent</a>.
+Installing Ghostscript and using its <code>ps2pdf</code> helped.</p>
+<h2>Development tools</h2>
+<p>Apple distributes a compiler and other goodies, gdb, git et cetera as
+the Xcode Command line tools. If you try to use anyone of them, for
+instance <code>git</code>, OS X will ask if you want to download them.</p>
+<p>If this doesn't happen go to:</p>
+<p><a href="http://connect.apple.com/">http://connect.apple.com/</a></p>
+<p>Create an Apple ID, if you don't have one already, then go to:</p>
+<p><a href="http://developer.apple.com/xcode/">http://developer.apple.com/xcode/</a></p>
+<p>Click “View downloads” and search for “command line tools”. Choose the
+latest package, download and install. This will give you all the
+development goodies without the IDE. It uses up about 170 MiBs.</p>
+<p><em>Nota bene</em>: The developer tools are necessary to run Homebrew!</p>
+<h2>f.lux</h2>
+<p><a href="http://justgetflux.com/">f.lux</a> changes the whitebalance on your
+display according to the sun's position. If the sun's down it changes
+white to appear more reddish. If it's daytime, white on the screen
+appears more blue.</p>
+<p>This makes it much easier to fall asleep after having stared at your
+computer all evening.</p>
+<h2>Xquartz</h2>
+<p>An X Window System server called X.app used to be bundled in OS X.
+It's no longer bundled but continues to be developed as
+<a href="http://xquartz.macosforge.net/">Xquartz</a>.</p>
+<p>It installs everything under <code>/opt/X11</code>. I needed to change
+<code>-I/usr/local/include</code> and <code>-L/usr/local/lib</code> to the new prefix and
+then my window manager, <a href="http://hack.org/mc/projects/mcwm/">mcwm</a>,
+compiled cleanly without warnings!</p>
+<p>Change the X server to full screen with Command-Option A.</p>
+<p>Xquartz uses your <code>~/.xinitrc</code>. Here's a simple one:</p>
+<pre><code>xsetroot -solid grey30 -cursor_name plus -fg white -bg black
+xmodmap ~/.xmodmap-mac
+xrdb -load ~/.Xresources
+~/hacks/checkout/mcwm/mcwm -b 2 -t xterm &amp;
+xterm
+</code></pre>
+<p>Unfortunately the <code>xmodmap</code> doesn't seem to work so I have to do it
+again after starting Xquartz. It looks like this:</p>
+<pre><code>! Command is Meta
+clear Mod1
+clear Mod2
+add Mod1 = Meta_L Meta_R
+
+! Left Option is Mod4 - controls mcwm.
+clear Mod4
+add Mod4 = Alt_L
+
+! Make right option AltGr
+keycode 69 = Mode_switch
+
+clear Mod5
+add Mod5 = Mode_switch
+</code></pre>
+<p>Xquartz seems to start by itself now and then. I don't know why. I
+tried doing:</p>
+<pre><code>% launchctl unload -w /Library/LaunchAgents/org.macosforge.xquartz.startx.plist
+</code></pre>
+<p>which stopped it from doing that. Now I have to start it explicitly
+before running any X programs.</p>
+<p>Xquartz doesn't behave quite like Xorg's usual server. Sometimes it
+forgets to draw window borders! Annoyingly, it doesn't send a Enter
+Notify to the window under the pointer when I change workspaces until
+I move the pointer.</p>
+<p>On the other hand, I find that I'm using X less and less.</p>
+<h2>Still missing</h2>
+<ul>
+<li>
+<p>Multimedia keys (play, pause, fast forward, et cetera)</p>
+<p>This little daemon is using them to start iTunes if the keys are
+pressed:</p>
+<pre><code>  /System/Library/CoreServices/rcd.app/Contents/MacOS/rcd
+</code></pre>
+<p>but it doesn't seem to run by default. Started by whom?</p>
+</li>
+</ul>
+<hr />
+<p>Last updated: &lt;2016-05-31 09:39:16 CEST&gt;</p>
+
+</body>
+</html>
