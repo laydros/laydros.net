@@ -1,0 +1,12 @@
+base_url = "https://laydros.github.io"
+title = "Jason Hamilton"
+description = "Personal website of Jason Hamilton"
+
+compile_sass = true
+minify_html = false
+generate_feeds = true
+
+[markdown]
+highlight_code = true
+
+[extra]

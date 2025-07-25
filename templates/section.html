@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+{% if section.path == "docs/" %}
+<style type="text/css">
+  table {
+    font-size: 0.8em;
+  }
+  .right {
+    float: right;
+  }
+  th, td {
+    padding: 3px;
+  }
+  #intro {
+    width: 80%;
+    font-size: 0.8em;
+  }
+</style>
+{% endif %}
+{% endblock extra_head %}
+
+{% block content %}
+<header><h2>{{ section.title }}</h2></header>
+{{ section.content | safe }}
+{% endblock content %}
