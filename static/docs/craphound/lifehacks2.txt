@@ -1,0 +1,291 @@
+Notes from Danny O'Brien's NotCon Recap of Life Hacks
+
+Cory Doctorow
+
+doctorow@craphound.com
+
+June 6, 2004
+
+Imperial College, London
+
+--
+
+Everyone in Silicon Valley has heads up displays, WiFi Hands, they're the borg.
+
+I walked onto stage with 220 index cards and got a cheap laugh.
+
+But index cards are the inspiration for Life Hacks.
+
+I went to PARC and saw Kent Beck, founder of Extreme Programming, whose improv 
+approach is quite admirable. 
+
+	* The nugget of Extreme Programming is index cards
+	
+	* He read from the cards and then threw them like shuriken into the audience
+	
+		* PARC audiences are like Statler and Waldorf
+		
+			* "I hate drop-down menus and I wish I'd never invented them"
+		
+	* A person in the center of the paperless office with paper
+	
+		* "Look on your works ye mighty and despair"
+		
+		* Paper is the way forward
+		
+	* I'm an average programmer with great habits, learned from masters like Ward Cunningham
+	
+I was the world's most disorganized person, and I resolved to adapt the habits of 
+the world's most organized and prolific geeks and become a Charles Atlas of organization
+
+--
+
+I emailed and contacted 70 technologists, asked 100 questions and got 14 replies back
+
+I got a bunch of screenshots, habits, code, anaecdotes
+
+	* JWZ -- Netscape hacker, sells beer, hangs out with goth chicks
+	
+	* Gnat Torkington -- Perl hacker
+	
+	* Brad Templeton -- Chairman of EFF
+	
+	* Guido van Rossom -- Invented Python
+	
+	* ESR -- Gun toting nice man, author of Cathedral and Bazaar
+	
+	* Ann Mitchell -- Antispam lawyer
+	
+	* Morbus Iff -- Amphetadesk, prefers dialup to broadband
+	
+	* Paul Ford -- ftrain.com
+	
+	* Dan Egnor -- Sweetcode.org
+	
+	* Edd Dumbill -- XML.com
+	
+	* Cory Doctorow -- Writer
+	
+	* Simon Cozens -- Perl Hacker
+	
+	* Tim Bray -- W3C
+	
+	* Piers Beckley -- LA Scriptwriter (meant to get a perl scriptwriter, 
+	  got an LA scriptwriter -- we'll call him "the control")
+
+--
+
+Results
+
+Screenshots
+
+	* Rather dull
+	
+		* A lot of shells (Brad)
+		
+		* A big shell
+		
+		* Shells (Paul Ford)
+		 
+		* Shells and incoming hate-mail (JWZ) 
+		
+		* Shells
+		
+		* emacs
+		
+		* Dan Egnor -- wins geek prize -- Google employee so lots is masked 
+		  out, shells, shells, two shells, "shelly", browser, shells
+
+		* Piers uses Outlook, bless 'im
+
+Conclusion: people use shells
+
+	* Not necessarily for efficiency
+	
+	* Respondents are geeks -- people who can read NTK in courier with no 
+	  linebreaks love shells
+
+	* The prolific people Danny knows are involved on the public net
+	
+		* Most shells are to remote computers
+		
+		* Shells are good for connecting to a public computer on which your 
+		  public stuff lives
+
+	* Shells don't hamper efficiency
+	
+Conclusion: People use todo.txt (Ford's is 27,000 lines long)
+
+	* Don't use complicated apps
+	
+	* Use Word, BBEdit, Notepad, emacs, vi, whatever
+	
+	* Why?
+	
+		* If you want to organize yourself, take the stuff you're going to forget 
+		  quickly and dump it just as quickly -- if it's in your short-term memory, 
+		  you have to put it somewhere
+
+		* You need to be able to find and enter text fast
+		
+			* Can cut, paste and find text fast
+		
+			* XML Guy: "Not interested in tagging my behavior with metadata -- 
+			  just want to find stuff. Google shows that text can be found quick"
+
+			* Text editors have incremental search (Mozilla: type slash and begin 
+			  typing for your search string) -- quick way to lock-in on your desired 
+			  text
+
+				* In Moz, Panther, Launchbar, Quicksilver, etc
+			
+		* Text can be trusted
+		
+			* Power users trust software as far as they've thrown them in the past
+			
+			* Power users know that the bigger an app, the flakier it is
+			
+			* They've upgraded and crossgraded a lot, which means that they need 
+			  text, which can run on every platform
+
+		* Cory: I use mail for everything, it's got access, version and metadata control
+		
+		* JWZ: Every app expands to handle mail
+		
+			* Some bits of life are too short to learn another app
+			
+		* Joel on Software: Uses Excel for everything
+		
+		* Clients send website designs in PowerPoint
+		
+		* Don Lancaster sees the world in PostScript -- he imprinted like a chick 
+		  on that app.
+				
+Conclusion: We'll have private blogs
+
+	* People use blogs all the time
+	
+	* They'll just use their blogs for everything, project mgmt etc
+	
+	* LiveJournal: 4% of posts are private -- people talking to themselves
+	
+Conclusion: We'll have private RSS feeds
+
+	* People suck lots of data into RSS
+	
+	* Sysadmins publish all status reports as private RSS feeds
+
+Conclusion: Geeks use secret scripts
+
+	* Thrown together
+	
+	* Shoddy
+	
+	* Embarassingly coded
+	
+	* Often forgotten
+	
+	* Universal scripts
+	
+		* Random sig generators
+		
+			* Linux Torvald's first Usenet post is trying to get pipes to 
+			  work in his random sig generator
+
+			* Netscape killer -- kills whatever app hangs most often
+			
+			* ssh foo: tunneling into and out of firewalls
+			
+			* mail wrangling
+			
+	* Sync
+	
+		* A way of making files mirror to another devices (Cory backs up 
+		  to spare powerbook, HDD, remote server, and iPod)
+
+		* Complex and personal
+			
+			* People don't trust existing sync apps
+			
+			* Write their own rsync stuff
+			
+	* Boilerplate
+	
+		* Letters and projects
+		
+			* Screenwriting template
+			
+			* Form responses to common email
+			
+	* Mungers and viewers
+	
+		* Ward Cunningham has a thing that counts how many files were changed
+		  on a given date -- a quick way to find files that are related to 
+		  one another
+		  
+		* KDE app shows you files that are low-down on your dir tree that are 
+		  taking up all your disk space (Danny found half a gig of filed-away virii)
+		  
+	* Not much cross-app automation
+	
+		* This was everyone's big dream for scripts -- AppleScript would
+		  pick up your mail and turn it into a GIF with Photoshop and 
+		  put it on a webserver
+		
+		* No one does this -- even though you can
+		
+		* They're too brittle -- it's like remote objects
+		
+		* Unix pipes might be as complicated as you can get
+		
+		* Longhorn will test this -- an OO shell interface between apps
+		
+	* Loads of webscraping
+	
+		* Make your own RSS
+		
+		* Worth the brittleness
+		
+		* Download your banking info and graph it
+		
+	* Lots of making public
+	
+		* RSS and syncing
+		
+		* "We write these things so we can upload them to webservers"
+		
+		* This is all to tidy things up so that it's fit for public viewing
+		
+		"Ideas rot if you don't do something with them. I used to try to hoard them, 
+		  but they rotted. Now I just blog them or tell people about them. Sometimes 
+		  they still rot, but sometimes someone finds them useful in one way or 
+		  another" -- Edd Dumbill
+
+		* Publishing is like your mum coming over -- you have to clean it up and make 
+		  it presentable
+		
+		* This not only makes you appear more prolific -- it actually makes you more
+		  prolific
+		  
+Here's a killer app that exploits all of this:
+
+	* Decent email search (bastards at Google!) -- this is what makes gmail good, 
+	  even cypherpunks will put all their mail in Google and their friends in Orkut
+	
+	* Easy webscraping -- select a page, select stuff, turn it into RSS, learns
+	  when it breaks (with your feedback), and improves (spike ebay auctions, track 
+	  airports, etc)
+	
+	* Keyboard macros for Windows/Linux
+	
+	* Filepile for everyone -- Suppose hypothetically that there was a site that
+	  let you share pix etc with your friends. The idea is to have a dir on your desktop
+	  that synch the files you drag into it with your friends. 
+
+Recommended books
+
+Getting Things Done: David Allen
+
+Home Comforts: Cheryl Mendelson (20 pages on dishwashing!)
+
+Test Driven Development: Kent Beck
