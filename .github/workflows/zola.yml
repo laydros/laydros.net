@@ -16,8 +16,7 @@ jobs:
       - name: Check site
         uses: shalzz/zola-deploy-action@v0.17.2
         env:
-          BUILD_ONLY: true
-          BUILD_FLAGS: check
+          CHECK: true
       - name: Build with Zola
         uses: shalzz/zola-deploy-action@v0.17.2
         env:
@@ -32,8 +31,7 @@ jobs:
       - name: Check site before deploy
         uses: shalzz/zola-deploy-action@v0.17.2
         env:
-          BUILD_ONLY: true
-          BUILD_FLAGS: check
+          CHECK: true
       - name: Build and deploy
         uses: shalzz/zola-deploy-action@v0.17.2
         env:
