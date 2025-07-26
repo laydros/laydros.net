@@ -21,6 +21,7 @@ Visit: [https://laydros.github.io](https://laydros.github.io)
 ### Prerequisites
 
 - [Zola](https://www.getzola.org/documentation/getting-started/installation/) static site generator
+- Or run `scripts/setup_zola.sh` to download a prebuilt binary
 
 ### Development Workflow
 
