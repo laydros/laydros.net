@@ -89,7 +89,7 @@ Page content...
 
 ### Key Configuration Features
 - **Taxonomies**: Tags and categories with automatic taxonomy pages and feeds
-- **Search**: `build_search_index = true` generates search index for JavaScript search
+- **Search**: `build_search_index = true` generates ElasticLunr search index for JavaScript search
 - **Sitemap**: `generate_sitemap = true` creates `/sitemap.xml`
 - **Feeds**: `generate_feeds = true` creates RSS feeds for blog and taxonomies
 - **Syntax Highlighting**: Monokai theme for code blocks
@@ -120,10 +120,44 @@ skip_prefixes = [
 - **Serve**: GitHub Pages serves from `gh-pages` branch at https://laydros.github.io
 - No manual building required - just push markdown changes to `main`
 
+### Search Implementation
+The site implements full-text search using ElasticLunr and Zola's built-in search index generation:
+
+#### Configuration
+- `build_search_index = true` in `config.toml` enables search index generation
+- Zola automatically generates `/search_index.en.js` containing the ElasticLunr index
+- Zola includes `/elasticlunr.min.js` for client-side search functionality
+
+#### Search Template (`templates/search.html`)
+```html
+<script src="{{ get_url(path='elasticlunr.min.js') }}"></script>
+<script src="{{ get_url(path='search_index.en.js') }}"></script>
+<script>
+// Initialize the search index with ElasticLunr
+const index = elasticlunr.Index.load(window.searchIndex);
+
+// Perform search with title boosting
+const searchResults = index.search(query, {
+  fields: {
+    title: {boost: 2},
+    body: {boost: 1}
+  }
+});
+</script>
+```
+
+#### How It Works
+1. Zola crawls all content during build and creates an ElasticLunr search index
+2. The search page loads both the ElasticLunr library and the pre-built index
+3. Client-side JavaScript performs real-time search as users type
+4. Results are ranked with title matches boosted higher than body content matches
+5. Search works across all content: blog posts, documentation, and pages
+
 ### Generated Files
 - `/sitemap.xml` - Automatic sitemap for search engines
 - `/rss.xml` - RSS feed for blog posts
-- `/search_index.en.json` - Search index for JavaScript search functionality
+- `/search_index.en.js` - ElasticLunr search index for JavaScript search functionality
+- `/elasticlunr.min.js` - ElasticLunr search library (automatically included by Zola)
 - `/tags/` and `/categories/` - Automatic taxonomy pages
 
 ### Documentation Migration Notes

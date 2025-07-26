@@ -145,9 +145,24 @@ tags = ["tag1", "tag2"]
 - Post navigation (previous/next)
 
 ### Search
-- Full-text search across all content
-- JavaScript-based using Zola's search index
+- **Full-text search** across all content (blog posts, documentation, pages)
+- **ElasticLunr-powered** client-side search with real-time results as you type
+- **Smart ranking** with title matches boosted 2x higher than body content
+- **No server required** - all search processing happens in the browser
+- **Auto-generated index** - Zola builds the search index during site generation
 - Available at `/search/`
+
+#### Search Implementation
+The search functionality is implemented using:
+1. **Zola's built-in search index generation** (`build_search_index = true`)
+2. **ElasticLunr library** for client-side full-text search
+3. **Custom JavaScript** in `templates/search.html` for search interface
+
+When you build the site, Zola automatically:
+- Crawls all markdown content
+- Creates an ElasticLunr search index (`/search_index.en.js`)
+- Includes the ElasticLunr library (`/elasticlunr.min.js`)
+- Enables fast, typo-tolerant search without requiring a backend
 
 ### Syntax Highlighting
 - Monokai theme for code blocks
@@ -180,7 +195,8 @@ The site uses GitHub Actions for automated deployment with validation:
 Features automatically generated:
 - Sitemap at `/sitemap.xml`
 - RSS feeds at `/rss.xml` and taxonomy feeds
-- Search index at `/search_index.en.json`
+- ElasticLunr search index at `/search_index.en.js`
+- ElasticLunr library at `/elasticlunr.min.js`
 
 ## Documentation Migration
 
