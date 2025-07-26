@@ -11,7 +11,7 @@
 let searchIndex = null;
 async function loadIndex() {
   if (!searchIndex) {
-    const resp = await fetch("{{ get_url(path="search_index.en.json") }}");
+    const resp = await fetch('{{ get_url(path="search_index.en.json") }}');
     searchIndex = await resp.json();
   }
 }
