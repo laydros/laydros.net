@@ -36,4 +36,6 @@ skip_prefixes = [
     "http://calummacrae.blogspot.com/",
     "https://support.lenovo.com/",
     "https://freedombox.org/",
+    "https://www.leancrew.com/",
+    "https://www.perplexity.ai/",
 ]
