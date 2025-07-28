@@ -14,7 +14,14 @@
     <title>{% if page.title %}{{ page.title }} - {{ config.title }}{% else %}{{ config.title }}{% endif %}</title>
 </head>
 
-<body>
+<body data-theme="original">
+    <div class="theme-switcher">
+        <button class="theme-btn" data-theme="original" title="Original Theme">🏠</button>
+        <button class="theme-btn" data-theme="vscode" title="VS Code Dark">⚫</button>
+        <button class="theme-btn" data-theme="catppuccin" title="Catppuccin">🌙</button>
+        <button class="theme-btn" data-theme="dracula" title="Dracula">🧛</button>
+    </div>
+    
     <div class="info">
         <p id="time"></p>
         <h1 id="greeting"></h1>
