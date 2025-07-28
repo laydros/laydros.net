@@ -54,40 +54,26 @@ window.addEventListener('load', (event) => {
     displayTime(time);
 });
 
-// Add smooth link hover effects and ripple animation
-document.addEventListener('DOMContentLoaded', () => {
-    // Add CSS for ripple animation first
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes ripple {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
+// Add CSS for ripple animation
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes ripple {
+        to {
+            transform: scale(4);
+            opacity: 0;
         }
-    `;
-    document.head.appendChild(style);
-    
-    // Debug: log when DOMContentLoaded fires
-    console.log('DOMContentLoaded fired, looking for links...');
-    
-    // Add ripple effect on link clicks - use more specific selectors
-    const linkSelectors = ['.tools a', '.dev a', '.nix a', '.media a', '.other a'];
-    const allLinks = document.querySelectorAll(linkSelectors.join(', '));
-    
-    console.log('Found links:', allLinks.length);
-    
-    allLinks.forEach((link, index) => {
-        console.log(`Adding ripple to link ${index}:`, link.textContent.trim());
-        
-        link.addEventListener('click', function(e) {
-            console.log('Link clicked, creating ripple effect');
-            
-            // Prevent the link from navigating immediately
-            e.preventDefault();
-            
+    }
+`;
+document.head.appendChild(style);
+
+// Add ripple effect using event delegation
+function addRippleEffect() {
+    document.body.addEventListener('click', function(e) {
+        // Check if clicked element is a link inside our containers
+        const target = e.target;
+        if (target.tagName === 'A' && target.closest('.tools, .dev, .nix, .media, .other')) {
             const ripple = document.createElement('span');
-            const rect = this.getBoundingClientRect();
+            const rect = target.getBoundingClientRect();
             const size = Math.max(rect.width, rect.height);
             const x = e.clientX - rect.left - size / 2;
             const y = e.clientY - rect.top - size / 2;
@@ -96,42 +82,36 @@ document.addEventListener('DOMContentLoaded', () => {
             const computedStyle = getComputedStyle(document.documentElement);
             const accentColor = computedStyle.getPropertyValue('--accent').trim();
             
-            console.log('Ripple accent color:', accentColor);
-            
             ripple.style.cssText = `
                 position: absolute;
                 border-radius: 50%;
                 background: ${accentColor};
-                opacity: 0.6;
+                opacity: 0.3;
                 pointer-events: none;
                 transform: scale(0);
-                animation: ripple 0.5s ease-out;
+                animation: ripple 0.3s ease-out;
                 width: ${size}px;
                 height: ${size}px;
                 left: ${x}px;
                 top: ${y}px;
-                z-index: 10;
+                z-index: 0;
             `;
             
-            this.style.position = 'relative';
-            this.style.overflow = 'hidden';
-            this.appendChild(ripple);
+            target.style.position = 'relative';
+            target.style.overflow = 'hidden';
+            target.appendChild(ripple);
             
-            console.log('Ripple element added:', ripple);
-            
-            // Navigate to the link after ripple effect
-            const href = this.href;
             setTimeout(() => {
                 if (ripple.parentNode) {
                     ripple.remove();
                 }
-                if (href) {
-                    window.location.href = href;
-                }
-            }, 500);
-        });
+            }, 300);
+        }
     });
-});
+}
+
+// Set up ripple effect
+addRippleEffect();
 
 // Add keyboard shortcuts for theme switching
 document.addEventListener('keydown', (e) => {
