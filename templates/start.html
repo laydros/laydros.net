@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page.title %}{{ page.title }} - {{ config.title }}{% else %}{{ config.title }}{% endif %}</title>
+    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ config.description }}{% endif %}">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🏠</text></svg>">
+    <link rel="stylesheet" href="{{ get_url(path='start/style.css') }}">
+</head>
+<body data-theme="vscode">
+    <div class="container">
+        <header class="header">
+            <h1 class="title">start</h1>
+            <div class="theme-switcher">
+                <button class="theme-btn" data-theme="vscode" title="VS Code Dark">⚫</button>
+                <button class="theme-btn" data-theme="catppuccin" title="Catppuccin">🌙</button>
+                <button class="theme-btn" data-theme="dracula" title="Dracula">🧛</button>
+            </div>
+        </header>
+        
+        <main class="main">
+            <div class="links-grid">
+                {{ section.content | safe }}
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <a href="/">← back to main site</a>
+        </footer>
+    </div>
+    
+    <script src="{{ get_url(path='start/script.js') }}"></script>
+</body>
+</html>

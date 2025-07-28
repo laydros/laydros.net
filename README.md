@@ -12,6 +12,7 @@ Visit: [https://laydros.github.io](https://laydros.github.io)
 - **Documentation** - Technical notes and tutorials in markdown
 - **Gallery** - Simple photo gallery
 - **Search** - Site-wide content search
+- **Startpage** - Personal browser startpage with theme switching and organized links
 - **Responsive Design** - Mobile-friendly sakura.css theme
 - **Automated Deployment** - GitHub Actions with link checking
 - **SEO Ready** - Sitemaps, meta tags, and structured data
@@ -101,6 +102,8 @@ tags = ["tag1", "tag2"]
 │   ├── about.md            # About page
 │   ├── gallery.md          # Photo gallery
 │   ├── search.md           # Search page
+│   ├── start/              # Personal startpage
+│   │   └── _index.md       # Startpage content with organized links
 │   ├── blog/               # Blog posts
 │   │   ├── _index.md       # Blog index with pagination
 │   │   └── *.md            # Individual blog posts
@@ -116,6 +119,7 @@ tags = ["tag1", "tag2"]
 │   ├── section.html        # Section listing template
 │   ├── blog-page.html      # Individual blog post template
 │   ├── search.html         # Search page template
+│   ├── start.html          # Startpage template with theme switching
 │   ├── taxonomy_list.html  # Tag/category listing
 │   └── taxonomy_single.html # Posts for specific tag
 ├── static/                 # Static assets
@@ -123,6 +127,9 @@ tags = ["tag1", "tag2"]
 │   ├── img/                # Images and photos
 │   ├── pictures/           # Gallery photos
 │   ├── js/                 # JavaScript files
+│   ├── start/              # Startpage assets
+│   │   ├── style.css       # Startpage-specific CSS with themes
+│   │   └── script.js       # Theme switching and interactive features
 │   └── docs/               # Legacy HTML docs and PDFs
 └── .github/workflows/      # GitHub Actions deployment
     └── zola.yml            # Automated build, check, and deploy
@@ -163,6 +170,16 @@ When you build the site, Zola automatically:
 - Creates an ElasticLunr search index (`/search_index.en.js`)
 - Includes the ElasticLunr library (`/elasticlunr.min.js`)
 - Enables fast, typo-tolerant search without requiring a backend
+
+### Startpage
+- **Personal browser startpage** at `/start/` with organized link categories
+- **Theme switching** with VS Code Dark, Catppuccin, and Dracula themes
+- **Interactive features** including keyboard shortcuts (Ctrl/Cmd + 1,2,3) and click ripple effects
+- **Responsive design** optimized for various screen sizes
+- **Isolated styling** that doesn't interfere with the main site's sakura.css theme
+- **Local storage** remembers your preferred theme across browser sessions
+
+The startpage is designed as a standalone feature with its own template (`start.html`) and assets (`static/start/`) to provide a clean, customizable landing page for daily browsing.
 
 ### Syntax Highlighting
 - Monokai theme for code blocks

@@ -17,6 +17,7 @@ This is a Zola-based static site generator project with full blog and search fun
 - **Full-text search** using JavaScript and Zola's search index
 - **Documentation** with converted markdown and legacy HTML preservation
 - **Gallery** for photos with simple markdown image display
+- **Startpage** with theme switching and organized links for personal browser use
 - **SEO optimization** with sitemaps, meta tags, and structured URLs
 - **Automated deployment** with link checking and validation
 
@@ -27,6 +28,8 @@ This is a Zola-based static site generator project with full blog and search fun
   - `about.md` - About page
   - `gallery.md` - Photo gallery using static/pictures/
   - `search.md` - Search page with JavaScript functionality
+  - `start/` - Personal startpage section
+    - `_index.md` - Startpage content with organized link categories (uses start.html template)
   - `blog/` - Blog posts with date-based sorting and pagination
     - `_index.md` - Blog index page (paginate_by = 10, sort_by = "date")
     - `YYYY-MM-DD-post-title.md` - Individual blog posts with tags
@@ -40,6 +43,7 @@ This is a Zola-based static site generator project with full blog and search fun
   - `section.html` - Section listing template with blog-specific pagination logic
   - `blog-page.html` - Individual blog post template with metadata and navigation
   - `search.html` - Search page template with JavaScript search functionality
+  - `start.html` - Startpage template with theme switching and interactive features
   - `taxonomy_list.html` - Tag/category listing pages
   - `taxonomy_single.html` - Posts for specific tags
 - `static/` - Static assets (CSS, images, JavaScript, legacy docs)
@@ -47,6 +51,9 @@ This is a Zola-based static site generator project with full blog and search fun
   - `css/sakura.css` - Primary CSS framework
   - `img/` - Site images and headshots
   - `pictures/` - Gallery photos referenced by gallery.md
+  - `start/` - Startpage-specific assets (isolated from main site)
+    - `style.css` - Startpage CSS with VS Code, Catppuccin, and Dracula themes
+    - `script.js` - Theme switching, keyboard shortcuts, and interactive effects
   - `docs/` - Legacy HTML documentation and PDFs (preserved for backwards compatibility)
 
 ### Content Management
@@ -85,6 +92,24 @@ description = "Optional SEO description"
 +++
 
 Page content...
+```
+
+#### Startpage Section
+```toml
++++
+title = "Start"
+template = "start.html"
+description = "Personal startpage"
++++
+
+## tools
+- [tool name](https://example.com/)
+
+## media
+- [news site](https://example.com/)
+
+## pages
+- [other links](https://example.com/)
 ```
 
 ### Key Configuration Features
@@ -152,6 +177,36 @@ const searchResults = index.search(query, {
 3. Client-side JavaScript performs real-time search as users type
 4. Results are ranked with title matches boosted higher than body content matches
 5. Search works across all content: blog posts, documentation, and pages
+
+### Startpage Implementation
+The site includes a personal browser startpage at `/start/` with the following features:
+
+#### Template Structure (`templates/start.html`)
+- **Isolated design**: Uses its own template separate from the main site layout
+- **Theme switching**: Three built-in themes (VS Code Dark, Catppuccin, Dracula)
+- **Responsive layout**: Grid-based link organization that adapts to screen size
+- **Interactive elements**: Theme buttons and smooth transitions
+
+#### Styling (`static/start/style.css`)
+- **CSS custom properties**: Theme-based color variables for easy theme switching
+- **Multiple themes**: 
+  - VS Code Dark: Professional dark theme with blue accents
+  - Catppuccin: Soft pastel theme with purple accents  
+  - Dracula: High-contrast dark theme with purple/pink accents
+- **Responsive grid**: Auto-fitting columns for link categories
+- **Smooth animations**: Fade-in effects, hover transitions, and click ripples
+
+#### JavaScript Features (`static/start/script.js`)
+- **Theme persistence**: Uses localStorage to remember theme preference
+- **Keyboard shortcuts**: Ctrl/Cmd + 1,2,3 for quick theme switching
+- **Interactive effects**: Click ripple animations on links
+- **Theme management**: Class-based theme switcher with active state tracking
+
+#### Content Organization (`content/start/_index.md`)
+- **Markdown structure**: Uses standard markdown with h2 headers for categories
+- **Link organization**: Groups links into logical categories (tools, media, pages)
+- **Template reference**: Uses `template = "start.html"` in front matter
+- **Section context**: Uses `section.content` in template (not `page.content`)
 
 ### Generated Files
 - `/sitemap.xml` - Automatic sitemap for search engines
