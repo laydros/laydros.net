@@ -181,6 +181,8 @@ When you build the site, Zola automatically:
 
 The startpage is designed as a standalone feature with its own template (`start.html`) and assets (`static/start/`) to provide a clean, customizable landing page for daily browsing.
 
+**Attribution**: The `/start/` layout is based on design by [grtcdr](https://benalita.tn) from https://git.sr.ht/~grtcdr/startpages/tree/master
+
 ### Syntax Highlighting
 - Monokai theme for code blocks
 - Supports all major programming languages
