@@ -1,71 +1,113 @@
-// Big thanks to u/Teiem1 from reddit for refactoring the old code!
+// Startpage theme management - isolated from main site
+class StartpageThemeManager {
+    constructor() {
+        this.themes = ['vscode', 'catppuccin', 'dracula'];
+        this.currentTheme = 'vscode';
+        this.storageKey = 'startpage-theme';
+        this.init();
+    }
 
-// Change this to your liking
-let username = "grtcdr";
-// Counter that is incremented when the search engines are cycled through
-let se = 3;
+    init() {
+        // Load saved theme or use default
+        const savedTheme = localStorage.getItem(this.storageKey) || 'vscode';
+        this.setTheme(savedTheme);
+        
+        // Add event listeners to theme buttons
+        document.querySelectorAll('.theme-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const theme = e.target.dataset.theme;
+                this.setTheme(theme);
+            });
+        });
 
-// Listens for click event in se_button, once clicked, se increments by one and cycleSearchEngines() is called to update the icon, placeholder, and form action
-document.getElementById("se_button").addEventListener("click", function() {
-  se++;
-  cycleSearchEngines(se);
-});
+        // Update active button state
+        this.updateActiveButton();
+    }
 
-function check_if_search_empty(event) {
-  //Do not allow searching if the user clicks "GO" when the search box is empty
-  if (document.forms["search_eng_form"]["q"].value == "") {
-    event.preventDefault();
-  }
-} 
+    setTheme(theme) {
+        if (!this.themes.includes(theme)) return;
+        
+        this.currentTheme = theme;
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem(this.storageKey, theme);
+        this.updateActiveButton();
+    }
 
-// The same as "onload"
-window.addEventListener('load', () => {
-  let today = new Date();
-  let time = today.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-  determineGreet(new Date().getHours());
-  displayTime(time);
-});
-
-document.getElementById("go_btn").addEventListener("click", function(event){
-  check_if_search_empty(event);
-}); 
-
-// Called every 1000ms to update the time and display it
-setInterval( function() {
-  let today = new Date();
-  let time = today.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-  document.getElementById("time").innerHTML = time;
-}, 1000);
-
-function displayTime(time) 
-{
-  document.getElementById("time").innerHTML = time;
+    updateActiveButton() {
+        document.querySelectorAll('.theme-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.theme === this.currentTheme);
+        });
+    }
 }
 
-const determineGreet = hours => document.getElementById("greeting").innerText = `Good ${hours < 12 ? "Morning," : hours < 18 ? "Afternoon," : "Evening,"} ${username}!`;
+// Initialize theme manager when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new StartpageThemeManager();
+});
 
-const search_engines = [{
-  src: "ddg.svg",
-  placeholder: "DuckDuckGo",
-  action: "https://www.duckduckgo.com/"
-}, {
-  src: "goog.svg",
-  placeholder: "Google",
-  action: "https://www.google.com/search?q="
-},  {
-  src: "reddit.svg",
-  placeholder: "Reddit",
-  action: "https://www.reddit.com/search?q="
-},  {
-  src: "youtube.svg",
-  placeholder: "YouTube",
-  action: "https://www.youtube.com/results?q="
-}];
+// Add keyboard shortcuts for theme switching (only on startpage)
+document.addEventListener('keydown', (e) => {
+    // Only activate shortcuts if we're focused on the startpage (not in input fields)
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    
+    // Ctrl/Cmd + 1,2,3 for theme switching
+    if ((e.ctrlKey || e.metaKey) && e.key >= '1' && e.key <= '3') {
+        e.preventDefault();
+        const themeIndex = parseInt(e.key) - 1;
+        const themes = ['vscode', 'catppuccin', 'dracula'];
+        const theme = themes[themeIndex];
+        
+        if (theme) {
+            const themeManager = new StartpageThemeManager();
+            themeManager.setTheme(theme);
+        }
+    }
+});
 
-const cycleSearchEngines = se => {
-  const curData = search_engines[(se+1) % search_engines.length];
-
-  document.getElementById("se_icon").src = "icons/" + curData.src;
-  document.getElementById("search").placeholder = "Searching with " + curData.placeholder;
-  document.getElementById("search_eng_form").action = curData.action;
-};
+// Add smooth link hover effects
+document.addEventListener('DOMContentLoaded', () => {
+    // Add ripple effect on link clicks
+    document.querySelectorAll('.links-grid a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.cssText = `
+                position: absolute;
+                border-radius: 50%;
+                background: var(--accent);
+                opacity: 0.3;
+                pointer-events: none;
+                transform: scale(0);
+                animation: ripple 0.3s ease-out;
+                width: ${size}px;
+                height: ${size}px;
+                left: ${x}px;
+                top: ${y}px;
+            `;
+            
+            this.style.position = 'relative';
+            this.style.overflow = 'hidden';
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 300);
+        });
+    });
+    
+    // Add CSS for ripple animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes ripple {
+            to {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+});
