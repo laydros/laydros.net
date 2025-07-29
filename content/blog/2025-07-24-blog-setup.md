@@ -6,37 +6,37 @@ description = "Moving to a Zola-powered Site"
 tags = ["meta", "zola", "blogging"]
 +++
 
-This site (laydros.net) has lived through a number of manifestations. Including at least being hosted at the wonderful [Super Dimensional Fortress](https://sdf.org), on a [Debian](https://www.debian.org) box at my house, I'm pretty sure for a while at the sadly defunct devio.us, later at linode, and then when I really wanted OpenBSD again, I moved to [vultr](https://www.vultr.com).
+This site (laydros.net) has taken many forms over the years. It's been hosted on the wonderful [Super Dimensional Fortress](https://sdf.org), on a [Debian](https://www.debian.org) box at my house, on the sadly now-defunct devio.us, later on Linode, and eventually on [Vultr](https://www.vultr.com) when I was set on using OpenBSD again.
 
-But now I'm trying something different, not because it's better, but because I'm lazy...
+Now I’m trying something different—not because it’s better, but because I'm lazy...
 
 <!-- more -->
 
-A while back vultr did some [stupid stuff][stupid-vultr], and I thought about leaving, but they walked back some of it, and I didn't make the effort. Now, for pretty much entirely different reasons, I am finally planning to pull my site from vultr.
+I considered leaving Vultr back when they pulled [some nonsense][stupid-vultr], but they walked it back, and I didn’t follow through. Lately though, for mostly unrelated reasons, I’ve finally decided to move the site.
 
-For my entire adult life I have been interested in open source software, and increasingly concerned about privacy. After the Edward Snowdon revelations came out, I pulled back considerably. Then in 2020 I heard an [episode][podep] of the (now also sadly defunct) [Privacy And Security Podcast][pod] about how much data even Apple had about you. Even though I logically knew they could be keeping all that data, I didn't quite realize they still would.
+I’ve been into open source my whole adult life, and my concern for privacy grew sharply after the Snowden revelations. That concern deepened in 2020 when I heard an [episode][podep] of the (now sadly defunct) [Privacy and Security Podcast][pod] that laid out just how much data Apple collects. I already knew it in theory, but hearing it spelled out like that was jarring.
 
-This sent me down quite a path of trying to really reduce my online footprint, and stick even more heavily to truely open source and self hosted solutions. I would still swing between Mac and Linux for my personal computing, but I avoided a lot of things.
+That kicked off a deeper effort to reduce my online footprint and double down on open source and self-hosted tools. I still bounced between Mac and Linux, but avoided most of the big platforms.
 
 ## The AI Influence
 
-But then came along this recent batch of what they like to call "AI." There are lots of problems, but I'm more excited about the tools than I have been about anything in tech since smartphones settled into their current form. This has led my focus on privacy, open source, and self-hosting to slide quite a bit.
+Then came the recent wave of so-called “AI.” There’s plenty to criticize, but I haven’t been this excited about new tools since smartphones settled into their current form. That excitement has softened my hard lines on privacy and hosting.
 
-After fliring with self-hosting my git repos, I had mostly transitioned to using [sourcehut](https://sr.ht), which is an excellent service. But now I can just tell [ChatGPT Codex](https://chatgpt.com/codex) to make a change on a repo at Github before I leave the office to head home, and it's done by the time I get home.
+After flirting with self-hosting my git repos, I eventually settled on [sourcehut](https://sr.ht), which I still recommend. But now, the convenience of telling [ChatGPT Codex](https://chatgpt.com/codex) to tweak a repo on GitHub while I’m heading out the door—and having it done by the time I get home—is hard to beat.
 
-So I've pulled my personal site to Github pages to take advantage of that. I was also interested in moving to a site generator because I was getting tired of hand-editing HTML.
+So I moved my site to GitHub Pages and decided to finally use a site generator. I'm also done hand-editing HTML for the smallest change, so a static site generator made sense.
 
 ## Why Zola?
 
-So did 5 minutes of research on a static site generator. By which I mean asking ChatGPT or Claude about the options that would fit my case. Even if I'm accepting the Microsoft run GitHub, I still have a think for software I can mostly understand, so I wanted something simple.
+I spent about five minutes researching static site generators—by which I mean I asked ChatGPT and Claude what might work for me. Even though I’ve accepted Microsoft-run GitHub for now, I still want tools I can mostly understand. So I wanted something simple.
 
-The default for Github pages is the venerable [Jekyll](https://jekyllrb.com/). I don't think there is anything wrong with Jekyll, and I might find myself going back to it, but it's based in [Ruby](https://www.ruby-lang.org/en/). I have a lot of respect for the Ruby language, but it came along at a time I wasn't interested in keeping up with the new stuff, so I didn't catch the wave. And now it feel like a dead end.
+[Jekyll](https://jekyllrb.com/) is the GitHub Pages default. It’s fine, but it’s Ruby-based, and I never really got into Ruby. I respect the language, but it came along at a time when I wasn’t chasing new tech. Now it feels like a dead end.
 
-I also considered [Hugo](https://gohugo.io/). I have messed with Hugo a little in the past, and while I haven't really learned [Go](https://go.dev/), I like it a lot. But Hugo is big and powerful and not quite the lightweight vibe I wanted.
+I also looked at [Hugo](https://gohugo.io/). I’ve played with it a bit and I like [Go](https://go.dev/). Hugo is powerful, but not quite the lightweight setup I was looking for.
 
-So the next viable option that came to my attention was Zola. Zola is built in [Rust](https://www.rust-lang.org/), which I also haven't learned to a serious extent, but I'm very interested in. And Zola is designed to be a super-simple single-binary type tool. I like that a lot.
+Then I came across [Zola](https://www.getzola.org/). It’s written in [Rust](https://www.rust-lang.org/), which I’m curious about, and it’s designed to be a simple, single-binary tool. That appealed to me immediately.
 
-So after a few round with mostly Claude code CLI and Gemini CLI, I had my site largely converted to a Zola format, ready for Github pages. Zola itself seems pretty good so far. It doesn't do a ton, but it seems to handle the basics well. The downside has been Github CI and ChatGPT Codex aren't great with it. It took quite a bit of testing to make Github build it consistently, and changed my Codex environment setup 3 different ways so far, and I still occasionally get errors.
+After a few rounds of trial and error with the Claude and Gemini CLI tools, I had the site mostly converted. Zola itself is solid. It doesn’t try to do too much but handles the basics well. The tricky part has been getting GitHub CI to build it consistently. I’ve changed my Codex environment setup three times already and still hit the occasional snag.
 
 [pod]: https://inteltechniques.com/podcast.html
 [podep]: https://inteltechniques.com/blog/2019/03/01/the-privacy-security-osint-show-episode-113/
