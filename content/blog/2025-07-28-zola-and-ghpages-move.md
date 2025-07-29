@@ -1,9 +1,9 @@
 +++
-title = "Setting up Zola blog"
+title = "Moving to Zola and GitHub Pages"
 date = "2025-07-28"
 description = "Moving to a Zola-powered Site"
 [taxonomies]
-tags = ["meta", "zola", "blogging"]
+tags = ["meta", "zola", "blogging", "github", "privacy", "ai", "vultr"]
 +++
 
 This site (laydros.net) has taken many forms over the years. It's been hosted on the wonderful [Super Dimensional Fortress](https://sdf.org), on a [Debian](https://www.debian.org) box at my house, on the sadly now-defunct devio.us, later on Linode, and eventually on [Vultr](https://www.vultr.com) when I was set on using OpenBSD again.
