@@ -1,7 +1,7 @@
 // Startpage theme management for start
 class StartpageThemeManager {
     constructor() {
-        this.themes = ['original', 'vscode', 'catppuccin', 'dracula'];
+        this.themes = ['original', 'vscode', 'catppuccin', 'dracula', 'tokyonight', 'ayu-light'];
         this.currentTheme = 'original';
         this.storageKey = 'startpage-d-theme';
         this.init();
@@ -12,15 +12,16 @@ class StartpageThemeManager {
         const savedTheme = localStorage.getItem(this.storageKey) || 'original';
         this.setTheme(savedTheme);
 
-        // Add event listeners to theme buttons
-        document.querySelectorAll('.theme-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const theme = e.target.dataset.theme;
+        // Add event listener to dropdown
+        const select = document.getElementById('theme-select');
+        if (select) {
+            select.addEventListener('change', (e) => {
+                const theme = e.target.value;
                 this.setTheme(theme);
             });
-        });
+        }
 
-        // Update active button state
+        // Update active option state
         this.updateActiveButton();
     }
 
@@ -34,18 +35,21 @@ class StartpageThemeManager {
     }
 
     updateActiveButton() {
-        document.querySelectorAll('.theme-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.theme === this.currentTheme);
-        });
+        const select = document.getElementById('theme-select');
+        if (select) {
+            select.value = this.currentTheme;
+        }
     }
 }
+
+let themeManager;
 
 // Time and greeting functionality
 const determineGreet = hours => document.getElementById("greeting").innerText = `Good ${hours < 12 ? "Morning." : hours < 18 ? "Afternoon." : "Evening."}`;
 
 window.addEventListener('load', (event) => {
     // Initialize theme manager
-    new StartpageThemeManager();
+    themeManager = new StartpageThemeManager();
 
     // Set up greeting and time
     let today = new Date();
@@ -118,15 +122,14 @@ document.addEventListener('keydown', (e) => {
     // Only activate shortcuts if we're not focused on input fields
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
-    // Ctrl/Cmd + 1,2,3,4 for theme switching
-    if ((e.ctrlKey || e.metaKey) && e.key >= '1' && e.key <= '4') {
+    // Ctrl/Cmd + 1-6 for theme switching
+    if ((e.ctrlKey || e.metaKey) && e.key >= '1' && e.key <= '6') {
         e.preventDefault();
         const themeIndex = parseInt(e.key) - 1;
-        const themes = ['original', 'vscode', 'catppuccin', 'dracula'];
+        const themes = ['original', 'vscode', 'catppuccin', 'dracula', 'tokyonight', 'ayu-light'];
         const theme = themes[themeIndex];
 
         if (theme) {
-            const themeManager = new StartpageThemeManager();
             themeManager.setTheme(theme);
         }
     }
