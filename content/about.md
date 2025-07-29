@@ -75,7 +75,11 @@ Minor: Computer Science
 
 ## This Site
 
-This site was hand coded with (mostly) care in [emacs](https://www.gnu.org/software/emacs/)/[mg(1).](https://man.openbsd.org/mg) The theme/styling is [sakura.css](https://oxal.org/projects/sakura/)
+I got lazy with the HTML and this site is now built with [zola](https://www.getzola.org) and hosted via GitHub pages.
+I spent too much time editing my init.el, so now mostly done with a combination
+of [VS Code](https://code.visualstudio.com) and [Neovim](https://neovim.io). 
+The theme/styling is [sakura.css](https://oxal.org/projects/sakura/)
 
-Currently hosted with [vultr](https://www.vultr.com/) running [httpd(8)](https://man.openbsd.org/httpd.8) on [OpenBSD](https://www.openbsd.org/).
+This site was previously hand coded with (mostly) care in [emacs](https://www.gnu.org/software/emacs/)/[mg(1).](https://man.openbsd.org/mg) 
+and hosted at [vultr](https://www.vultr.com/) running [httpd(8)](https://man.openbsd.org/httpd.8) on [OpenBSD](https://www.openbsd.org/).
 Previously iterations have happily lived at **linode** on [debian](https://www.debian.org/) and at [sdf](http://sdf.org)
