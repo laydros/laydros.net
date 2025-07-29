@@ -1,17 +1,17 @@
-// Startpage theme management - isolated from main site
+// Startpage theme management for start
 class StartpageThemeManager {
     constructor() {
-        this.themes = ['vscode', 'catppuccin', 'dracula'];
-        this.currentTheme = 'vscode';
-        this.storageKey = 'startpage-theme';
+        this.themes = ['original', 'vscode', 'catppuccin', 'dracula'];
+        this.currentTheme = 'original';
+        this.storageKey = 'startpage-d-theme';
         this.init();
     }
 
     init() {
         // Load saved theme or use default
-        const savedTheme = localStorage.getItem(this.storageKey) || 'vscode';
+        const savedTheme = localStorage.getItem(this.storageKey) || 'original';
         this.setTheme(savedTheme);
-        
+
         // Add event listeners to theme buttons
         document.querySelectorAll('.theme-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -26,7 +26,7 @@ class StartpageThemeManager {
 
     setTheme(theme) {
         if (!this.themes.includes(theme)) return;
-        
+
         this.currentTheme = theme;
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem(this.storageKey, theme);
@@ -40,45 +40,52 @@ class StartpageThemeManager {
     }
 }
 
-// Initialize theme manager when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
+// Time and greeting functionality
+const determineGreet = hours => document.getElementById("greeting").innerText = `Good ${hours < 12 ? "Morning." : hours < 18 ? "Afternoon." : "Evening."}`;
+
+window.addEventListener('load', (event) => {
+    // Initialize theme manager
     new StartpageThemeManager();
+
+    // Set up greeting and time
+    let today = new Date();
+    let time = today.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    determineGreet(new Date().getHours());
+    displayTime(time);
 });
 
-// Add keyboard shortcuts for theme switching (only on startpage)
-document.addEventListener('keydown', (e) => {
-    // Only activate shortcuts if we're focused on the startpage (not in input fields)
-    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-    
-    // Ctrl/Cmd + 1,2,3 for theme switching
-    if ((e.ctrlKey || e.metaKey) && e.key >= '1' && e.key <= '3') {
-        e.preventDefault();
-        const themeIndex = parseInt(e.key) - 1;
-        const themes = ['vscode', 'catppuccin', 'dracula'];
-        const theme = themes[themeIndex];
-        
-        if (theme) {
-            const themeManager = new StartpageThemeManager();
-            themeManager.setTheme(theme);
+// Add CSS for ripple animation
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes ripple {
+        to {
+            transform: scale(4);
+            opacity: 0;
         }
     }
-});
+`;
+document.head.appendChild(style);
 
-// Add smooth link hover effects
-document.addEventListener('DOMContentLoaded', () => {
-    // Add ripple effect on link clicks
-    document.querySelectorAll('.links-grid a').forEach(link => {
-        link.addEventListener('click', function(e) {
+// Add ripple effect using event delegation
+function addRippleEffect() {
+    document.body.addEventListener('click', function (e) {
+        // Check if clicked element is a link inside our containers
+        const target = e.target;
+        if (target.tagName === 'A' && target.closest('.tools, .dev, .nix, .media, .other')) {
             const ripple = document.createElement('span');
-            const rect = this.getBoundingClientRect();
+            const rect = target.getBoundingClientRect();
             const size = Math.max(rect.width, rect.height);
             const x = e.clientX - rect.left - size / 2;
             const y = e.clientY - rect.top - size / 2;
-            
+
+            // Get computed accent color for ripple
+            const computedStyle = getComputedStyle(document.documentElement);
+            const accentColor = computedStyle.getPropertyValue('--accent').trim();
+
             ripple.style.cssText = `
                 position: absolute;
                 border-radius: 50%;
-                background: var(--accent);
+                background: ${accentColor};
                 opacity: 0.3;
                 pointer-events: none;
                 transform: scale(0);
@@ -87,27 +94,51 @@ document.addEventListener('DOMContentLoaded', () => {
                 height: ${size}px;
                 left: ${x}px;
                 top: ${y}px;
+                z-index: 0;
             `;
-            
-            this.style.position = 'relative';
-            this.style.overflow = 'hidden';
-            this.appendChild(ripple);
-            
+
+            target.style.position = 'relative';
+            target.style.overflow = 'hidden';
+            target.appendChild(ripple);
+
             setTimeout(() => {
-                ripple.remove();
+                if (ripple.parentNode) {
+                    ripple.remove();
+                }
             }, 300);
-        });
-    });
-    
-    // Add CSS for ripple animation
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes ripple {
-            to {
-                transform: scale(2);
-                opacity: 0;
-            }
         }
-    `;
-    document.head.appendChild(style);
+    });
+}
+
+// Set up ripple effect
+addRippleEffect();
+
+// Add keyboard shortcuts for theme switching
+document.addEventListener('keydown', (e) => {
+    // Only activate shortcuts if we're not focused on input fields
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+    // Ctrl/Cmd + 1,2,3,4 for theme switching
+    if ((e.ctrlKey || e.metaKey) && e.key >= '1' && e.key <= '4') {
+        e.preventDefault();
+        const themeIndex = parseInt(e.key) - 1;
+        const themes = ['original', 'vscode', 'catppuccin', 'dracula'];
+        const theme = themes[themeIndex];
+
+        if (theme) {
+            const themeManager = new StartpageThemeManager();
+            themeManager.setTheme(theme);
+        }
+    }
 });
+
+// Time display
+setInterval(function () {
+    var today = new Date();
+    var time = today.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    document.getElementById("time").innerHTML = time;
+}, 1000);
+
+function displayTime(time) {
+    document.getElementById("time").innerHTML = time;
+}

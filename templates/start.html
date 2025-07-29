@@ -1,35 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- 
+    Original design by grtcdr (https://benalita.tn)
+    Source: https://git.sr.ht/~grtcdr/startpages/tree/master
+-->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% if page.title %}{{ page.title }} - {{ config.title }}{% else %}{{ config.title }}{% endif %}</title>
-    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ config.description }}{% endif %}">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🏠</text></svg>">
     <link rel="stylesheet" href="{{ get_url(path='start/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@300&display=swap" rel="stylesheet">
+    <title>{% if page.title %}{{ page.title }} - {{ config.title }}{% else %}{{ config.title }}{% endif %}</title>
 </head>
-<body data-theme="vscode">
-    <div class="container">
-        <header class="header">
-            <h1 class="title">start</h1>
-            <div class="theme-switcher">
-                <button class="theme-btn" data-theme="vscode" title="VS Code Dark">⚫</button>
-                <button class="theme-btn" data-theme="catppuccin" title="Catppuccin">🌙</button>
-                <button class="theme-btn" data-theme="dracula" title="Dracula">🧛</button>
-            </div>
-        </header>
-        
-        <main class="main">
-            <div class="links-grid">
-                {{ section.content | safe }}
-            </div>
-        </main>
-        
-        <footer class="footer">
-            <a href="/">← back to main site</a>
-        </footer>
+
+<body data-theme="original">
+
+    <div class="theme-switcher">
+        <button class="theme-btn" data-theme="original" title="Original Theme">🏠</button>
+        <button class="theme-btn" data-theme="vscode" title="VS Code Dark">⚫</button>
+        <button class="theme-btn" data-theme="catppuccin" title="Catppuccin">🌙</button>
+        <button class="theme-btn" data-theme="dracula" title="Dracula">🧛</button>
     </div>
-    
-    <script src="{{ get_url(path='start/script.js') }}"></script>
+
+    <div class="info">
+        <p id="time"></p>
+        <h1 id="greeting"></h1>
+    </div>
+    <div class="lists">
+        <div class="list_card">
+            <h2 class="list_title" id="t">Tools</h2>
+            <a href="https://fastmail.com/">Fastmail</a>
+            <a href="https://mail.protonmail.com/">Protonmail</a>
+            <a href="https://claude.ai">Claude</a>
+            <a href="https://chat.openai.com">ChatGPT</a>
+            <a href="https://www.perplexity.ai">Perplexity.ai</a>
+            <a href="https://x.ai">Grok (xAI)</a>
+            <a href="http://localhost:8384/">Syncthing (local)</a>
+        </div>
+        <div class="list_card">
+            <h2 class="list_title" id="d">Dev</h2>
+            <a href="https://chatgpt.com/codex">ChatGPT Codex</a>
+            <a href="https://github.com/">Github</a>
+            <a href="https://sourcehut.org/">Sourcehut(fka sr.ht)</a>
+        </div>
+        <div class="list_card">
+            <h2 class="list_title" id="l">*Nix</h2>
+            <a href="https://wiki.archlinux.org/">Arch Wiki</a>
+            <a href="https://alltop.com/linux">Alltop/linux</a>
+            <a href="https://reddit.com/r/unixporn">/r/unixporn</a>
+            <a href="https://xn--gckvb8fzb.com">ごくふつうのブログ</a>
+            <a href="http://start.laydros.net/openbsd_install.html">OpenBSD install</a>
+        </div>
+        <div class="list_card">
+            <h2 class="list_title" id="m">Media</h2>
+            <a href="https://www.reddit.com/">Reddit</a>
+            <a href="https://www.youtube.com">YouTube</a>
+            <a href="https://lobste.rs/">lobsters</a>
+            <a href="https://news.ycombinator.com/">Hacker News</a>
+            <a href="https://www.daringfireball.net/">DF</a>
+            <a href="https://www.leancrew.com/all-this/">Dr. Drang</a>
+            <a href="https://xkcd.com/">xkcd</a>
+            <a href="https://www.theverge.com">The Verge</a>
+            <a href="https://www.macrumors.com">MacRumors</a>
+            <a href="https://9to5mac.com">9to5Mac</a>
+            <a href="https://slickdeals.net/deals/musical-instruments/">SD insruments</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <a href="/">← back to main site</a>
+    </footer>
+
+    <script async type="text/javascript" src="{{ get_url(path='start/script.js') }}"></script>
 </body>
+
 </html>
