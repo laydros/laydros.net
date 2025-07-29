@@ -53,6 +53,32 @@
     --shadow: rgba(0, 0, 0, 0.5);
 }
 
+:root[data-theme="tokyonight"] {
+    --bg-primary: #1a1b26;
+    --bg-secondary: #24283b;
+    --text-primary: #c0caf5;
+    --text-secondary: #a9b1d6;
+    --accent: #7aa2f7;
+    --accent-hover: #7dcfff;
+    --border: #414868;
+    --card-border: #414868;
+    --card-bg: #24283b;
+    --shadow: rgba(0, 0, 0, 0.5);
+}
+
+:root[data-theme="ayu-light"] {
+    --bg-primary: #fcfcfc;
+    --bg-secondary: #ffffff;
+    --text-primary: #5c6166;
+    --text-secondary: #889095;
+    --accent: #e6b450;
+    --accent-hover: #ffb454;
+    --border: #d7d8d2;
+    --card-border: #d7d8d2;
+    --card-bg: #ffffff;
+    --shadow: rgba(0, 0, 0, 0.2);
+}
+
 body {
     background-color: var(--bg-primary);
     transition: background-color 0.3s ease, color 0.3s ease;
@@ -173,6 +199,19 @@ body {
     display: flex;
     gap: 8px;
     z-index: 1000;
+}
+
+.theme-select {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    border-radius: 8px;
+    padding: 6px 8px;
+    font-size: 16px;
+}
+.theme-select:hover {
+    background: var(--accent);
+    color: var(--bg-primary);
 }
 
 .theme-btn {
