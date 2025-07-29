@@ -1,3 +1,5 @@
+/* Startpage-specific CSS - completely isolated from main site */
+
 /* Theme definitions */
 :root[data-theme="original"] {
     --bg-primary: #000000;
@@ -102,7 +104,7 @@ body {
 
 .lists {
     display: flex;
-    margin-top: 90px;
+    margin-top: 40px;
     flex-wrap: wrap;
     vertical-align: center;
     justify-content: center;
@@ -120,14 +122,14 @@ body {
     background-color: var(--card-bg);
     border-radius: 12px;
     margin: 5px;
-    width: 230px;
-    padding: 40px;
+    width: 180px;
+    padding: 30px;
     transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
 /* Links - using /start/ style (no permanent background) */
 .tools a,
-.dev a, 
+.dev a,
 .nix a,
 .media a,
 .other a {
@@ -145,7 +147,7 @@ body {
 
 .tools a:hover,
 .dev a:hover,
-.nix a:hover, 
+.nix a:hover,
 .media a:hover,
 .other a:hover {
     background-color: var(--bg-secondary);
@@ -157,7 +159,7 @@ body {
 .tools a:active,
 .dev a:active,
 .nix a:active,
-.media a:active, 
+.media a:active,
 .other a:active {
     transform: translateX(2px);
 }
@@ -223,7 +225,7 @@ body {
         right: 10px;
         gap: 6px;
     }
-    
+
     .theme-btn {
         width: 36px;
         height: 36px;
