@@ -96,7 +96,7 @@ body {
     }
 }
 
-.list_title {
+.lists h2 {
     font-size: 25px;
     color: var(--accent);
     transition: color 0.3s ease;
