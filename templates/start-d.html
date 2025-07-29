@@ -15,62 +15,31 @@
 </head>
 
 <body data-theme="original">
-    <div class="theme-switcher">
-        <button class="theme-btn" data-theme="original" title="Original Theme">🏠</button>
-        <button class="theme-btn" data-theme="vscode" title="VS Code Dark">⚫</button>
-        <button class="theme-btn" data-theme="catppuccin" title="Catppuccin">🌙</button>
-        <button class="theme-btn" data-theme="dracula" title="Dracula">🧛</button>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">start-d</h1>
+            <div class="theme-switcher">
+                <button class="theme-btn" data-theme="original" title="Original Theme">🏠</button>
+                <button class="theme-btn" data-theme="vscode" title="VS Code Dark">⚫</button>
+                <button class="theme-btn" data-theme="catppuccin" title="Catppuccin">🌙</button>
+                <button class="theme-btn" data-theme="dracula" title="Dracula">🧛</button>
+            </div>
+        </header>
+
+        <div class="info">
+            <p id="time"></p>
+            <h1 id="greeting"></h1>
+        </div>
+
+        <main class="lists">
+            {{ section.content | safe }}
+        </main>
+
+        <footer class="footer">
+            <a href="/">← back to main site</a>
+        </footer>
     </div>
-    
-    <div class="info">
-        <p id="time"></p>
-        <h1 id="greeting"></h1>
-    </div>
-    <div class="lists">
-        <div class="tools">
-            <p class="list_title" id="t">Tools</p>
-            <a href="https://fastmail.com/">fastmail</a>
-            <a href="https://mail.protonmail.com/">protonmail</a>
-            <a href="https://claude.ai">Claude</a>
-            <a href="https://chat.openai.com">ChatGPT</a>
-            <a href="https://www.perplexity.ai">Perplexity.ai</a>
-            <a href="https://x.ai">Grok (xAI)</a>
-            <a href="https://localhost:8384/">syncthing</a>
-        </div>
-        <div class="dev">
-            <p class="list_title" id="d">Dev</p>
-            <a href="https://chatgpt.com/codex">ChatGPT Codex</a>
-            <a href="https://github.com/">github</a>
-            <a href="https://sourcehut.org/">sourcehut(fka sr.ht)</a>
-        </div>
-        <div class="nix">
-            <p class="list_title" id="l">*Nix</p>
-            <a href="https://wiki.archlinux.org/">Arch Wiki</a>
-            <a href="https://alltop.com/linux">Alltop/linux</a>
-            <a href="https://reddit.com/r/unixporn">unixporn</a>
-            <a href="https://xn--gckvb8fzb.com">ごくふつうのブログ</a>
-            <a href="http://start.laydros.net/openbsd_install.html">OpenBSD install</a>
-        </div>
-        <div class="media">
-            <p class="list_title" id="m">Media</p>
-            <a href="https://www.reddit.com/">Reddit</a>
-            <a href="https://www.youtube.com">YouTube</a>
-            <a href="https://lobste.rs/">lobsters</a>
-            <a href="https://news.ycombinator.com/">hacker news</a>
-            <a href="https://www.daringfireball.net/">df</a>
-            <a href="https://www.leancrew.com/all-this/">dr. drang</a>
-            <a href="https://xkcd.com/">xkcd</a>
-            <a href="https://www.theverge.com">The Verge</a>
-            <a href="https://www.macrumors.com">MacRumors</a>
-            <a href="https://9to5mac.com">9to5Mac</a>
-            <a href="https://slickdeals.net/deals/musical-instruments/">SD insruments</a>
-        </div>
-    </div>
-    
-    <footer class="footer">
-        <a href="/">← back to main site</a>
-    </footer>
-    
+
     <script async type="text/javascript" src="{{ get_url(path='start-d/script.js') }}"></script>
 </body>
 
