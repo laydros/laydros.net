@@ -111,11 +111,7 @@ body {
     font-family: 'Barlow', sans-serif;
 }
 
-.tools,
-.nix,
-.dev,
-.media,
-.other {
+.list_card {
     display: flex;
     flex-direction: column;
     border: 2px solid var(--card-border);
@@ -128,11 +124,7 @@ body {
 }
 
 /* Links - using /start/ style (no permanent background) */
-.tools a,
-.dev a,
-.nix a,
-.media a,
-.other a {
+.lists a {
     display: block;
     color: var(--text-primary);
     text-decoration: none;
@@ -145,22 +137,14 @@ body {
     overflow: hidden;
 }
 
-.tools a:hover,
-.dev a:hover,
-.nix a:hover,
-.media a:hover,
-.other a:hover {
+.lists a:hover {
     background-color: var(--bg-secondary);
     color: var(--accent-hover);
     transform: translateX(4px);
     box-shadow: 0 2px 8px var(--shadow);
 }
 
-.tools a:active,
-.dev a:active,
-.nix a:active,
-.media a:active,
-.other a:active {
+.lists a:active {
     transform: translateX(2px);
 }
 
