@@ -1,0 +1,99 @@
+# Site settings
+title: Jason Hamilton
+description: Personal website of Jason Hamilton
+baseurl: ""
+url: "https://laydros.net"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# Pagination settings
+pagination:
+  enabled: true
+  per_page: 10
+  permalink: '/page/:num/'
+  title: ':title - page :num of :max'
+  sort_field: 'date'
+  sort_reverse: true
+
+# Jekyll Archives for tag and category pages
+jekyll-archives:
+  enabled:
+    - categories
+    - tags
+  layout: archive
+  permalinks:
+    category: '/categories/:name/'
+    tag: '/tags/:name/'
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-paginate-v2
+  - jekyll-archives
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /blog/:year/:month/:day/:title/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Jason Hamilton"
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+
+# Exclude files
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - config.toml
+  - templates/
+  - scripts/
+  - README.md
+  - CLAUDE.md
+
+# Sass settings
+sass:
+  style: compressed
+
+# Kramdown settings
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+    span:
+      line_numbers: false
+    block:
+      line_numbers: false
+
+# Site navigation
+navigation:
+  - title: Home
+    url: /
+  - title: Blog
+    url: /blog/
+  - title: Docs
+    url: /docs/
+  - title: Search
+    url: /search/
+  - title: About
+    url: /about/
