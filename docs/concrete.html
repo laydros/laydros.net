@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>OpenBSD Notes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/normalize.css" type="text/css">
+    <!--link rel="stylesheet" href="/css/sakura.css" type="text/css"-->
+    <!--link rel="stylesheet" href="/css/style.css" type="text/css"-->
+    <link rel="stylesheet" href="https://unpkg.com/normalize.css">
+    <link rel="stylesheet" href="https://unpkg.com/concrete.css">
+  </head>
+  <body>
+  <nav>
+    <ul>
+      <li><a href="/">home</a></li>
+      <li><a href="/docs/">docs</a></li>
+      <li><a href="http://git.laydros.net">repo</a></li>
+      <li><a href="/about.html">about</a></li>
+    </ul>
+  </nav>
+    <br />
+<main>
+<h1>Notes on OpenBSD setup and usage</h1>
+
+<p>There are a few things I do on any OpenBSD desktop, I'm collecting many
+of them here. This is borrowed from several sources including:<p>
+<ul>
+<li><a href="https://rgz.ee/openbsd/install.html">rgz.ee</a></li>
+<li><a href="https://www.c0ffee.net/blog/openbsd-on-a-laptop">c0ffee.net</a></li>
+</ul>
+
+<h3 id="setcapsasctrl">Set caps as ctrl</h3>
+
+<code><pre># wsconsctl keyboard.map+="keysym Caps_Lock = Control_L"
+</code></pre>
+
+<p>To make this run at boot, add <code>keyboard.map+="keysym Caps_Lock = Control_L"</code> 
+to /etc/wsconsctl.conf.</p>
+
+Still need to add the following to .xsession when you are 
+using <a href="https://www.xenocara.org/">xenocara</a>
+<pre><code>setxkbmap -option 'ctrl:nocaps'</code></pre>
+
+<h3>Thinkpad Trackpoint scrolling</h3>
+<p>Enable middle button scrolling with the trackpoint</p>
+
+Add the following to .xsession:
+<pre><code>xinput set-prop "/dev/wsmouse" "WS Pointer Wheel Emulation" 1
+xinput set-prop "/dev/wsmouse" "WS Pointer Wheel Emulation Button" 2
+xinput set-prop "/dev/wsmouse" "WS Pointer Wheel Emulation Axes" 6 7 4 5</code></pre>
+
+<h5 id="disablexconsole">Disable x console</h5>
+
+By default xconsole is on the xenocara login screen and stays into X11
+
+<pre>sed -i 's/xconsole/#xconsole/' /etc/X11/xenodm/Xsetup_0
+echo 'xset b off' &gt;&gt; /etc/X11/xenodm/Xsetup_0</pre>
+
+
+<h5 id="fstab">Update <a href="https://man.openbsd.org/fstab.5">fstab(5)</a> to add <em>noatime</em>:</h5>
+
+<pre>
+# <b>cp /etc/fstab /etc/fstab.bak</b>
+# <b>sed -i 's/rw/rw,softdep,noatime/' /etc/fstab</b>
+</pre>
+
+<h5 id="apmd">Enable <a href="https://man.openbsd.org/apmd.8">apmd(8)</a>:</h5>
+
+For a laptop enable power management. 
+<pre>
+# <b>rcctl enable apmd</b>
+# <b>rcctl set apmd flags -A -z 7</b>
+# <b>rcctl start apmd</b>
+ampd (ok)
+</pre>
+
+<p>To check current battery life run <a href="https://man.openbsd.org/apm.8">apm(8)</a></p>
+
+<h3 id="usersettings">User Settings</h3>
+
+<h5 id="doasconfig">Add your <em>username</em> <code>&#47;etc&#47;doas.conf</code>:</h5>
+
+<pre>
+# <b>echo 'permit persist keepenv <em>username</em>' > /etc/doas.conf</b>
+</pre>
+
+<h5 id="staffuser">Add your user to staff group:</h5>
+Add your user to the staff group. This group has higher resource limits in login.conf. You'll need to log out and back in for this change to take effect.
+
+<pre><code>usermod -G staff YOUR_USERNAME </code></pre>
+
+
+<h3>Fix Screen Tearing (Intel only)</h3>
+<p>Pasted from <a href="https://www.c0ffee.net/blog/openbsd-on-a-laptop#x11">c0ffee.net</a></p>
+
+<p>The default modesetting driver doesn't use vsync, so you'll get a lot of tearing when scrolling
+webpages or watching videos. If you have an Intel-based video chipset, you can switch to the <span class="monospace">intel</span>
+driver to get smooth video.
+
+<p>Create the <span class="monospace">/etc/X11/xorg.conf.d</span> directory:
+
+<pre>mkdir /etc/X11/xorg.conf.d</pre>
+
+<p>Then, create <span class="monospace">intel.conf</span> with the following contents:
+
+<pre><div class="code-title">/etc/X11/xorg.conf.d/intel.conf</div>Section "Device"
+  Identifier "drm"
+  Driver "intel"
+  Option "TearFree" "true"
+EndSection</pre>
+
+<p>Restart <span class="monospace">xenodm</span> to restart the X server:
+
+<pre>rcctl restart xenodm</pre>
+
+
+<h3>My tmux setup</h3>
+<p>Allows <code>mosh host -- tmux a</code>. Uses C-z</p>
+<pre><code>curl https://laydros.net/docs/conf/tmux.conf -o ~/.tmux.conf</code></pre>
+
+<h3>Disable SSH access except for key</h3>
+Update /etc/ssh/sshd_config with the following:
+<pre><code>PermitRootLogin no
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+UsePAM no</code></pre>
+
+Then run:
+<pre><code> rcctl restart sshd
+</pre></code>
+
+    </main>
+
+  </body>
+</html>

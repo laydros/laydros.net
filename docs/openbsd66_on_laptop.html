@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title> 
+Installing OpenBSD 6.6 on your laptop is really hard (not)
+</title>
+<!--
+<style>
+* { font-family: "Comic Sans MS", cursive, sans-serif; line-height:130%;}
+* {background-color: darkblue;}
+* {color: yellow;}
+pre {font-family: "Courier New", Courier, monospace;}
+@media print {
+* {background-color: white;}
+* {color: black;}
+* { font-family: "Times New Roman", sans; line-height:130%;}
+<pre> {font-family: "Courier New", Courier, monospace;}
+}
+</style>
+-->
+</head>
+
+<!-- 22nd Dec 2019: updated for 6.6 release properly based on L440  -->
+
+<!-- 13th July 2019: Added note about performance on lower spec 
+machines. -->
+
+<!-- 6th June 2019: Bit behind with OpenBSD 6.5 - all good - user needs 
+to be in operator group to close down from within xfce4 -->
+
+<!-- 6th Nov 2018: OpenBSD 6.4 out on 18th Oct. Basics work, new wifi 
+features to play with -->
+
+<!-- 8th April 2018: OpenBSD 6.3 released, re-wrote the full drive 
+encryption section to use FAQ instructions. -->
+
+<!-- 21st April 2017: ToDo, re-write Step 1a with more detail. Improve 
+consistency of the code tags for commands and devices. -->
+
+<!-- 6th May 2017: syspatch has some errata to install and mtier have 
+updated so added command output --> <body>
+
+<p>[ <a href="http://sohcahtoa.org.uk/index.html">home</a> ]</p>
+
+<h1><a name="top">Running OpenBSD 6.6
+on your laptop is really hard (not)</a> </h1> 
+
+<h3> Copied from <a href="https://sohcahtoa.org.uk/openbsd.html"> sohcahtoa.org.uk</a> incase it ever goes away - JWH</a>
+
+<p>I have used the instructions in this page to install amd64 OpenBSD 
+6.6 with the xfce4 desktop, graphical login, automatic mounting of USB 
+sticks, with a basic set of applications on a Thinkpad L440 (legacy 
+boot) laptop with 8 Gb RAM and a 200Gb SSD. Some of the links in this 
+page relate to earlier versions of OpenBSD 6.x.</p>
+
+<p>The L440 with 8Gb and an ssd is responsive. Battery life is an hour 
+or two less than with a popular Linux distribution.</p>
+
+<p>Below are some links to other pages about using 
+OpenBSD on laptops.</p>
+
+<ul>
+
+<li><a 
+href="https://www.c0ffee.net/blog/openbsd-on-a-laptop/">OpenBSD 
+6.4 using the stock cwm window manager.</a> Does not specify make 
+of laptop, does have an example of autojoin.</li>
+
+<li><a 
+href="http://bsdly.blogspot.co.uk/2017/07/openbsd-and-modern-laptop.html">More 
+recent laptops are supported</a> - appears to have been updated for 6.4</li>
+
+<li><a 
+href="https://news.ycombinator.com/item?id=13223351">Alternative 
+30 minute version with Lumina desktop</a> -Version 6.0 vintage but likely to work on later versions - just check 
+<code>/etc/installurl</code> and use in preference to <code>PKG_PATH</code></li>
+
+</ul>
+
+<p>I suggest that you print and read this page before proceeding.</p>
+
+<h2>Install OpenBSD according to the 
+instructions in FAQ</h2> 
+
+<p><strong>Background reading:</strong> <a 
+href="http://www.openbsd.org/faq/faq4.html" title="FAQ section 4 is the 
+install guide">FAQ 4: The OpenBSD installation guide</a> and <a 
+href="https://marc.info/?l=openbsd-misc&m=157496600111772&w=2">useful 
+mail list thread</a>.</p>
+
+<p>The steps below assume that you have successfully installed the base 
+OpenBSD system from the USB stick installer (<code>install66.fs</code>).</p>
+
+<p>One thing to remember is that the installer is running from RAM and 
+knows nothing about the USB drive you have plugged in. When you reach 
+the part of the installation dialogue that asks you for the location of 
+the sets (the system files to install) you have to specify [disk] and 
+answer [No] when the script asks if the disk is mounted. The script will 
+then list the available disks and ask you which one has the sets. The 
+list will probably be something like [sd0 sd1] for an installation that 
+is not using drive encryption and sd1 is likely to be your USB stick.</p>
+
+
+<h2>Connect to the Internet</h2>
+
+<p><strong>Background reading:</strong> OpenBSD FAQ <a 
+href="http://www.openbsd.org/faq/faq6.html#Setup.if">6.2.1</a>, <a 
+href="http://www.openbsd.org/faq/faq6.html#Wireless">6.13</a>.</p>
+
+<p>Jack into your router with a cable and...</p>
+
+<pre># dhclient em0
+DHCPDISCOVER on em0 - interval 3
+DHCPOFFER from 192.168.0.1 (00:1b:2f:42:41:42)
+DHCPREQUEST on em0 to 255.255.255.255
+DHCPACK from 192.168.0.1 (00:1b:2f:42:41:42)
+bound to 192.168.0.4 -- renewal in 43200 seconds.
+#</pre>
+
+<p>Then install any non-free firmware that your laptop might need. The 
+Thinkpad L440 required the wifi drivers, intel firmware and a couple of 
+other files.</p>
+
+<pre>
+# fw_update
+</pre>
+
+<p>Pull the cable out and set up a wifi connection. Most Thinkpads have 
+Intel wifi cards. The L440 uses the iwm0 driver (earlier Thinkpads used 
+the iwn0 driver)</p>
+
+<pre>$ su -l
+# ifconfig -a # shows a list of all the interfaces 
+# ifconfig iwm0 up
+# ifconfig iwm0 scan
+# ifconfig iwm0 nwid connection_name wpakey password wpaprotos wpa1,wpa2 
+# dhclient iwm0 
+DHCPREQUEST on iwm0 to 255.255.255.255 # lots more output
+</pre>
+
+<p><Strong>Warning</strong>: You need to use the <code>wpaprotos</code> 
+option with argument <code>wpa1</code> to enable connections using 
+<code>wpa1</code>. The <code>wpa1</code> protocol is now considered 
+insecure.</p>
+
+<h2>Use a hostname.if file to automatically join wifi 
+networks</h2>
+
+<p><strong>Background Reading:</strong> <a 
+href="https://www.openbsd.org/faq/faq6.html#Wireless">FAQ 
+6 Configuring Your Wireless Adapter</a> section of 
+Wireless Networking, <a 
+href="https://man.openbsd.org/OpenBSD-6.6/hostname.if">man 
+<code>hostname.if</code></a>
+
+<p>My <code>hostname.iwm0</code> file looks like this...</p>
+
+<pre>
+foo$ cat /etc/hostname.iwm0
+# line below connects to my home wifi 
+join myhomewifi wpakey wifi_password wpaprotos wpa1
+# line below might connect to an open wifi [needs testing]
+join Visitors_Library_of_Birmingham 
+# line below requests IP address and DNS details using DHCP
+dhcp
+</pre>
+
+<p>When experimenting with lines in your <code>hostname.iwm0</code> 
+file, the commands below can be used to remove existing settings, and 
+then restart networking without rebooting the machine...</p>
+
+<pre>
+# ifconfig iwm0 down
+# pkill dhclient
+# sh /etc/netstart
+</pre>
+
+<p>The kernel will use the <a 
+href="https://undeadly.org/cgi?action=article;sid=20180712084645">auto-join 
+algorithm</a> to pick a wifi access point to connect to if there is more 
+than one in range when you start networking. You don't have to use a 
+<code>hostname.if</code> file at all if you prefer to explicitly choose 
+a wifi network to join (e.g a guest network at work instead of the 
+authenticated one). You can just type in the commands each time you want 
+to use a different wifi access point, or add some lines to 
+<code>doas.conf</code> and use a little script from your user space to 
+select which access point to use. I find that <code>hostname.if</code> 
+fits my use case as I use just a few different and widely spaced 
+locations.</p>
+
+<h2>Set up a package mirror and install a 
+package</h2> 
+
+<p><strong>Background reading:</strong> OpenBSD FAQ <a 
+href="http://www.openbsd.org/faq/faq15.html#PkgMgmt">15.2</a>.
+
+</p><p>The <code>pkg_add</code> command reads the URL of the package 
+mirror from the <code>/etc/installurl</code> file which is set to the 
+OpenBSD content distribution network by default when installing version 
+6.6</p>
+
+<p>To install applications, you need to become root and run 
+<code>pkg_add</code>.</p>
+
+<pre>$ su -l
+foo# pkg_add nano	# example from 6.5
+quirks-3.124 signed on 2019-04-15T12:10:16Z
+quirks-3.124: ok
+nano-4.0:libiconv-1.14p3: ok
+nano-4.0:gettext-0.19.8.1p3: ok
+nano-4.0: ok
+# exit
+$
+</pre>
+
+<p>Once the command returns, exit root and try editing a text file with 
+<a href="https://rachelbythebay.com/w/2011/09/24/editor/">nano</a>.</p>
+
+<h2>Install the xfce4 desktop environment and 
+some applications</h2> 
+
+<p>I like the xfce desktop and the packages below will install Firefox, 
+a pdf reader, an image organiser, a music player and an office 
+package.</p>
+
+<pre># pkg_add -v consolekit2 xfce xfce-extras evince firefox shotwell audacious audacious-plugins libreoffice
+</pre>
+
+<p>The <code>consolekit2</code> package is needed to allow the user to 
+shut down or reboot from within xfce4 without using terminal commands. 
+</p>
+
+<p><code>pkg_add</code> will stop when it reaches the document reader 
+Evince and offer you a choice of two versions of the package, each 
+compiled with different configuratons...</p>
+
+<pre># pkg_add evince
+quirks-2.114 signed on 2015-08-09T15:30:39Z
+Ambiguous: choose package for evince
+a       0: &lt;none&gt;
+        1: evince-3.16.1p0
+        2: evince-3.16.1p0-light
+Your choice: 2
+</pre>
+
+<p>Option 1 will pull in a large number of Gnome libraries. Option 2 has 
+been provided by the packager for those of us who wish to use Evince to 
+read pdf files with a different desktop or window manager.</p>
+
+<p>Some of the more complex packages come with <code>readme</code> files 
+installed to <code>/usr/local/share/doc/pkg-readmes/</code>. It is best 
+to read these to complete configuration of the package.</p>
+
+<p>Don't reboot yet. You need to configure the graphical login and set 
+up some daemons. See below...</p>
+
+<h2>Use <code>/etc/rc.conf.local</code> to enable apmd and graphical 
+log-in</h2>
+
+<p><strong>Background reading:</strong> <a 
+href="https://en.wikipedia.org/wiki/Comparison_of_X_Window_System_desktop_environments">Comparison 
+of Desktop Environments</a>, <a 
+href="https://github.com/ConsoleKit2/ConsoleKit2">ConsoleKit Github 
+readme with definitions</a>, <a 
+href="http://man.openbsd.org/OpenBSD-6.6/xenodm">xenodm man page</a> and 
+the package_readme for consolekit2 at 
+<code>/usr/local/share/doc/pkg-readmes/consolekit2</code>. Note 
+that as of OpenBSD 6.5, <a 
+href="https://www.linuxquestions.org/questions/%2Absd-17/openbsd-6-5-xorg-xfce4-start-failure-4175653099/">you 
+can no longer start an X session using startx as a user</a>, you have to 
+enable xenodm to start an X session.</p>
+
+<p><strong>As root</strong> add some lines to 
+<code>/etc/rc.conf.local</code> to enable power management 
+(<code>apmd</code>) so that you can use Fn-F4 to suspend your thinkpad, 
+and to enable the graphical log-in manager <code>xenodm</code>. Xenodm 
+is an OpenBSD fork of the venerable <code>xdm</code>.</p>
+
+<pre># nano /etc/rc.conf.local
+multicast_host=YES       # Some avahi shenanigans
+apmd_flags="-A"          # Laptop power saving
+xenodm_flags=""          # Starts xenodm graphical login
+pkg_scripts="messagebus" # Enables dbus/ConsoleKit stuff
+</pre>
+
+<p>Then <strong>as user</strong> add an <code>.xsession</code> file with 
+a line that will start consolekit so that you can shutdown &amp;c from 
+within xfce4.</p>
+
+<pre>$ cat .xsession
+exec ck-launch-session startxfce4</pre>
+
+<p>From OpenBSD 6.5, you need to <a 
+href="https://www.reddit.com/r/openbsd/comments/bnf1vp/xfce4_shutdown_acts_like_logout_openbsd_65/en5rk0o/?utm_source=share&utm_medium=web2x">add 
+your user to the operator group to be able to shutdown</a> from within 
+xfce4...</p>
+
+<pre>
+# usermod -G operator $USER
+</pre>
+
+<p>...where you replace $USER with the name of your user account.</p>
+
+<h3>Memory limits in <code>/etc/login.conf</code></h3>
+
+<p>My Thinkpad L440 has 8Gb of RAM. Firefox (and Chromium) like lots of 
+RAM. By default, OpenBSD enforces limits on the largest amount of RAM 
+that a user level program can use to around 1.5Gb, and if it exceeds 
+that limit, the OOM killer will terminate the process. Your user will be 
+part of the <code>staff</code> group and you can edit <code>/etc/login.conf</code> to increase the default limit. Mine is set as 
+follows...</p>
+
+<pre>
+#
+# Staff have fewer restrictions and can login even when nologins are set.
+#
+staff:\
+        :datasize-cur=4096M:\
+        :datasize-max=infinity:\
+        :maxproc-max=512:\
+        :maxproc-cur=256:\
+        :ignorenologin:\
+        :requirehome@:\
+        :tc=default:
+
+</pre>
+
+<p><strong>Reboot</strong> and you'll get the xenodm login greeter. When 
+you log in, Xfce4 will ask you to specify a layout, and then show you 
+the desktop.</p>
+
+<h2>Use <code>/etc/doas.conf</code> to allow 
+user mounting of an external USB stick</h2> 
+
+<p><strong>Background reading:</strong> OpenBSD FAQ sections <a 
+href="https://www.openbsd.org/faq/faq10.html#doas">10 (doas)</a>, <a 
+href="http://www.openbsd.org/faq/faq14.html">14 (File Systems Intro)</a> 
+as well as <code>man doas</code> and <code>man mount</code>.</p>
+
+<p>You must use <code>doas</code> and a few lines in 
+<code>/etc/doas.conf</code> to allow user mounting of USB sticks. My 
+<code>/etc/doas.conf</code> file looks like this...</p>
+
+<pre>$ cat /etc/doas.conf
+# http://daemonforums.org/showthread.php?t=9774
+permit nopass keith as root cmd mount
+permit nopass keith as root cmd umount
+</pre>
+
+<p>Then you can mount a USB stick like this...</p>
+
+<pre>
+$ mkdir ~/usb				# make a directory to mount to
+$ doas mount /dev/sd1i /home/keith/usb 	# mounts my USB on ~/usb
+</pre>
+
+<p>The mount command tells me what partitions and disks are mounted...</p>
+
+<pre>$ mount
+/dev/sd0a on / type ffs (local)
+/dev/sd0k on /home type ffs (local, nodev, nosuid)
+/dev/sd0d on /tmp type ffs (local, nodev, nosuid)
+/dev/sd0f on /usr type ffs (local, nodev)
+/dev/sd0g on /usr/X11R6 type ffs (local, nodev)
+/dev/sd0h on /usr/local type ffs (local, nodev, wxallowed)
+/dev/sd0j on /usr/obj type ffs (local, nodev, nosuid)
+/dev/sd0i on /usr/src type ffs (local, nodev, nosuid)
+/dev/sd0e on /var type ffs (local, nodev, nosuid)
+/dev/sd1i on /home/keith/usb type msdos (local, uid=1000, gid=1000)
+</pre>
+
+<p>Once mounted, you can use a graphical file manager like Thunar to 
+copy and paste files to and from your storage stick. You can't unmount 
+the USB stick from Thunar, remember to use the <code>umount 
+/dev/sd1i</code> command before removing the USB stick...</p>
+
+<pre>
+doas umount /dev/sd1i 			# un-mounts the drive
+</pre>
+
+<h2>Use <code>xfce4-mount-plugin</code> and an <code>/etc/fstab</code> 
+entry to allow graphical mount/unmount of a USB thumb drive</h2>
+
+<p><strong>Background reading:</strong> <a 
+href="http://goodies.xfce.org/projects/panel-plugins/xfce4-mount-plugin">xfce4-mount-plugin 
+page on the Xfce Web site</a>.</p>
+
+<p><strong>A note on how disks get numbered</strong>: There are two 
+possibilities for a simple installation on a laptop with a single main 
+hard drive...</p>
+
+<ul>
+
+<li>Unencrypted hard drive: you probably have OpenBSD installed to the 
+internal hard drive with number <code>sd0</code>. Your USB stick will be 
+recognised as <code>sd1</code>.</li>
+
+<li>Whole disk encryption: the internal hard drive will be 
+<code>sd0</code> but you will have installed OpenBSD to a softraid 
+device numbered <code>sd1</code>. So your USB stick will be recognised 
+as <code>sd2</code>.</li>
+
+</ul>
+
+<p>The rest of this section assumes that you have an OpenBSD install on 
+<code>sd0</code>. Just increase the drive numbers by 1 for an 
+installation using whole drive encryption.</p>
+
+<p>The <code>xfce4-mount</code> package is installed as part of the <code>xfce4</code> package set. <strong>Add</strong> an icon for the 
+plugin to the XFCE4 
+panel by right-clicking on the panel and selecting 
+<strong>Panel | Add New Items</strong> and searching for 'mount'.</p>
+
+<p>By default, <code>xfce4-mount-plugin</code> lists all the devices 
+including the default local hard drive including all the partitions on 
+<code>sd0</code>. I can set options to prevent that and to use a custom mount 
+command. Right click over the xfce4-mount icon and <strong>select 
+Properties | File Systems</strong> tab. Add the pattern 
+<code>/dev/sd0*</code> to the Exclude specified file systems textbox so 
+the local drive is not listed.</p>
+
+<p>Right-click on the xfce4-mount icon, and selected <strong>Preferences 
+| Commands</strong> and write the following in the Custom Commands 
+textboxes, after ensuring that the Custom Commands checkbox was 
+ticked...</p>
+
+<pre>doas mount %m
+doas umount %m
+</pre>
+
+<p>Now to ensure that a USB stick is <em>listed</em> in the 
+xfce4-mount-popup list, you have to add a line for the device to 
+<code>/etc/fstab</code>. My extra line looks like this (adapted from the 
+examples in <code>man fstab</code>...</p>
+
+<pre>/dev/sd1i /home/keith/usb msdos rw,noauto 0 0
+</pre>
+
+<p>Using an <code>fstab</code> entry like this means that only one vfat 
+formatted USB thumb drive will be listed and available with mouse 
+clicks.</p>
+
+<h2>Set up updates</h2>
+
+
+<p><strong>Background reading:</strong> pages about <a 
+href="http://www.openbsd.org/stable.html">following the 
+<code>-stable</code> branch</a> and the <a 
+href="https://www.openbsd.org/errata66.html">OpenBSD 6.6 Errata</a> 
+page.</p>
+
+<p>The <code>syspatch</code> command provides binary updates to the core 
+system. Running the <code>syspatch</code> command without arguments on 
+OpenBSD 6.6 gave...
+
+<pre>$ su
+Password:
+foo# syspatch                                                           
+Get/Verify syspatch66-001_bpf.tgz 100% |****************|   102 KB    00:02    
+Installing patch 001_bpf
+Get/Verify syspatch66-002_ber.tgz 100% |****************|   660 KB    00:10    
+Installing patch 002_ber
+Get/Verify syspatch66-003_bgpd.tgz 100% |***************|   181 KB    00:02    
+Installing patch 003_bgpd
+Get/Verify syspatch66-004_net8021... 100% |*************| 64839       00:00    
+Installing patch 004_net80211
+Get/Verify syspatch66-005_sysupgr... 100% |*************|  3023       00:00    
+Installing patch 005_sysupgrade
+Get/Verify syspatch66-006_ifioctl... 100% |*************|   381 KB    00:06    
+Installing patch 006_ifioctl
+... more lines...
+Get/Verify syspatch66-016_ripd.tgz 100% |********************| 45685       00:00    
+Installing patch 016_ripd
+Relinking to create unique kernel... done; reboot to load the new kernel
+Errata can be reviewed under /var/syspatch
+</pre>
+
+<p>M:Tier sponsors OpenBSD and has provided <code>binpatches</code> for 
+the packages in the stable release for use together with the 
+<code>openup</code> script. They recommend using <code>openup</code> to 
+upgrade packages that you have installed in addition to the base 
+system. I have yet to try <code>openup</code> on OpenBSD 6.6</p>
+
+<h2>Install OpenBSD with whole drive encryption (advanced) (not tried on 
+6.6 yet)</h2>
+
+</p><p><strong>Background reading</strong>: OpenBSD FAQ sections <a 
+href="http://www.openbsd.org/faq/faq14.html#intro">14.1</a>, <a 
+href="http://www.openbsd.org/faq/faq14.html#fdisk">14.2</a> and <a 
+href="http://www.openbsd.org/faq/faq14.html#disklabel">14.3</a>.</p>
+
+<p>In OpenBSD 6.4 I used the <a 
+href="https://www.openbsd.org/faq/faq14.html#softraidFDE">commands 
+detailed in the FAQ</a> to create an encrypted softraid device and then 
+install OpenBSD within that device. I omitted the command to over-write 
+the disk with random numbers because of time.</p>
+
+<p>Because I install from a USB stick, the drive numbering is 'off by 
+one' compared to the example commands in the FAQ, so the fixed disk in 
+the laptop is sd0 and the USB stick that I am installing from is sd1. 
+The softraid device I install OpenBSD to is therefore sd2. The 
+commands I actually used in the installer shell session are shown 
+below.</p>
+
+<p>Boot from the installer USB stick and then select 
+<code>[S]hell</code> to get a command prompt...</p>
+
+<pre>
+# fdisk -iy sd0		# MBR not GPT
+# disklabel -E sd0
+>a a
+offset:[64]
+size:[the size of your drive]
+FS type:[4.2BSD] RAID
+>w
+>q
+No label changes
+# bioctl -c C -l sd0a softraid0
+New pass phrase:
+re-type passphrase
+# cd /dev && sh MAKEDEV sd2
+# dd if=/dev/zero of=/dev/rsd2c bs=1m count=1
+# exit
+</pre>
+
+<p>The <code>exit</code> command starts the installer script and you 
+type in the root password, your user and the user password and so on. 
+Then you select <code>sd2</code> as the disk to install to. You also 
+have to specify <code>[disk]</code> as the location of the package sets 
+and then answer 'no' when asked if the disk is mounted, select 
+<code>sd1</code>, mount the <code>a</code> partition. The installer 
+script should then find the package sets.</p>
+
+<p>When you reboot into the new installation, you will be asked to enter 
+the pass phrase for the encrypted disk, and then OpenBSD should show the 
+usual boot dialogue. You will see a message about renumbering the 
+operating system disk as <code>sd1</code>, because the USB stick I 
+installed from has been removed. The <code>/etc/fstab</code> file shows 
+UUIDs for each partition, so the boot loader can find the 
+partitions.</p>
+
+<hr />
+<p><small>Keith Burnett, 22nd December 2019: Updated for 
+OpenBSD 6.6 release</small></p>
+
+</body></html>
+

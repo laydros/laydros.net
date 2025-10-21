@@ -1,0 +1,1913 @@
+<!DOCTYPE HTML>
+
+<!--Converted with LaTeX2HTML 2002-2-1 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html>
+<head>
+
+<title>Introduction to Unix &amp; SDF</title>
+<meta name="description" content="Introduction to Unix &amp; SDF">
+<meta name="keywords" content="unx">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta name="Generator" content="LaTeX2HTML v2002-2-1">
+<meta http-equiv="Content-Style-Type" content="text/css">
+
+<link rel="STYLESHEET" href="/css/cybertiggyr-unx.css">
+
+</head>
+<body>
+
+	<p><b>Note:</b> 2020-03-13-JWH this appears to have disappeared a long time ago. I grabbed the archive.org wayback
+		version from 2011-04-26 and stripped the wayback toolbar off.</p>
+
+<h1 align="CENTER">Introduction to Unix &amp; SDF</h1><div class="author_info">
+
+<p align="CENTER"><strong><a name="tex2html2" href="/web/20110426193653/http://cybertiggyr.com/gene/contacting/">Gene Michael
+Stover</a></strong></p>
+<p align="CENTER"><strong>created Saturday, 2003 December 6 December
+<br>updated Sunday, 2005 May 8</strong></p>
+</div>
+
+<p>
+<small class="SMALL"><em>Copyright &#169; 2003, 2004, 2005 by Gene Michael
+Stover.  All rights reserved.  Permission to copy, store, &amp;
+view this document unmodified &amp; in its entirety is
+granted.</em></small>
+
+<p>
+<br>
+
+<h2><a name="SECTION00100000000000000000">
+Contents</a>
+</h2>
+<!--Table of Contents-->
+
+<ul class="TofC">
+<li><a name="tex2html80" href="unx.html#SECTION00200000000000000000">1. To Do</a>
+<li><a name="tex2html81" href="unx.html#SECTION00300000000000000000">2. Introduction</a>
+<ul>
+<li><a name="tex2html82" href="unx.html#SECTION00310000000000000000">2.1 What to read first</a>
+</ul><br>
+<li><a name="tex2html83" href="unx.html#SECTION00400000000000000000">3. What is Unix?</a>
+<ul>
+<li><a name="tex2html84" href="unx.html#SECTION00410000000000000000">3.1 Short Answer</a>
+<li><a name="tex2html85" href="unx.html#SECTION00420000000000000000">3.2 Long Answer</a>
+<ul>
+<li><a name="tex2html86" href="unx.html#SECTION00421000000000000000">3.2.1 My Opinion</a>
+<li><a name="tex2html87" href="unx.html#SECTION00422000000000000000">3.2.2 Another Opinion</a>
+</ul>
+</ul><br>
+<li><a name="tex2html88" href="unx.html#SECTION00500000000000000000">4. Some Basic Commands</a>
+<ul>
+<li><a name="tex2html89" href="unx.html#SECTION00510000000000000000">4.1 The Command Line Shell</a>
+<li><a name="tex2html90" href="unx.html#SECTION00520000000000000000">4.2 Listing Files</a>
+<li><a name="tex2html91" href="unx.html#SECTION00530000000000000000">4.3 Moving Around the File System</a>
+<li><a name="tex2html92" href="unx.html#SECTION00540000000000000000">4.4 The VI Cursor Commands</a>
+<li><a name="tex2html93" href="unx.html#SECTION00550000000000000000">4.5 E-mail</a>
+<ul>
+<li><a name="tex2html94" href="unx.html#SECTION00551000000000000000">4.5.1 mutt</a>
+<li><a name="tex2html95" href="unx.html#SECTION00552000000000000000">4.5.2 Graphical E-mail Readers</a>
+<li><a name="tex2html96" href="unx.html#SECTION00553000000000000000">4.5.3 My Own E-mail</a>
+</ul>
+<li><a name="tex2html97" href="unx.html#SECTION00560000000000000000">4.6 Viewing Files</a>
+<li><a name="tex2html98" href="unx.html#SECTION00570000000000000000">4.7 Surf the Web</a>
+<li><a name="tex2html99" href="unx.html#SECTION00580000000000000000">4.8 Upload &amp; Download</a>
+<ul>
+<li><a name="tex2html100" href="unx.html#SECTION00581000000000000000">4.8.1 FTP</a>
+<li><a name="tex2html101" href="unx.html#SECTION00582000000000000000">4.8.2 scp</a>
+<li><a name="tex2html102" href="unx.html#SECTION00583000000000000000">4.8.3 rcp</a>
+<li><a name="tex2html103" href="unx.html#SECTION00584000000000000000">4.8.4 When FTP Doesn't Work</a>
+</ul>
+<li><a name="tex2html104" href="unx.html#SECTION00590000000000000000">4.9 Editing Files</a>
+</ul><br>
+<li><a name="tex2html105" href="unx.html#SECTION00600000000000000000">5. Learning More</a>
+<ul>
+<li><a name="tex2html106" href="unx.html#SECTION00610000000000000000">5.1 The Man</a>
+<ul>
+<li><a name="tex2html107" href="unx.html#SECTION00611000000000000000">5.1.1 The man is for real</a>
+</ul>
+<li><a name="tex2html108" href="unx.html#SECTION00620000000000000000">5.2 Gnu info</a>
+<li><a name="tex2html109" href="unx.html#SECTION00630000000000000000">5.3 Books</a>
+<li><a name="tex2html110" href="unx.html#SECTION00640000000000000000">5.4 Folklore</a>
+</ul><br>
+<li><a name="tex2html111" href="unx.html#SECTION00700000000000000000">6. Super Dimension Fortress</a>
+<ul>
+<li><a name="tex2html112" href="unx.html#SECTION00710000000000000000">6.1 Getting Information on SDF</a>
+<li><a name="tex2html113" href="unx.html#SECTION00720000000000000000">6.2 COM Mode</a>
+<ul>
+<li><a name="tex2html114" href="unx.html#SECTION00721000000000000000">6.2.1 COM Commands Discussion</a>
+<li><a name="tex2html115" href="unx.html#SECTION00722000000000000000">6.2.2 COM Session Example</a>
+<li><a name="tex2html116" href="unx.html#SECTION00723000000000000000">6.2.3 What to Do if You Are Caught in the Newbie Loop</a>
+<li><a name="tex2html117" href="unx.html#SECTION00724000000000000000">6.2.4 COM History</a>
+</ul>
+<li><a name="tex2html118" href="unx.html#SECTION00730000000000000000">6.3 Bulletin Board</a>
+</ul><br>
+<li><a name="tex2html119" href="unx.html#SECTION00800000000000000000">7. Programming</a>
+<ul>
+<li><a name="tex2html120" href="unx.html#SECTION00810000000000000000">7.1 Language</a>
+<li><a name="tex2html121" href="unx.html#SECTION00820000000000000000">7.2 Languages on SDF</a>
+<li><a name="tex2html122" href="unx.html#SECTION00830000000000000000">7.3 Theory</a>
+</ul><br>
+<li><a name="tex2html123" href="unx.html#SECTION00900000000000000000">8. Hacking</a>
+<li><a name="tex2html124" href="unx.html#SECTION001000000000000000000">9. Meta</a>
+<li><a name="tex2html125" href="unx.html#SECTION001100000000000000000">Bibliography</a>
+</ul>
+<!--End of Table of Contents-->
+<p>
+
+<h1><a name="SECTION00200000000000000000">
+<span class="arabic">1</span>. To Do</a>
+</h1>
+
+<p>
+How to make a web site on SDF.  Probably mention the <tt>mkhomepg</tt> (or whatever it's called) command &amp; give pointers
+to other articles about HTML &amp; CGI.
+
+<p>
+Mention Tweak membership on SDF.
+
+<p>
+Mention some games.
+
+<p>
+Better discussion of membership levels on SDF.  This is a
+toughie to do because this is mostly an introduction to
+unix, with only some SDF-specific goodies, not a full SDF
+policy document.  Maybe it would be suitable to mention that
+any unix system might allow only certain users to run
+certain programs, &amp; I could give brief details of SDF's
+membership levels.  This was requested or suggested by at
+least two people on <em>bboard</em> / <small>GENERAL</small>, so it's
+not a frivolous request.  Hmmm...
+
+<p>
+Discuss Zmodem (<em>rz</em>, <em>sz</em>).
+
+<p>
+Put it in gopher space.
+
+<p>
+
+<h1><a name="SECTION00300000000000000000">
+<span class="arabic">2</span>. Introduction</a>
+</h1>
+
+<p>
+This is for people who are new to unix, especially people
+who are new to unix &amp; new to <a name="tex2html3" href="https://web.archive.org/web/20110426193653/http://sdf.lonestar.org/">Super
+Dimension Fortress</a>
+(SDF), a
+public access unix system.
+
+<p>
+I sometimes hang out in the chat rooms on SDF, &amp; almost
+every day someone enters who has recently created an account
+&amp; asks how to get started using unix &amp; the features of
+SDF.  It's an awkward situation because there is a lot to
+know to get started with unix; it would be difficult to
+explain it all in a chat room.  What's more, most of the
+regulars in those chat rooms have seen &amp; answered the
+question enough times that they understandably do not look
+forward to doing so again.
+
+<p>
+So I'm answering that question here, once.  If all goes
+well, when someone enters a chat room &amp; asks how to start
+learning about unix, someone can point them to this
+article.
+
+<p>
+
+<h1><a name="SECTION00310000000000000000">
+<span class="arabic">2</span>.<span class="arabic">1</span> What to read first</a>
+</h1>
+
+<p>
+If you already know what unix is, or if you don't but you
+also don't enjoy reading about petty controversies about a
+definition, skip the ``What is Unix'' chapter &amp; start
+reading Chapter&nbsp;<a href="#basics">4</a> ``Some Basic Commands''.
+
+<p>
+
+<h1><a name="SECTION00400000000000000000"></a>
+<a name="unx-what-is-unix"></a><br>
+<span class="arabic">3</span>. What is Unix?
+</h1>
+
+<p>
+What is unix?  That's a loaded question.
+
+<p>
+
+<h1><a name="SECTION00410000000000000000">
+<span class="arabic">3</span>.<span class="arabic">1</span> Short Answer</a>
+</h1>
+
+<p>
+The short answer is ``Unix is an operating system''.  So is
+Gnu/Linux, which is often just called Linux.  So are HP/UX,
+AIX, NeXT STEP (now called Apple Macintosh OS 10), &amp;
+Microthought Winders (often called many uncomplimentary
+things).
+
+<p>
+If this short answer is enough for you, congratulations on
+knowing the value of keeping things simple.  Now skip ahead
+to Chapter&nbsp;<a href="#basics">4</a> ``Some Basic Commands''.
+
+<p>
+
+<h1><a name="SECTION00420000000000000000">
+<span class="arabic">3</span>.<span class="arabic">2</span> Long Answer</a>
+</h1>
+
+<p>
+The long answer is ``It depends on who you ask''.
+
+<p>
+
+<h2><a name="SECTION00421000000000000000">
+<span class="arabic">3</span>.<span class="arabic">2</span>.<span class="arabic">1</span> My Opinion</a>
+</h2>
+
+<p>
+In my opinion, unix is a description of the function of an
+operating system.  I even say that unix is an Application
+Programmer's Interface (API).  Any operating system which
+implements the unix API is a unix; it's an implementation of
+unix.  Gnu/Linux is a unix.<a name="tex2html4" href="footnode.html#foot254"><sup><span class="arabic">3</span>.<span
+class="arabic">1</span></sup></a>  Gnu/Linux is often called
+Linux, but strictly speaking, Linux is a unix kernel, but
+not a whole unix operating system.  There are many other
+implementations of unix.  I can name original BSD, OpenBSD,
+FreeBSD, NetBSD, HP/UX, AIX, Minix, Apple Macintosh OS 10,
+NeXT STEP, QNX, &amp; Lynx.  There are probably others.
+
+<p>
+Now for some legal bullshit.  ``UNIX'' is a trademark of
+<a name="tex2html5" href="https://web.archive.org/web/20110426193653/http://www.opengroup.org/">The Open
+Group</a>.  From what I can infer
+from their web site about their opinions of what unix is,
+they would agree with me that it's a description of the
+function of a family of operating systems, but they would
+also add ``that we have certified to be UNIX''.  So legally,
+it's not a UNIX unless The Open Group certifies it as a
+UNIX.  So a lot of those operating systems I listed as
+unices are not UNIXes.  It's a thoroughly sad case of
+legalities getting in the way of simplicity &amp; sanity.
+
+<p>
+Anyway, I say that if an operating system behaves like unix,
+then it's a unix, though not necessarily a UNIX<span class="MATH"><img width="31" height="19" align="BOTTOM" border="0"
+src="/web/20110426193653im_/http://cybertiggyr.com/gene/unx/img1.png" alt="$^{(tm)}$"></span>.
+
+<p>
+
+<h2><a name="SECTION00422000000000000000">
+<span class="arabic">3</span>.<span class="arabic">2</span>.<span class="arabic">2</span> Another Opinion</a>
+</h2>
+
+<p>
+Another opinion, which I don't share, is that Unix is a
+particular product.  HP/UX is another.  AIX is another.
+Gnu/Linux is another.  You get the idea.
+
+<p>
+Fine, except that there is no product simply called
+``Unix'' for sale today.  You can't even point at a product
+that is the direct descendant of the original Unix that
+Ritchie &amp; Thompson wrote at AT&amp;T.  Their Unix was <em>the</em> definitive Unix, the original, the one named Unix.  You
+can't buy it today, methinks.  And many of those that you
+can obtain today shared code with the original Unix.  BSD is
+Unix as modified by students at the University of California
+in Berkeley.  That's where sockets were invented.  BSD
+branched into many implementations, several of which are
+alive &amp; well today.  Theoretically, each of those
+implementations has at least some of the original Unix code
+in them.  Yet somehow BSD isn't a unix?  Get real.  I'm sure
+there are similar examples of cross-pollination between the
+other unix operating systems available today.
+
+<p>
+Another problem with the claim that BSD, Gnu/Linux, &amp; the
+others are not unix is that it takes little effort to write
+a program that runs on all of them.  There are enough
+differences that a non-trivial program requires a little
+care to be portable, but it's not like portability concerns
+affect the architecture of your program.  All in all, it is
+easy to port code between HP/UX, AIX, Gnu/Linux, &amp; the
+BSDs.  This isn't an accident.  Those products are
+implementations of a single idea of what an operating system
+should be.  That idea needs a name so that when you ask me
+what kind of operating system I program for a living, I
+don't have to reply with ``I'm an HP/UX, Gnu/Linux, AIX,
+FreeBSD, NetBSD, OpenBSD, QNX, &amp; others programmer''.  I
+say the name for that concept is ``unix''.  If not, then
+it's POSIX, but POSIX is also a trademarked term with a
+certification schedule from The Open Group (together with
+IEEE).
+
+<p>
+So somewhat out of contempt for our legal system's petty
+concerns for terminology, I say it's all ``unix''.  There
+you have it, in more detail &amp; controversy than anyone with
+a sense of perspective would ever want.
+
+<p>
+
+<h1><a name="SECTION00500000000000000000"></a>
+<a name="basics"></a><br>
+<span class="arabic">4</span>. Some Basic Commands
+</h1>
+
+<p>
+
+<h1><a name="SECTION00510000000000000000">
+<span class="arabic">4</span>.<span class="arabic">1</span> The Command Line Shell</a>
+</h1>
+
+<p>
+When you login to a unix system, you'll be on a command
+line.  It'll have a prompt like ``<tt>$</tt>'' or ``<tt>bash-2.04$ </tt>'' or maybe ``<tt>%</tt>''.  There are other
+variations.
+
+<p>
+The command line is how you communicate with the <em>shell</em>.  The shell is a program that reads commands from a
+command line &amp; runs other programs.  It does some other
+things, but they are mostly details.  The main point of a
+shell is to run programs.
+
+<p>
+The traditional, original shell on unix is called the Bourne
+shell.  If you're wondering why it's called the Bourne
+shell, ask yourself who might have written it.
+
+<p>
+The Bourne shell program is named <tt>/bin/sh</tt>, but that
+program on most modern unices is actually a pointer to the
+Korn shell or the Born Again shell.  Those two shells are
+more modern than the Bourne shell, but they are backward
+compatible with it.
+
+<p>
+There are other shells, including C shell (<tt>/bin/csh</tt>)
+&amp; the restricted shell.  You can change your shell on many
+unices with the <tt>chsh</tt> command.  Since a shell is just a program,
+no magic behind it, you can use damned near any program you
+want as your shell.  You could use Perl as your shell, I've
+used clisp as a shell (just for an experiment), or you could
+write your own shell.
+
+<p>
+The important thing about a shell is that most of the things
+you type to it are interpreted as requests to run a
+program.  If you type ``<tt>ls</tt>'', you're asking your shell
+to run a program called <em>ls</em>.  If you type ``<tt>bogie
+-k lap -f lap woo woo -d hickie</tt>'', you're asking it to run
+a program called <em>bogie</em> with all that other crap as
+<em>command line arguments</em>.
+
+<p>
+Enough about shells for now.
+
+<p>
+
+<h1><a name="SECTION00520000000000000000">
+<span class="arabic">4</span>.<span class="arabic">2</span> Listing Files</a>
+</h1>
+
+<p>
+On unix, the <em>ls</em> program gives you lists of files.
+
+<p>
+If you just type ``<tt>ls</tt>'', you'll get a list of the
+files in the current directory.  Like this:
+
+<p>
+<pre>
+bash-2.04$ ls
+#unx.tex#  RCS  unx.aux  unx.bbl  unx.blg  unx.log  unx.tex  unx.tex~  unx.toc
+bash-2.04$
+</pre>
+
+<p>
+Notice that <em>ls</em>, when used in this plain way, doesn't
+show you files sizes or permissions or anything like that.
+Unix is traditionally tery terse.  Programs show you only
+the information you requested, plus error messages.  You
+don't have progress messages like ``2003-12-06T16:16
+beginning to read files'' and ``2003-12-06T16:17 reading
+first file'' and other nonsense cluttering your screen.  The
+programs just print what's important.
+
+<p>
+If you want <em>ls</em> to print the details about the files,
+give it the ``<tt>-l</tt>'' option.  That's a minus sign (<tt>-</tt>) followed by a letter <em>el</em> (<tt>l</tt>).  Like this:
+
+<p>
+<pre>
+bash-2.04$ ls -l
+total 52
+-rw-r-----    1 gene     gene         9181 Dec  6 16:18 #unx.tex#
+drwxrwx---    2 gene     gene         4096 Dec  6 14:03 RCS
+-rw-rw----    1 gene     gene         1390 Dec  6 14:47 unx.aux
+-rw-rw----    1 gene     gene           49 Dec  6 14:47 unx.bbl
+-rw-rw----    1 gene     gene          878 Dec  6 14:47 unx.blg
+-rw-rw----    1 gene     gene         4201 Dec  6 14:47 unx.log
+-rw-r-----    1 gene     gene         6387 Dec  6 14:47 unx.tex
+-rw-rw----    1 gene     gene         1212 Dec  6 13:49 unx.tex~
+-rw-rw----    1 gene     gene          658 Dec  6 14:47 unx.toc
+bash-2.04$
+</pre>
+
+<p>
+The first column, which has all those minus signs, <em>r</em>s,
+&amp; <em>w</em>s, shows the <a name="tex2html7"
+href="https://web.archive.org/web/20110426193653/http://www.dartmouth.edu/~rc/help/faq/permissions.html">file permissions</a>.  The next
+column is
+the number of links to the file.<a name="tex2html6" href="footnode.html#foot292"><sup><span class="arabic">4</span>.<span
+class="arabic">1</span></sup></a>  The next column is the
+user who owns the file.  The next is the group of the file.
+Then there's the number of bytes in the file.  Then the date
+the file was modified.  Then the file's name.
+
+<p>
+Here's an exercise: Type ``<tt>echo *</tt>'' on the command
+line, like this:
+
+<p>
+<pre>
+bash-2.04$ echo *
+#unx.tex# RCS unx.aux unx.bbl unx.blg unx.log unx.tex unx.tex~ unx.toc
+bash-2.04$
+</pre>
+
+<p>
+Now go figure out why or how <em>echo</em> differs from <em>ls</em>.
+
+<p>
+
+<h1><a name="SECTION00530000000000000000">
+<span class="arabic">4</span>.<span class="arabic">3</span> Moving Around the File System</a>
+</h1>
+
+<p>
+All unix systems have a file system whose root directory is
+<tt>/</tt>.  Your home directory is somewhere inside a
+directory in the file system.  Maybe your home directory is
+<tt>/home/you</tt> or <tt>/usr/hm0/you</tt> or whatever.  The
+details depend on the unix.  To learn your home directory,
+type ``<tt>echo $HOME</tt>'', like this:
+
+<p>
+<pre>
+bash-2.04$ echo $HOME
+/home/gene
+bash-2.04$
+</pre>
+
+<p>
+Unix has a notion of a <em>current working directory</em>.  To
+see what your current working directory is, type ``<tt>pwd</tt>'', like this:
+
+<p>
+<pre>
+bash-2.04$ pwd
+/home/gene/library/website/docsrc/unx
+bash-2.04$
+</pre>
+
+<p>
+To change your current working directory, use the <em>cd</em>
+command.  Give it the name of the new directory you want.
+If you want to move to the current working directory's
+parent, use ``<tt>..</tt>''.  Here are some examples:
+
+<p>
+<pre>
+bash-2.04$ pwd
+/home/gene/library/website/docsrc/unx
+bash-2.04$ cd ..  # move to parent
+bash-2.04$ pwd
+/home/gene/library/website/docsrc
+bash-2.04$ cd .. # move to parent again
+bash-2.04$ pwd
+/home/gene/library/website
+bash-2.04$ cd share # move into the "share" directory
+bash-2.04$ pwd
+/home/gene/library/website/share
+bash-2.04$ cd /tmp  # move to this absolute directory
+bash-2.04$ pwd
+/tmp
+bash-2.04$
+</pre>
+
+<p>
+
+<h1><a name="SECTION00540000000000000000">
+<span class="arabic">4</span>.<span class="arabic">4</span> The VI Cursor Commands</a>
+</h1>
+
+<p>
+<a href="#editors">vi</a> is an editor, but its
+cursor-movement commands are often used by other programs.
+Figure&nbsp;<a href="#fig-vi-commands">4.1</a> shows <em>vi</em>'s
+cursor-movement commands.
+
+<p>
+
+<div align="CENTER"><a name="fig-vi-commands"></a><a name="687"></a>
+<table>
+<caption align="BOTTOM"><strong>Figure 4.1:</strong>
+The cursor-movement commands from <em>vi</em></caption>
+<tr><td><img width="242" height="99" border="0" src="/web/20110426193653im_/http://cybertiggyr.com/gene/unx/img2.png"
+alt="\begin{figure}\begin{tabular}{\vert r\vert l\vert} \hline
+{\bf command} &amp; {\bf a...
+...e cursor up \\ \hline
+l &amp; move cursor right \\ \hline
+\end{tabular}
+\end{figure}"></td></tr>
+</table>
+</div>
+
+<p>
+The <em>vi</em> commands might not make much sense at first,
+but notice that you can use all of them with the fingers
+from the right hand.  They may not be the most mnemonic
+commands, but they are very functional.
+
+<p>
+Some programs besides <em>vi</em> which use the <em>vi</em>
+cursor-movement commands include:
+
+<p>
+
+<ul>
+<li>the mail reader called <a href="#mutt">mutt</a>, but just
+the <em>j</em> &amp; <em>k</em> keys in its menus
+</li>
+<li><tt>/usr/games/worm</tt>, an old game &amp; an excellent way
+to learn the <em>vi</em> commands
+</li>
+<li><small>VIPER</small>, a <em>vi</em>-emulator for
+<a href="#editors">emacs</a>
+</li>
+</ul>
+
+<p>
+
+<h1><a name="SECTION00550000000000000000">
+<span class="arabic">4</span>.<span class="arabic">5</span> E-mail</a>
+</h1>
+
+<p>
+Most unix systems give you multiple options for how to read
+your e-mail.
+
+<p>
+If you want to read your e-mail with a text-only program you
+run from the command line (which is how I read e-mail), some
+common programs are <em>mutt</em> and <em>pine</em>.  Just type
+the name of either of those programs.  If you see a list of
+e-mail, it means the program is available, &amp; you are
+running it.  If you see an error message that says ``command
+not found'', it means your shell couldn't find it, maybe
+because it's not available on your unix.
+
+<p>
+You can figure out the basics of <em>mutt</em> or <em>pine</em>
+just by using them.  People become almost religiously
+devoted to their favorite e-mail programs, so you can learn
+more detailed or subtle ways of using a mail program by
+asking someone who prefers that program.  People are usually
+happy to tell you more than you want to know about how to
+use their favorite e-mail program.  So pick one of them,
+figure out the basics on your own, &amp; then go find a
+long-time user of that program &amp; strike up a conversation
+about it with him.
+
+<p>
+I've never used <em>pine</em>, so I can't tell you how.  I
+sometimes use <em>mutt</em>, so here is some super-quick info
+on using <em>mutt</em>.
+
+<p>
+
+<h2><a name="SECTION00551000000000000000"></a>
+<a name="mutt"></a><br>
+<span class="arabic">4</span>.<span class="arabic">5</span>.<span class="arabic">1</span> mutt
+</h2>
+
+<p>
+The official documentation about <em>mutt</em> is at
+<a name="tex2html9" href="https://web.archive.org/web/20110426193653/http://www.mutt.org/">http://www.mutt.org/</a>.
+
+<p>
+When you run <em>mutt</em>, you'll see a list of e-mail
+messages.  Each line on your screen will show a subject, a
+date, &amp; who sent the message.
+
+<p>
+One of the messages will be selected.  To view the selected
+message, type the Return, Enter, or Space-bar key (I can't
+remember which).  You'll see the body of the message.
+
+<p>
+When you are viewing the body of a message, type the Space
+bar to page down.  When you come to the end of the message,
+type the Space bar to view the next unread message.  If
+there are no more unread messages, you'll see the list of
+messages again.
+
+<p>
+When you are viewing the body of a message, you can type
+``<tt>q</tt>'' to quit that view &amp; return to the list of
+messages.
+
+<p>
+In the list of messages, the ``<tt>j</tt>'' key moves the
+cursor down &amp; selects that message.  The ``<tt>k</tt>'' key
+moves the cursor up &amp; selects that message.  The ``<tt>q</tt>'' key exits <em>mutt</em>.
+
+<p>
+
+<h2><a name="SECTION00552000000000000000">
+<span class="arabic">4</span>.<span class="arabic">5</span>.<span class="arabic">2</span> Graphical E-mail Readers</a>
+</h2>
+
+<p>
+If you want to read your e-mail with a graphical e-mail
+reader, maybe the one in your web browser, you'll need a
+more elaborate setup.  You'll need to instruct your mail
+client to use your unix account for sending &amp; receiving
+messages.  It sends messages via the Simple Mail Transport
+Protocol (SMTP).  It downloads messages that you receive via
+the Post Office Protocol version 3 (POP3).  Of course, the
+unix system where you have your account must be configured
+to allow these operations.  You'll need to refer to the
+documentation for that computer system to do all this, but
+it can be done if the unix system allows it.
+
+<p>
+
+<h2><a name="SECTION00553000000000000000">
+<span class="arabic">4</span>.<span class="arabic">5</span>.<span class="arabic">3</span> My Own E-mail</a>
+</h2>
+
+<p>
+For the record, I usually use the <em>rmail</em> mode in Gnu
+Emacs for reading &amp; sending e-mail.
+
+<p>
+
+<h1><a name="SECTION00560000000000000000">
+<span class="arabic">4</span>.<span class="arabic">6</span> Viewing Files</a>
+</h1>
+
+<p>
+If you have a file you want to read, use the <em>less</em>
+program to read it.  For example, if the file is called <tt>README</tt> &amp; is in your current directory, type ``<tt>less
+README</tt>''.  If that gets you a ``command not found'' error,
+try ``<tt>more README</tt>''.
+
+<p>
+You'll see the first part of the file on your screen.  (If
+it's a really short file, you'll see all of it on your
+screen.)  To see the next screen-full, type the Space bar.
+To see the previous screen-full, type the ``<tt>b</tt>'' key.
+To quit viewing the file &amp; return to the command line, type
+the ``<tt>q</tt>'' key.
+
+<p>
+
+<h1><a name="SECTION00570000000000000000">
+<span class="arabic">4</span>.<span class="arabic">7</span> Surf the Web</a>
+</h1>
+
+<p>
+A good web browser to use on a text-only command line is
+<em>lynx</em>.  You can give it an URL to read on the command
+line, like this: ``<tt>lynx http://lisp-p.org/</tt>'' or ``<tt>lynx http://google.com/</tt>''.  Use the Space bar to page down,
+the ``<tt>b</tt>'' key to page up, the arrow keys to select
+hyperlinks, &amp; the Return or Enter key to follow a
+hyperlink.  Use the ``<tt>q</tt>'' key to quit.
+
+<p>
+Unless the unix system where you have an account is very
+trusting, you probably cannot run a graphical web browser on
+it.  Technically it can be done using the graphical system
+called X (which is common on unices), setting permissions
+with the <em>xhost</em> program, &amp; setting your DISPLAY
+environment variable, but it usually is not allowed on a
+public access unix.
+
+<p>
+
+<h1><a name="SECTION00580000000000000000">
+<span class="arabic">4</span>.<span class="arabic">8</span> Upload &amp; Download</a>
+</h1>
+
+<p>
+
+<h2><a name="SECTION00581000000000000000"></a>
+<a name="ftp"></a><br>
+<span class="arabic">4</span>.<span class="arabic">8</span>.<span class="arabic">1</span> FTP
+</h2>
+
+<p>
+To transfer files between your home computer &amp; a remote
+unix, use the program called <em>ftp</em>.  Your home computer
+almost certainly has a copy, even if you run Microthought
+Winders at home.
+
+<p>
+To run <em>ftp</em>, first go to a command line.  Then type
+``<tt>ftp ftp.freeshell.org</tt>'' to connect to the FTP server
+at SDF.
+
+<p>
+The <em>ftp</em> client has a command line interface.  Here are
+some of the commands it understands:
+
+<p>
+<dl>
+<dt><strong>cd <em>directory</em></strong></dt>
+<dd>Change directory on the remote
+    FTP server.
+</dd>
+<dt><strong>dir</strong></dt>
+<dd>Print a lsit of the files in the current
+    directory on the remote FTP server.
+</dd>
+<dt><strong>ascii</strong></dt>
+<dd>Tell FTP to assume that files you transfer
+    are text files.
+</dd>
+<dt><strong>binary</strong></dt>
+<dd>Tell FTP to assume that files you trnasfer
+    are binary files.
+</dd>
+<dt><strong>hash</strong></dt>
+<dd>Tell FTP to print an octothorpe character (#)
+    for each block it sends or receives.  It helps you see
+    the progress of the file transfer.
+</dd>
+<dt><strong>put <em>filename</em></strong></dt>
+<dd>Upload a file.
+</dd>
+<dt><strong>get <em>filename</em></strong></dt>
+<dd>Download a file.
+</dd>
+</dl>
+
+<p>
+In general, use the <em>cd</em> command to enter the correct
+directory on the remote FTP server.  Then set the correct
+mode (<em>ascii</em> or <em>binary</em>).  Then use <em>get</em> to
+download a file or <em>put</em> to upload one.
+
+<p>
+The <em>ftp</em> client program supports many more commands.
+Use ``<tt>man ftp</tt>'' for more information about FTP.
+
+<p>
+In case you are interested: FTP refers to the File Transfer
+Protocol; it was one of the three requirements that created
+the Arpa Net which became the Internet.  <em>Ftp</em> is also
+the name of the File Transfer Program which implements FTP.
+
+<p>
+
+<h2><a name="SECTION00582000000000000000"></a>
+<a name="scp"></a><br>
+<span class="arabic">4</span>.<span class="arabic">8</span>.<span class="arabic">2</span> scp
+</h2>
+
+<p>
+<em>scp</em> is the Secure Shell Copy Program.  It's name is
+also a reference to <em>rcp</em>, the Remote Copy Program.
+
+<p>
+Use <em>scp</em> like you would use <em>cp</em>, but it can copy
+from one computer to another.
+
+<p>
+For example, if I want to copy <tt>myfile.cpio.bz2</tt> on my
+computer into the <tt>tmp</tt> directory in my account on SDF,
+I would run this: ``<tt>scp myfile.cpio.bz2
+gms@freeshell.org:tmp/</tt>''.  The <em>scp</em> program will
+probably prompt me for my password, then it will copy the
+file.
+
+<p>
+Run ``<tt>man scp</tt>'' to get more information about using
+<em>scp</em>.
+
+<p>
+In my experience, <em>scp</em> takes longer than <em>ftp</em> to
+transfer files, &amp; it gives up easily.  If either computer
+or the network is slow, <em>scp</em> gives up quickly.  So I
+prefer <em>ftp</em>.
+
+<p>
+Ed&nbsp;Chang has told me that there is an implementation of <em>scp</em> for Microthought Winders called WinSCP, at
+<a name="tex2html10"
+href="https://web.archive.org/web/20110426193653/http://winscp.sourceforge.net/eng/about.php">http://winscp.sourceforge.net/eng/about.php</a>.
+I haven't tried it myself, but it sounds like it might be
+pretty good.
+
+<p>
+
+<h2><a name="SECTION00583000000000000000"></a>
+<a name="rcp"></a><br>
+<span class="arabic">4</span>.<span class="arabic">8</span>.<span class="arabic">3</span> rcp
+</h2>
+
+<p>
+You can't use <em>rcp</em> on SDF, so this section applies when
+copying files between other unix systems.
+
+<p>
+An old but pretty cool program for copying files between two
+unices is <em>rcp</em>, the Remote Copy Program.
+
+<p>
+For <em>rcp</em> to work, you must first configure the <tt>.rhosts</tt> files in your accounts on the unix systems.  Then
+you can copy files from one system to another with the <em>rcp</em> program.
+
+<p>
+For example, if I want to copy <tt>myfile.cpio.bz2</tt> on the
+local
+computer into the <tt>tmp</tt> directory in my account on a
+computer called <tt>overthere</tt>,
+I would run this: ``<tt>rcp myfile.cpio.bz2
+overthere:tmp/</tt>''.  The <em>rcp</em> program will
+copy the file; it won't ask me for my password.
+
+<p>
+
+<h2><a name="SECTION00584000000000000000">
+<span class="arabic">4</span>.<span class="arabic">8</span>.<span class="arabic">4</span> When FTP Doesn't Work</a>
+</h2>
+
+<p>
+If you don't have FTP on your home computer, you can
+transfer files via e-mail.
+
+<p>
+First, make sure you have an e-mail account that allows you
+to send files as attachments.  You might use the e-mail
+account that your ISP supplied with your Internet
+connection, or you might create a Web e-mail account on
+Yahoo!, Hotmail, or any of the many other systems that
+provide free Web e-mail accounts.
+
+<p>
+To transfer a file from your home computer to SDF, you
+create an e-mail message on your e-mail account that is <em>not</em> on SDF.  Attach the file; with a Web e-mail account,
+it'll allow you to upload the file into the e-ail message.
+Then send the message.
+Give it a minute to arrive, then login to your account on
+SDF.  Receive the message with an e-mail program which knows
+how to deal with attached files.  Mutt &amp; pine both know
+about attachments.  Use that e-mail program to save the
+attachment to a file.
+
+<p>
+To transfer a file from SDF to your home computer through
+e-mail, login to SDF &amp; send the file to your non-SDF
+account as an attachment to an e-mail message.  Then receive
+the message on your non-SDF e-mail account &amp; save the file
+to your home computer's file system.
+
+<p>
+
+<h1><a name="SECTION00590000000000000000"></a>
+<a name="editors"></a><br>
+<span class="arabic">4</span>.<span class="arabic">9</span> Editing Files
+</h1>
+
+<p>
+There are two great religions in the modern world: <em>emacs</em> and <em>vi</em>.
+
+<p>
+The two most popular file editors on unix are <em>emacs</em>
+and <em>vi</em>.
+
+<p>
+<em>Emacs</em> is more properly called Gnu Emacs because emacs
+is a way of programming file editors, &amp; Gnu Emacs is just
+one editor written in that way.  I believe Gnu Emacs was the
+first big production product of Gnu.  Richard&nbsp;Stallman wrote
+it himself.  It is a Lisp with screen-handling functions
+built-in.  It's a great big powerful editor, an operating
+environment, &amp; I love it.  To try emacs, type ``<tt>emacs</tt>'', wait for the screen to update, then type the
+Escape key, the <tt>x</tt> key, then ``<tt>info</tt>'', then press
+Return.  Carefully read &amp; follow the instructions you see
+on the screen.  It's kind of difficult to learn emacs from
+the start, but once you do, it's great.
+
+<p>
+The other popular editor on unix is <em>vi</em>.  I don't use
+vi much.  Two web sites that discuss it are
+<a name="tex2html11" href="https://web.archive.org/web/20110426193653/http://www.eng.hawaii.edu/Tutor/vi.html">Mastering the VI
+editor</a>
+at the
+Department of Engineering at the university of Hawaii,
+and the <a name="tex2html12" href="https://web.archive.org/web/20110426193653/http://www.thomer.com/vi/vi.html">Vi Lovers Home
+Page</a>.
+
+<p>
+
+<h1><a name="SECTION00600000000000000000">
+<span class="arabic">5</span>. Learning More</a>
+</h1>
+
+<p>
+
+<h1><a name="SECTION00610000000000000000">
+<span class="arabic">5</span>.<span class="arabic">1</span> The Man</a>
+</h1>
+
+<p>
+Most of a unix system is documented in the online manual,
+called the <em>man</em>.  If you want to know about a program,
+you look it up in the <em>man</em>.  For example, if you want
+to learn more about the <em>ls</em> program, type ``<tt>man
+ls</tt>''.
+
+<p>
+The man also has a simple search capability.  The ``<tt>-k</tt>'' command line option tells the man to give you a list
+of entries that mention a particular keyword, which you also
+supply on the command line.  If you want to
+get a list of the manual entries that menion networking, you
+would type ``<tt>man -k network</tt>''.
+
+<p>
+The man is divided into sections.  If you don't specify a
+section when you ask the man to lookup documentation for a
+program, the man takes a guess about what section you mean,
+&amp; it usually assumes you mean the most general, high-level
+section available (section 1).  You can specify a section as
+the second argument to <em>man</em>, before the keyword.  For
+example, if I want to read about the <tt>select</tt> function
+in section 2 (the kernel API), I would type ``<tt>man 2
+select</tt>''.
+
+<p>
+Here are some things I recommend reading in the man to get
+started with unix.  I give you the exact command to type,
+then an explanation of why I recommend that entry in the man.
+
+<p>
+<dl>
+<dt><strong>man man</strong></dt>
+<dd>This tells you how to use the online manual.
+</dd>
+<dt><strong>man 1 intro</strong></dt>
+<dd>This tells you about the general section
+    of the online manual.  You should also try ``<tt>man 2
+    intro</tt>'' &amp; all the other intros for sections 3 through
+    9.
+</dd>
+<dt><strong>man mutt</strong></dt>
+<dd>Tells you how to use <em>mutt</em>, the e-mail
+    reader.
+</dd>
+<dt><strong>man pine</strong></dt>
+<dd>Tells you how to use <em>pine</em>, the e-mail
+    reader.
+</dd>
+<dt><strong>man sh</strong></dt>
+<dd>Tells you how to use &amp; program the shell.
+</dd>
+<dt><strong>man 4 tcp</strong></dt>
+<dd>Tells you how to program TCP sockets.  I
+    suggest it here as an example of the breadth of
+    information that's available in the online manual.
+</dd>
+</dl>
+
+<p>
+
+<h2><a name="SECTION00611000000000000000">
+<span class="arabic">5</span>.<span class="arabic">1</span>.<span class="arabic">1</span> The man is for real</a>
+</h2>
+
+<p>
+I tell newbies about the man all the time, but they usually don't
+try it.
+
+<p>
+I don't know why they don't believe me.  I started
+using unix in college in 1985.  In a class, the professor
+gave everyone an account &amp; told us to login after class &amp;
+type ``<tt>man man</tt>''.  He didn't tell us anything else,
+not even what ``man man'' would do.  By exploring the manual
+on my own time for a couple of evenings, plus a couple of
+conversations with the unix gurus that worked in the lab, I
+was pretty good with unix.  It was an excellent way to start
+using &amp; programming unix.
+
+<p>
+Maybe the newbies do believe me, but they're lazy.
+
+<p>
+
+<h1><a name="SECTION00620000000000000000">
+<span class="arabic">5</span>.<span class="arabic">2</span> Gnu info</a>
+</h1>
+
+<p>
+Besides the unix <em>man</em>, Gnu/Linux computers usually have
+some information in a hypertext system call <em>info</em>.
+
+<p>
+To use <em>info</em> from the command line, just type ``<tt>info</tt>''.  If you are a Gnu Emacs user, you can run emacs &amp;
+type Meta-x <tt>info</tt>, &amp; you'll be presented with the same
+data in the same format that <em>info</em> would.
+
+<p>
+<em>Info</em> is an interactive hypertext system.  It predates
+the Web by at least five years, methinks.  Read &amp; follow
+the instructions on the screen &amp; you'll be alright.
+
+<p>
+<em>Info</em> systems are not always maintained as well as the
+man, but most are pretty good, &amp; some have a lot of
+excellent information.  It is often well-written, too.  It's
+an enjoyable read, &amp; since you can page through the entire
+system one screen-full at a time by typing the Space bar,
+it's convenient to read.
+
+<p>
+Though it's not for beginning users, I'll mention here that
+one of my favorite sections in <em>info</em> is the
+documentation for Autoconf.
+
+<p>
+
+<h1><a name="SECTION00630000000000000000">
+<span class="arabic">5</span>.<span class="arabic">3</span> Books</a>
+</h1>
+
+<p>
+I can't recommend any books on using unix.  I learned it so
+long ago that I don't remember what books I used, or even if
+I used any books.  Here are some interesting books about
+unix, though not exactly about <em>using</em> unix.
+
+<p>
+I like Mike&nbsp;Gancarz's book, <em>The Unix Philosophy</em>, a
+lot.  It talks about the reasons behind writing applications
+the unix way: with small programs piped together, &amp; with
+flat, plain text data files.  I have heard that
+Eric&nbsp;Raymond's book, <em>The Art of UNIX Programming</em>,
+is similar &amp; also good, but I haven't read it
+myself.<a name="tex2html13" href="footnode.html#foot480"><sup><span class="arabic">5</span>.<span class="arabic">1</span></sup></a>
+<p>
+Even though we're talking about using unix, I think an
+understanding of how operating systems work is useful to
+know, &amp; Andrew&nbsp;S.&nbsp;Tanenbaum's <em>Modern Operating
+Systems</em> is an excellent book.  It includes a good
+section about unix.  He points out that the defining
+characteristic about early unix was its 40 system
+calls.  We've added more system calls, but the unix kernel
+still has a fairly small number of elegant, well-chosen
+system calls.  That's an important part of what makes unix
+what it is.
+
+<p>
+
+<h1><a name="SECTION00640000000000000000">
+<span class="arabic">5</span>.<span class="arabic">4</span> Folklore</a>
+</h1>
+
+<p>
+One of the cool things about unix is that it has  played an
+intimate part in the folklore of computing since the late
+1970s.  There are all sorts of interesting tales &amp;
+personalities to explain or help you remember why something
+was done a particular way.  The history is not hidden inside
+a corporation.  It's out in the open, &amp; lots of people know it.
+
+<p>
+That's also one of the bad things about unix because it
+means you need to talk to people to learn what you need to
+learn next.  Hopefully people will write downt he folklore
+&amp; also link to it so that new unix users &amp; programmers can
+find it.
+
+<p>
+You can learn the folklore by talking (or typing) to an
+experienced unix user or programmer.  A good place to read
+about it online is <a name="tex2html14" href="https://web.archive.org/web/20110426193653/http://catb.org/~esr/jargon/html/">The Jargon
+File</a>.
+
+<p>
+
+<h1><a name="SECTION00700000000000000000">
+<span class="arabic">6</span>. Super Dimension Fortress</a>
+</h1>
+
+<p>
+Here is some quick reference information about using
+<a name="tex2html15" href="https://web.archive.org/web/20110426193653/http://sdf.lonestar.org/">Super Dimension
+Fortress</a> (SDF).  I'm not a
+member of SDF's staff, so the information here is not
+definitive.  If you find a discrepancy between what I say
+&amp; how things actually work on SDF, it's an error in what
+I've said, not in how SDF behaves.
+
+<p>
+
+<h1><a name="SECTION00710000000000000000">
+<span class="arabic">6</span>.<span class="arabic">1</span> Getting Information on SDF</a>
+</h1>
+
+<p>
+Use the <em>faq</em> or <em>help</em> commands to get information
+about SDF.  These are not standard unix programs.  They are
+specific to SDF.
+
+<p>
+The <em>help</em> command mostly gives you lists of other
+commands.  If you type ``<tt>help</tt>'', you'll see a menu
+like this:
+
+<p>
+<pre>
+SDF Help System - v8, 1993 - sdf!smj
+
+ [a] Directory and File Utilities
+ [b] Email Information
+ [c] USENET Information
+ [d] User and Process Information
+ [e] Tutorials and Very Useful Commands
+ [f] ARPA Services (internetworking)
+ [g] Homepage, VHOST and MetaARPA Utilities
+
+ [q] Quit SDF Help System
+
+Your Choice?
+For more help, type 'faq'
+For a list of basic UNIX commands, type 'unix'
+to remove your account, type 'delme'
+</pre>
+
+<p>
+Most of the letters in the menu will give you lists of
+commands.  After you quit the <em>help</em> program with
+``<tt>q</tt>'', you could run the commands or read more about
+them in the online manual I discussed earlier.
+Some of the programs are specific to SDF &amp; are not
+discussed in the man.  SDF's excellent <em>com</em> program is
+an example of a program that is not discussed in the man.
+
+<p>
+To me, the <em>faq</em> program is more useful.  In it, you can
+find short explanations of unix file permissions, uploading
+&amp; downloading, SDF's policies, &amp; the history of SDF.
+
+<p>
+To enter the faq, type ``<tt>faq</tt>'' on the command line, &amp; the <em>faq</em> program gives
+you a list of sections.  This is faq's main menu.  You can
+exit by typing ``<tt>q</tt>'' here.  If you type ``<tt>g</tt>'', it will
+ask you for the name of a section.  You enter  a section
+name &amp; press return, &amp; you'll see the section's menu.
+
+<p>
+In a section's menu, you have a numbered list of questions
+or topics.  If you type ``<tt>g</tt>'', &amp; press return, you'll see
+main menu again.  If you type ``<tt>t</tt>'', you'll be prompted for
+the number of a question or topic.  Type that &amp; press
+return.  You should type the number exactly as it appears in
+the menu, including leading zeros.
+
+<p>
+Some things you can learn from the <em>faq</em> include:
+
+<p>
+
+<ul>
+<li>SDF's policies (&amp; prices, methinks)
+</li>
+<li>brief history of unix
+</li>
+</ul>
+
+<p>
+
+<h1><a name="SECTION00720000000000000000"></a>
+<a name="com-mode"></a><br>
+<span class="arabic">6</span>.<span class="arabic">2</span> COM Mode
+</h1>
+
+<p>
+SDF has its own chat system, called <tt>com</tt>.  It's like a
+stripped-down IRC, but much cooler than IRC because people
+actually talk, &amp; you don't get unwanted pop-up download
+files &amp; you don't have tons &amp; tons of bots waiting to
+download ``warez''.  Anyway, <tt>com</tt> is like IRC except
+that <tt>com</tt> is cool.
+
+<p>
+To use com, type ``<tt>com</tt>'' on the command line.  You'll
+be plopped into the lobby, which is the default room.
+
+<p>
+Com uses <em>single-key commands</em> mostly.  If you are new to <tt>com</tt>, you might want to read <a href="#com-command-discussion">COM
+Command
+Discussion</a> in this same
+article.  If you are having trouble exiting from the <tt>com</tt> program, then you definitely need to read <a
+href="#com-command-discussion">COM Command
+Discussion</a>.
+
+<p>
+Table&nbsp;<a href="#tab-com-commands">6.1</a> shows the most frequently
+needed <tt>com</tt> commands.
+
+<p>
+<br><p></p>
+<div align="CENTER"><a name="688"></a>
+<table>
+<caption><strong>Table 6.1:</strong>
+The most frequently needed commands for <tt>com</tt></caption>
+<tr><td><table cellpadding="3" border="1">
+<tr><td align="RIGHT"><b>key</b></td>
+<td align="LEFT"><b>meaning</b></td>
+</tr>
+<tr><td align="RIGHT">h</td>
+<td align="LEFT">Get a list of all the commands</td>
+</tr>
+<tr><td align="RIGHT">?</td>
+<td align="LEFT">Get a list of all the commands</td>
+</tr>
+<tr><td align="RIGHT"><em>space bar</em></td>
+<td align="LEFT">Enter text that you ``say'' into the room</td>
+</tr>
+<tr><td align="RIGHT"><em>return</em></td>
+<td align="LEFT">Enter text that you ``say'' into the room</td>
+</tr>
+<tr><td align="RIGHT">g</td>
+<td align="LEFT">goto another room</td>
+</tr>
+<tr><td align="RIGHT">q</td>
+<td align="LEFT">Quit COM Mode</td>
+</tr>
+</table>
+
+<a name="tab-com-commands"></a></td></tr>
+</table>
+</div><p></p><br>
+
+<p>
+Also, from COM Mode, you can compete with others in games of
+Nethack, Netris, &amp; some others.  If you can master the ``h'' command in COM,
+it will show you the commands for playing these games.
+
+<p>
+
+<h2><a name="SECTION00721000000000000000"></a>
+<a name="com-commands-discussion"></a><br>
+<span class="arabic">6</span>.<span class="arabic">2</span>.<span class="arabic">1</span> COM Commands Discussion
+</h2>
+
+<p>
+The <tt>com</tt> commands are <em>hot</em>.  By that, I mean that
+you type a command character, &amp; <tt>com</tt> immediately takes
+action.  You must be careful to type only the command
+character you intend.  If you type other characters along
+with the character you intend, one of those other characters
+might be interpreted as a command, &amp; the character you
+intend will be interpreted as an argument to that command.
+It might sound like I'm being pedantic, but people who are
+new to <tt>com</tt> often have this problem.
+
+<p>
+Table&nbsp;<a href="#tab-proper-com">6.2</a> shows the proper sequence of
+steps for entering a command in <tt>com</tt>.  It assumes you
+are already running <tt>com</tt> &amp; that you are not currently
+processing any <tt>com</tt> commands.  You are just reading the
+text in the room.
+
+<p>
+<br><p></p>
+<div align="CENTER"><a name="tab-proper-com"></a><a name="690"></a>
+<table>
+<caption><strong>Table 6.2:</strong>
+The proper &amp; detailed sequence of events for executing a
+command in <tt>com</tt></caption>
+<tr><td><img width="536" height="682" border="0" src="/web/20110426193653im_/http://cybertiggyr.com/gene/unx/img3.png"
+alt="\begin{table}\begin{enumerate}
+\item Put both hands in your lap so that neither ...
+...he command key you intended,
+you did it incorrectly.
+\end{enumerate}
+\end{table}"></td></tr>
+</table>
+</div><p></p><br>
+
+<p>
+Step number 4 in Table&nbsp;<a href="#tab-proper-com">6.2</a> is critically
+important &amp; deserves further discussion.
+In step number 4, you touch (or ``type'') the command key.
+You do not touch (or type) any other keys on your keyboard
+or on any other keyboard.  You don't need to ``enter'' the
+command by typing the Return or Enter key on your keyboard;
+<tt>com</tt> will acknowledge your command key
+immediately.<a name="tex2html18" href="footnode.html#foot691"><sup><span class="arabic">6</span>.<span class="arabic">1</span></sup></a>
+<p>
+A common error for new users is to type the Return (or
+Enter) key after they type the command key.  <tt>Com</tt>
+executes the command key fine, then it notices the Return
+key.  Return is a command, so <tt>com</tt> executes it.  The
+Return command gets you a prompt so that you may enter text
+that you ``say'' for other people to ``hear'' in the room.
+Because of the Return key, <tt>com</tt> is not interpreting the
+new user's keystrokes as commands.
+
+<p>
+Then the new user tries to type another command, such as the
+``q'' (quit) command, but <tt>com</tt> interprets it as text to
+say into the room.  The new user is under the impression
+that he needs to end commands with Return, so he does that,
+which causes <tt>com</tt> to print ``q'' into the room for
+everyone to see.  The new user is confused about why his
+command doesn't execute, so he types ``h'' &amp; Return again.
+The ``h'' is interpreted as a command &amp; gets him a menu,
+but the Return is also interpreted as a command &amp; puts him
+into enter-a-line-of-text mode.  He sees the ``q'' command
+in the menu, types it &amp; Return, &amp; the cycle repeats.
+
+<p>
+All of this discussion may seem silly to most people, but a
+lot of new users have amazingly huge amounts of trouble when
+they learn to enter a command into <tt>com</tt>.<a name="tex2html19" href="footnode.html#foot692"><sup><span class="arabic">6</span>.<span
+class="arabic">2</span></sup></a>
+<p>
+
+<h2><a name="SECTION00722000000000000000">
+<span class="arabic">6</span>.<span class="arabic">2</span>.<span class="arabic">2</span> COM Session Example</a>
+</h2>
+
+<p>
+Let's walk a new user named <em>newbie</em> through his first
+session in <tt>com</tt>.
+
+<p>
+
+<ol>
+<li>Newbie starts on the unix command line.
+
+<p>
+</li>
+<li>Newbie enters COM Mode by typing ``<tt>com</tt>'' &amp;
+pressing the Return key.
+
+<p>
+</li>
+<li>Newbie might have to wait a few seconds, but she
+eventually sees <tt>com</tt> start.  (I think new users see a
+menu of the <tt>com</tt> commands &amp; have to answer Yes that
+they have read &amp; understood the menu.)  After <tt>com</tt>
+starts, Newbie will be in the <em>lobby</em> &amp; will see a list
+of the people in that room.  (The lobby is the default room
+&amp; is where most of the chatting happens.)
+
+<p>
+</li>
+<li>Newbie wants to say hello to everyone, so she types
+the Space Bar &amp; waits until she sees a ``<tt>[newbie]</tt>''
+prompt.  Then Newbie types ``Hi all.  I'm new.'' &amp; then
+types the Return key.
+
+<p>
+</li>
+<li>Everyone in the room will see ``<tt>[newbie] Hi all.
+I'm new.</tt>''.
+
+<p>
+</li>
+<li><em>Newbie is doing well so far, but now let's have
+her make a mistake.</em>
+
+<p>
+</li>
+<li>Newbie wants to leave <tt>com</tt>, but she can't
+remember the command, so she types ``h'' to get a menu &amp;
+pressed Return.  <em>This was a mistake.  Newbie should
+have typed ``h'' alone &amp; not pressed Return.</em>
+
+<p>
+</li>
+<li><em><tt>Com</tt> sees Newbie's ``h'' command &amp; prints the
+help menu.  That's good, but <tt>com</tt> also sees Newbies
+Return &amp; assumes Newbie wants to ``say'' a line of text
+into the room.  So <tt>com</tt> prints a ``<tt>[newbie]</tt>''
+prompt &amp; waits for Newbie to type some text, but Newbie is
+busy reading the help menu &amp; doesn't notice the prompt.</em>
+
+<p>
+</li>
+<li>Newbie sees the ``q'' (quit) command on the help menu
+&amp; types ``q'' &amp; then Return.  <em>This is a double
+mistake.  <tt>Com</tt> thinks Newbie is typing a line of text
+to say into the room, so her ``q'' is not interpreted as a
+command.  Also, Newbie is still under the incorrect belief
+that she must end <tt>com</tt> commands with a Return.</em>
+
+<p>
+</li>
+<li>Because of Newbie's mistake in the previous step, <tt>com</tt> prints ``<tt>[newbie] q</tt>'' into the room.
+
+<p>
+</li>
+<li>Newbie is confused that her ``q'' command didn't work,
+so she types ``h'' &amp; Return.  This takes her back to step
+7.
+
+<p>
+She'll repeat this who knows how many times.  Other
+  people in the lobby will notice her problem &amp; try to help,
+  but Newbie has to go through the error many times before she
+  stops typing Return after her commands.
+
+<p>
+The problem is compounded by <tt>com</tt>'s modality &amp;
+  Newbie's failure to realize that <tt>com</tt> is modal.
+  Sometimes, <tt>com</tt> is waiting for Newbie to type a
+  command.  Some commands are single key.  (The ``q'' &amp;
+  ``h'' commands are examples.)  Other commands wait for
+  Newbie to type something, &amp; during that time, <tt>com</tt>
+  does not interpret her keystrokes as commands.  (The Space
+  Bar and Return commands, both of which are for saying text
+  into the room, are examples.)
+
+<p>
+The other people in the room see what Newbie is going
+  through, but there isn't much they can do because they
+  can't see Newbie's screen &amp; help her figure out whether
+  <tt>com</tt> is waiting for her to type a command or waiting
+  for her to type text.  What's more, whenever they say
+  something like ``Type <em>h</em> by itself'', Newbie types an
+  ``h'' &amp; then a Return.  So Newbie keeps going around &amp;
+  around.
+
+<p>
+</li>
+<li>Eventually, Newbie figures it out while <tt>com</tt> is
+waiting for her to type a command.  At this time, Newbie
+types ``q'' (&amp; does not type any other characters at all).
+
+<p>
+</li>
+<li>Newbie might have to wait a few seconds, but she
+eventually sees <tt>com</tt> print an ``Unlinking tty''
+message, &amp; then Newbie is dropped back into her unix
+command line.
+</li>
+</ol>
+
+<p>
+
+<h2><a name="SECTION00723000000000000000">
+<span class="arabic">6</span>.<span class="arabic">2</span>.<span class="arabic">3</span> What to Do if You Are Caught in the Newbie Loop</a>
+</h2>
+
+<p>
+The problem is that <tt>com</tt> is modal &amp;
+new users sometimes fail to realize that.
+
+<p>
+What does it mean for a program to be <b>modal</b>?
+It means that sometimes, <tt>com</tt> is waiting for you to type a
+command, &amp; sometimes it is waiting for you to type
+arguments to a command.  Some commands are single key.  (The ``q'' &amp;
+``h'' commands are examples.)  Other commands wait for
+you to type something, &amp; during that time, <tt>com</tt>
+does not interpret her keystrokes as commands.  (The Space
+Bar and Return commands, both of which are for saying text
+into the room, are examples.)
+
+<p>
+If you find yourself in the <tt>Com</tt> Newbie loop, here's
+how to get out of it.  Follow the exact steps from
+Table&nbsp;<a href="#tab-exit-newbie-loop">6.3</a>.  Type only what it says to
+type.  Do not type anything else.  Do not type Return unless
+a step in the table says to type Return.
+
+<p>
+<br><p></p>
+<div align="CENTER"><a name="tab-exit-newbie-loop"></a><a name="695"></a>
+<table>
+<caption><strong>Table 6.3:</strong>
+The steps to get out of the <tt>Com</tt> Newbie loop.
+Do exactly what the steps say.  Do only what the steps say.
+Do not type anything else.</caption>
+<tr><td><img width="534" height="192" border="0" src="/web/20110426193653im_/http://cybertiggyr.com/gene/unx/img4.png"
+alt="\begin{table}\begin{enumerate}
+\item Type the Space Bar.
+\item Type the Return (...
+... may now re-enter {\tt com} or go do something
+else.
+\end{enumerate}
+\end{table}"></td></tr>
+</table>
+</div><p></p><br>
+
+<p>
+Here's why the steps in Table&nbsp;<a href="#tab-exit-newbie-loop">6.3</a> work:
+
+<p>
+
+<ol>
+<li>If <tt>com</tt> is waiting for you to type a command,
+  then you could type the command anyway, but you type Space,
+  which gets you a prompt (<tt>com</tt> isn't interpreting
+  commands).  Then you type Return, which ends that prompt.
+  So now  <tt>com</tt> is waiting for a command again.  So the
+  Space Bar &amp; Return sequence was unnecessary, but it
+  did not harm.  (People in the room won't even see it
+  because if you try to ``say'' an empty line, <tt>com</tt>
+  doesn't print anything.)
+</li>
+<li>If <tt>com</tt> has prompted you &amp; is not interpreting
+  your commands, the Space Bar won't do anything useful, but
+  the Return key will end that prompt.  If you had
+mistakenly typed Return earlier &amp; <tt>com</tt> was waiting for
+you to say something into the room, the Space Bar will do
+nothing, but the Return will end that mode, &amp; <tt>com</tt>
+will now wait for you to type a command..  (If you had
+typed things before the Space Bar, you will ``say'' them
+into the room.)
+</li>
+</ol>
+
+<p>
+
+<h2><a name="SECTION00724000000000000000">
+<span class="arabic">6</span>.<span class="arabic">2</span>.<span class="arabic">4</span> COM History</a>
+</h2>
+
+<p>
+I have heard that early versions of COM Mode were fairly
+simple shell scripts that ran <em>tail</em> on a common file.
+Excellently unixly elegant.  COM Mode is in about version 6
+now, &amp; it works across a bunch of computers networked at
+SDF, so I don't know if it's still just some shell scripts.
+
+<p>
+
+<h1><a name="SECTION00730000000000000000">
+<span class="arabic">6</span>.<span class="arabic">3</span> Bulletin Board</a>
+</h1>
+
+<p>
+If you type ``<tt>bboard</tt>'', you'll enter the bulletin
+board.  Its commands resemble those of the <em>faq</em>:
+
+<p>
+<dl>
+<dt><strong>g</strong></dt>
+<dd>Prompts you for a section name, which you type.
+    Then takes you to that section.
+</dd>
+<dt><strong>t</strong></dt>
+<dd>From a section's menu, prompts you for a message
+    number (which you must enter exactly, including leading
+    zeros).  Then it prints the message &amp; all replies to
+    your screen.
+</dd>
+<dt><strong>q</strong></dt>
+<dd>Quits the bulletin board.
+</dd>
+</dl>
+
+<p>
+
+<h1><a name="SECTION00800000000000000000">
+<span class="arabic">7</span>. Programming</a>
+</h1>
+
+<p>
+So you want to learn to program?  Good.  Programming is fun,
+creative, &amp; fascinating.  (It used to be a well-paying career, too.  I
+guess it still is, if you are in India or China.)
+
+<p>
+
+<h1><a name="SECTION00810000000000000000">
+<span class="arabic">7</span>.<span class="arabic">1</span> Language</a>
+</h1>
+
+<p>
+There are billions &amp; billions of programming languages.
+Well, not that many, but there's a damned lot.
+
+<p>
+You'll probably want to learn one of the most popular ones,
+which is too bad because most of the currently popular
+languages aren't very good.  They are complex versions of
+the exact same features that have been available in
+programming languages since the 1960s.  That's right: Even
+after forty years of hyped, new languages, we've effectively
+come full-circle to Algol 1960.
+
+<p>
+But I'm a bitter &amp; opinionated old programmer, so ignore
+what I just wrote.  Here's some actually useful information:
+
+<p>
+You can use just about any language you want on unix.  At
+the moment, it might be difficult to find a fully
+functioning C# compiler for unix, but one is coming, &amp;
+there is no technical reason that C# won't work on unix.
+Many other programming languages are available for unix.
+Heck, many were developed <em>on</em> unix.  So you can pick
+pretty much whichever you want.
+
+<p>
+No matter what you pick, I highly recommend that you also do
+some plain, vanilla C.  That's because the programming
+language of unix is C.  When you need to write some programs
+to experiment with some feature of unix to learn the details
+of how it works before you use it in a larger program you
+are writing, the best language for writing those
+experimental programs is C because it hides the least from
+you.  It's not that C is better, &amp; I'm not saying it's
+better for writing applications.  I mean that because unix's
+API is for C, C is the best language for discovering how
+unix's system calls work.  C doesn't hide anything from
+you.
+
+<p>
+There are two books you need to do serious C programming.
+
+<p>
+The first is the original &amp; the classic <em>The C
+Programming Language</em>, by Kernighan &amp; Ritchie
+([<a href="unx.html#kandr">aDMR88</a>]).  Yeah, it's old &amp; small, but since when is
+information bad just because it's old?  And since when would
+you rather take days to read a humongous tome that contained
+no more information than in a small book like K&amp;R?
+
+<p>
+The second book you need for C programming is <em>The
+Standard C Library</em>, by P. J. Plauger
+([<a href="unx.html#plauger:library">Pla92</a>]).
+
+<p>
+
+<h1><a name="SECTION00820000000000000000">
+<span class="arabic">7</span>.<span class="arabic">2</span> Languages on SDF</a>
+</h1>
+
+<p>
+Here are some languages that are available on SDF.  You may
+have to be validated or even ARPA to use some of them, but I
+don't know for sure.
+
+<p>
+<div align="CENTER">
+<table cellpadding="3" border="1">
+<tr><td align="RIGHT"><b>language</b></td>
+<td align="LEFT"><b>pathname</b></td>
+</tr>
+<tr><td align="RIGHT">Bourne (or other)</td>
+<td align="LEFT">/bin/sh</td>
+</tr>
+<tr><td align="RIGHT">C</td>
+<td align="LEFT">/usr/bin/gcc</td>
+</tr>
+<tr><td align="RIGHT">C++</td>
+<td align="LEFT">/usr/bin/g++</td>
+</tr>
+<tr><td align="RIGHT">Open Lisp (not Common)</td>
+<td align="LEFT">/sys/pkg/uxlisp/uxlisp</td>
+</tr>
+<tr><td align="RIGHT">Perl</td>
+<td align="LEFT">/usr/pkg/bin/perl</td>
+</tr>
+<tr><td align="RIGHT">Python</td>
+<td align="LEFT">/usr/pkg/bin/python</td>
+</tr>
+</table>
+</div>
+
+<p>
+To learn a language, I recommend studying at least one book,
+not just online sources.
+
+<p>
+
+<h1><a name="SECTION00830000000000000000">
+<span class="arabic">7</span>.<span class="arabic">3</span> Theory</a>
+</h1>
+
+<p>
+Obtain, read, &amp; understand a book about data structures.
+Learn it &amp; learn to love it.  Data structures separates the
+scripters from the programmers.
+
+<p>
+
+<h1><a name="SECTION00900000000000000000">
+<span class="arabic">8</span>. Hacking</a>
+</h1>
+
+<p>
+So you want to hack?  To break into computers?  Take them
+over?  Get root access?  Crash them or use their CPU cycles
+to do work for you?
+
+<p>
+Aim high, but I have some advice.  Those activities aren't
+<a name="tex2html22" href="https://web.archive.org/web/20110426193653/http://catb.org/~esr/jargon/html/H/hack.html">hacking</a>.
+Those activities are part of
+<a name="tex2html23" href="https://web.archive.org/web/20110426193653/http://catb.org/~esr/jargon/html/C/cracking.html">cracking</a>.
+For more information about the meaning of <em>hack</em>, you
+might read two other chapters from The Jargon File:
+
+<ul>
+<li><a name="tex2html24" href="https://web.archive.org/web/20110426193653/http://catb.org/~esr/jargon/html/meaning-of-hack.html">The Meaning
+of
+'Hack'</a> and
+</li>
+<li><a name="tex2html25" href="https://web.archive.org/web/20110426193653/http://catb.org/~esr/jargon/html/crackers.html">Crackers, Phreaks,
+&amp;
+Lamers</a>.
+</li>
+</ul>
+
+<p>
+You might find some people in COM Mode who would like to
+talk about these things, but most of them are really tired
+of kiddies coming into the lobby &amp; asking ``Do any of you
+know how to hack?''  So you'll need to be more subtle.  It's
+like real life; you don't walk into a room, interrupt the
+current conversation, &amp; loudly ask if anyone will sell you
+nose candy.  It's just rude.
+
+<p>
+Information about security holes is pretty easy to
+find without help.  Just use Google to search for things
+like ``computer security virus hole exploit''.
+What you need is the knowledge to make use
+of that information.  You need to learn
+straightforward programming techniques, especially
+networking<a name="tex2html21" href="footnode.html#foot696"><sup><span class="arabic">8</span>.<span class="arabic">1</span></sup></a>,
+before you can make use of all that security
+information that is readily available.  So instead of
+asking people to teach you to crack, it might be more
+worthwhile &amp; fun to talk programming with people.
+
+<p>
+While we're on the topic, I guess I can throw out a bone.
+Take a look at ``CIFS: Common Insecurities Fail Scrutiny''
+([<a href="unx.html#hobbit:cifs">Hob77</a>]).
+
+<p>
+Also, be aware that most of the
+protocols in use on the Internet are defined in the Request
+For Comment (RFC) documents.  One database of RFCs is
+<a name="tex2html26" href="https://web.archive.org/web/20110426193653/http://www.rfc-editor.org/">The RFC
+Editor</a>.  Another such database
+is <a name="tex2html27" href="https://web.archive.org/web/20110426193653/http://www.cis.ohio-state.edu/cs/Services/rfc/index.html">RFCs at
+Ohio State University</a>.
+
+<p>
+Why do you care about the RFCs?  Because to find a hole in
+some protocol, you need to know the actual protocol, not
+just heresay that people slip to you in a chat room.  To
+know the protocol, you need to refer to its definitive
+source.  For most protocols on the Internet, that's the
+RFCs.
+
+<p>
+For example, let's say you wanted to research holes in
+Internet multicast.  You could go to either of those RFC
+databases &amp; search for ``multicast''.  You conclude that
+any of these RFCs were worth your time
+<table cellpadding="3" border="1">
+<tr><td align="RIGHT"><b>id</b></td>
+<td align="LEFT"><b>title</b></td>
+<td align="LEFT"><b>author</b></td>
+<td align="LEFT"><b>data</b></td>
+</tr>
+<tr><td align="RIGHT">RFC1112</td>
+<td align="LEFT">Host extensions ofr IP multicasting</td>
+<td align="LEFT">S.E. Deering</td>
+<td align="LEFT">1 Aug 1989</td>
+</tr>
+<tr><td align="RIGHT">RFC3513</td>
+<td align="LEFT">Internet Protocol Version 6 (IPv6) Addressing
+Architecture</td>
+<td align="LEFT">R. Hinden, S. Deering</td>
+<td align="LEFT">Apr 2003</td>
+</tr>
+<tr><td align="RIGHT">RFC3261</td>
+<td align="LEFT">SIP: Session Initiation Protocol</td>
+<td align="LEFT">lots of blokes</td>
+<td align="LEFT">Jun 2002</td>
+</tr>
+</table>
+
+<p>
+That's just an example.  By the way, if none of those title
+make you at least a little curious to know what's in those
+documents, then you might not be cut-out to be a computer
+hacker or a cracker.
+
+<p>
+
+<h1><a name="SECTION001000000000000000000">
+<span class="arabic">9</span>. Meta</a>
+</h1>
+
+<p>
+This document is available online in several
+formats:
+
+<p>
+
+<ul>
+<li>HTML is at <tt><a name="tex2html28"
+href="https://web.archive.org/web/20110426193653/http://lisp-p.org/unx/">http://lisp-p.org/unx/</a></tt>.
+</li>
+<li>PostScript is <tt><a name="tex2html29"
+href="https://web.archive.org/web/20110426193653/http://lisp-p.org/unx/unx.ps">http://lisp-p.org/unx/unx.ps</a></tt>.
+</li>
+<li>DVI is <tt><a name="tex2html30"
+href="https://web.archive.org/web/20110426193653/http://lisp-p.org/unx/unx.dvi">http://lisp-p.org/unx/unx.dvi</a></tt>.
+</li>
+</ul>
+
+<p>
+There are no plans to make it available in Pointless
+Document Format (PDF).
+
+<p>
+
+<h2><a name="SECTION001100000000000000000">
+Bibliography</a>
+</h2><dl compact><dd><p></p><dt><a name="kandr">aDMR88</a>
+<dd>
+Brian W.&nbsp;Kernighan  - Dennis M.&nbsp;Ritchie.
+<br><em>The C Programming Language</em>.
+<br>Prentice Hall, 2nd edition, 1988.
+<br>ISBN 0-13-110362-8.
+
+<p></p><dt><a name="hobbit:cifs">Hob77</a>
+<dd>
+Hobbit.
+<br>Cifs: Common insecurities fail scrutiny.
+<br>January 1977.
+<br>
+  <a name="tex2html31"
+href="https://web.archive.org/web/20110426193653/http://www.ussrback.com/docs/cifs.txt">http://www.ussrback.com/docs/cifs.txt</a>
+or
+  <a name="tex2html32"
+href="https://web.archive.org/web/20110426193653/http://www.undergroundnews.com/files/texts/underground/hacking/cifs.html">http://www.undergroundnews.com/files/texts/underground/hacking/cifs.html</a>.
+
+<p></p><dt><a name="plauger:library">Pla92</a>
+<dd>
+P.&nbsp;J. Plauger.
+<br><em>The Standard C Library</em>.
+<br>Prentice Hall, 1992.
+<br>ISBN 0-13-131509-9.
+</dl>
+
+<address>
+Gene Michael Stover
+2008-04-20
+</address>
+</body>
+</html>
+<!--
+     FILE ARCHIVED ON 19:36:53 Apr 26, 2011 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 20:07:55 Mar 13, 2020.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+-->
+<!--
+playback timings (ms):
+  captures_list: 169.005
+  PetaboxLoader3.resolve: 119.718
+  LoadShardBlock: 143.581 (3)
+  CDXLines.iter: 14.761 (3)
+  PetaboxLoader3.datanode: 156.916 (4)
+  exclusion.robots.policy: 0.312
+  RedisCDXSource: 6.48
+  esindex: 0.014
+  exclusion.robots: 0.327
+  load_resource: 136.409
+-->

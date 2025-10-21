@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ThinkPad Notes - Jason Hamilton</title>
+    <meta name="description" content="Personal website of Jason Hamilton">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/normalize.css" type="text/css">
+    <link rel="stylesheet" href="/css/sakura.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="/">home</a></li>
+        <li><a href="/blog/">blog</a></li>
+        <li><a href="/docs/">docs</a></li>
+        <li><a href="/search/">search</a></li>
+        <li><a href="http://git.laydros.net">repo</a></li>
+        <li><a href="/about/">about</a></li>
+      </ul>
+    </nav>
+    <br />
+    <main>
+      
+<h1 id="thinkpad-specific">ThinkPad Specific</h1>
+<h2 id="battery-threshold">Battery Threshold</h2>
+<p>In Windows use Lenovo Vantage to set maximum battery at 80% to preserve battery life.</p>
+<p>In Linux write to <code>/sys/class/power_supply/BAT0/charge_stop_threshold</code> and <code>/sys/class/power_supply/BAT0/charge_start_threshold</code></p>
+<p>Can also use TLP with the tp-smapi kernel module (tp-smapi-dkms package in debian, for example)</p>
+<hr />
+<p>You can let tlp take care of that for you like so:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>~ ❯❯❯ egrep </span><span style="color:#e6db74;">&quot;BAT[0,1]&quot;</span><span> /etc/tlp.conf
+</span><span style="color:#75715e;"># auto = mid on BAT, high on AC.
+</span><span>START_CHARGE_THRESH_BAT0</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">75
+</span><span>STOP_CHARGE_THRESH_BAT0</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">80
+</span><span>START_CHARGE_THRESH_BAT1</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">75
+</span><span>STOP_CHARGE_THRESH_BAT1</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">80
+</span><span>
+</span><span>~ ❯❯❯ sudo systemctl restart tlp
+</span><span>   egrep </span><span style="color:#e6db74;">&quot;BAT[0,1]&quot;</span><span> /etc/tlp.conf
+</span></code></pre>
+<p>Works like a charm. I put the TLP config in /etc/tlp.d instead though.</p>
+<h2 id="thinkpad-trackpoint">ThinkPad TrackPoint</h2>
+<p>Edit the file <code>/etc/tmpfiles.d/tpoint.conf</code></p>
+<p>Add the lines:</p>
+<pre style="background-color:#272822;color:#f8f8f2;"><code><span>w /sys/devices/platform/i8042/serio1/speed - - - - 255
+</span><span>w /sys/devices/platform/i8042/serio1/sensitivity - - - - 255
+</span><span>w /sys/devices/platform/i8042/serio1/inertia - - - - 6
+</span><span>w /sys/devices/platform/i8042/serio1/press_to_select - - - - 0
+</span></code></pre>
+<p>May need to use <code>/sys/devices/platform/i8042/serio1/serio2</code> instead</p>
+<p>To make changes take effect before next reboot:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>sudo systemd-tmpfiles</span><span style="font-style:italic;color:#fd971f;"> --prefix</span><span style="color:#f92672;">=</span><span>/sys</span><span style="font-style:italic;color:#fd971f;"> --create
+</span></code></pre>
+
+
+    </main>
+    <div id="footer">
+      <a href="http://www.laydros.net/">&#169; 2025 jwh</a> &nbsp - &nbsp <b>contact</b>: jwh at laydros dot net
+    </div>
+  </body>
+</html>

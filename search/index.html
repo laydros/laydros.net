@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Search - Jason Hamilton</title>
+    <meta name="description" content="Search site content">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/normalize.css" type="text/css">
+    <link rel="stylesheet" href="/css/sakura.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="/">home</a></li>
+        <li><a href="/blog/">blog</a></li>
+        <li><a href="/docs/">docs</a></li>
+        <li><a href="/search/">search</a></li>
+        <li><a href="http://git.laydros.net">repo</a></li>
+        <li><a href="/about/">about</a></li>
+      </ul>
+    </nav>
+    <br />
+    <main>
+      
+<header><h2>Search</h2></header>
+
+<input type="search" id="search" placeholder="Search content...">
+<div id="results"></div>
+
+<script src="https://laydros.github.io/elasticlunr.min.js"></script>
+<script src="https://laydros.github.io/search_index.en.js"></script>
+<script>
+// Initialize the search index with ElasticLunr
+const index = elasticlunr.Index.load(window.searchIndex);
+
+const search = document.getElementById('search');
+const results = document.getElementById('results');
+
+search.addEventListener('input', function() {
+  const query = this.value.trim();
+
+  if (query.length < 2) {
+    results.innerHTML = '';
+    return;
+  }
+
+  // Perform the search
+  const searchResults = index.search(query, {
+    fields: {
+      title: {boost: 2},
+      body: {boost: 1}
+    }
+  });
+
+  if (searchResults.length === 0) {
+    results.innerHTML = '<p>No results found.</p>';
+    return;
+  }
+
+  // Display results (limit to 10)
+  const limitedResults = searchResults.slice(0, 10);
+  results.innerHTML = limitedResults.map(result => {
+    const url = result.ref;
+    const title = url.split('/').pop() || url;
+    const displayTitle = title.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    
+    return `<div style="margin-bottom: 1em;">
+      <h3><a href="${url}">${displayTitle}</a></h3>
+      <p>Score: ${result.score.toFixed(2)}</p>
+    </div>`;
+  }).join('');
+});
+</script>
+
+    </main>
+    <div id="footer">
+      <a href="http://www.laydros.net/">&#169; 2025 jwh</a> &nbsp - &nbsp <b>contact</b>: jwh at laydros dot net
+    </div>
+  </body>
+</html>

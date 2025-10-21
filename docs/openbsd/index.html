@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OpenBSD Notes - Jason Hamilton</title>
+    <meta name="description" content="Personal website of Jason Hamilton">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/normalize.css" type="text/css">
+    <link rel="stylesheet" href="/css/sakura.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="/">home</a></li>
+        <li><a href="/blog/">blog</a></li>
+        <li><a href="/docs/">docs</a></li>
+        <li><a href="/search/">search</a></li>
+        <li><a href="http://git.laydros.net">repo</a></li>
+        <li><a href="/about/">about</a></li>
+      </ul>
+    </nav>
+    <br />
+    <main>
+      
+<h1 id="notes-on-openbsd-setup-and-usage">Notes on OpenBSD Setup and Usage</h1>
+<p>There are a few things I do on any OpenBSD desktop, I'm collecting many of them here. This is borrowed from several sources including:</p>
+<ul>
+<li><a href="https://romanzolotarev.com/openbsd/install.html">romanzolotarev.com</a></li>
+<li><a href="https://www.c0ffee.net/blog/openbsd-on-a-laptop">c0ffee.net</a></li>
+</ul>
+<h2 id="set-caps-as-ctrl">Set Caps as Ctrl</h2>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#75715e;"># wsconsctl keyboard.map+=&quot;keysym Caps_Lock = Control_L&quot;
+</span></code></pre>
+<p>To make this run at boot, add <code>keyboard.map+=&quot;keysym Caps_Lock = Control_L&quot;</code> to /etc/wsconsctl.conf.</p>
+<p>Still need to add the following to .xsession when you are using <a href="https://www.xenocara.org/">xenocara</a>:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>setxkbmap</span><span style="font-style:italic;color:#fd971f;"> -option </span><span style="color:#e6db74;">&#39;ctrl:nocaps&#39;
+</span></code></pre>
+<h2 id="thinkpad-trackpoint-scrolling">ThinkPad TrackPoint Scrolling</h2>
+<p>Enable middle button scrolling with the trackpoint</p>
+<p>Add the following to .xsession:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>xinput set-prop </span><span style="color:#e6db74;">&quot;/dev/wsmouse&quot; &quot;WS Pointer Wheel Emulation&quot;</span><span> 1
+</span><span>xinput set-prop </span><span style="color:#e6db74;">&quot;/dev/wsmouse&quot; &quot;WS Pointer Wheel Emulation Button&quot;</span><span> 2
+</span><span>xinput set-prop </span><span style="color:#e6db74;">&quot;/dev/wsmouse&quot; &quot;WS Pointer Wheel Emulation Axes&quot;</span><span> 6 7 4 5
+</span></code></pre>
+<h2 id="disable-x-console">Disable X Console</h2>
+<p>By default xconsole is on the xenocara login screen and stays into X11</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>sed</span><span style="font-style:italic;color:#fd971f;"> -i </span><span style="color:#e6db74;">&#39;s/xconsole/#xconsole/&#39;</span><span> /etc/X11/xenodm/Xsetup_0
+</span><span style="color:#66d9ef;">echo </span><span style="color:#e6db74;">&#39;xset b off&#39; </span><span style="color:#f92672;">&gt;&gt;</span><span> /etc/X11/xenodm/Xsetup_0
+</span></code></pre>
+<h2 id="update-fstab-to-add-noatime">Update fstab to add noatime</h2>
+<p>Update <a href="https://man.openbsd.org/fstab.5">fstab(5)</a> to add <em>noatime</em>:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#75715e;"># cp /etc/fstab /etc/fstab.bak
+</span><span style="color:#75715e;"># sed -i &#39;s/rw/rw,softdep,noatime/&#39; /etc/fstab
+</span></code></pre>
+<h2 id="enable-apmd">Enable apmd</h2>
+<p>Enable <a href="https://man.openbsd.org/apmd.8">apmd(8)</a>:</p>
+<p>For a laptop enable power management.</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#75715e;"># rcctl enable apmd
+</span><span style="color:#75715e;"># rcctl set apmd flags -A -z 7
+</span><span style="color:#75715e;"># rcctl start apmd
+</span><span>ampd (ok)
+</span></code></pre>
+<p>To check current battery life run <a href="https://man.openbsd.org/apm.8">apm(8)</a></p>
+<h2 id="user-settings">User Settings</h2>
+<h3 id="add-your-username-to-etc-doas-conf">Add your username to /etc/doas.conf</h3>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#75715e;"># echo &#39;permit persist keepenv username&#39; &gt; /etc/doas.conf
+</span></code></pre>
+<h3 id="add-your-user-to-staff-group">Add your user to staff group</h3>
+<p>Add your user to the staff group. This group has higher resource limits in login.conf. You'll need to log out and back in for this change to take effect.</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>usermod</span><span style="font-style:italic;color:#fd971f;"> -G</span><span> staff YOUR_USERNAME
+</span></code></pre>
+<h2 id="fix-screen-tearing-intel-only">Fix Screen Tearing (Intel only)</h2>
+<p>Pasted from <a href="https://www.c0ffee.net/blog/openbsd-on-a-laptop#x11">c0ffee.net</a></p>
+<p>The default modesetting driver doesn't use vsync, so you'll get a lot of tearing when scrolling webpages or watching videos. If you have an Intel-based video chipset, you can switch to the <code>intel</code> driver to get smooth video.</p>
+<p>Create the <code>/etc/X11/xorg.conf.d</code> directory:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>mkdir /etc/X11/xorg.conf.d
+</span></code></pre>
+<p>Then, create <code>intel.conf</code> with the following contents:</p>
+<pre style="background-color:#272822;color:#f8f8f2;"><code><span>Section &quot;Device&quot;
+</span><span>  Identifier &quot;drm&quot;
+</span><span>  Driver &quot;intel&quot;
+</span><span>  Option &quot;TearFree&quot; &quot;true&quot;
+</span><span>EndSection
+</span></code></pre>
+<p>Restart <code>xenodm</code> to restart the X server:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>rcctl restart xenodm
+</span></code></pre>
+<h2 id="my-tmux-setup">My tmux setup</h2>
+<p>Allows <code>mosh host -- tmux a</code>. Uses C-z</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>curl https://laydros.net/docs/conf/tmux.conf</span><span style="font-style:italic;color:#fd971f;"> -o </span><span>~/.tmux.conf
+</span></code></pre>
+<h2 id="disable-ssh-access-except-for-key">Disable SSH access except for key</h2>
+<p>Update /etc/ssh/sshd_config with the following:</p>
+<pre style="background-color:#272822;color:#f8f8f2;"><code><span>PermitRootLogin no
+</span><span>PasswordAuthentication no
+</span><span>ChallengeResponseAuthentication no
+</span><span>UsePAM no
+</span></code></pre>
+<p>Then run:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>rcctl restart sshd
+</span></code></pre>
+<h2 id="updating">Updating</h2>
+<h3 id="update-patch-system">Update/Patch System</h3>
+<p>Update the base system with <a href="https://man.openbsd.org/syspatch.8">syspatch(8)</a>:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#75715e;"># syspatch
+</span></code></pre>
+<h3 id="update-packages">Update Packages</h3>
+<p>Update packages with <a href="https://man.openbsd.org/pkg_add">pkg_add(1)</a> -u:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#75715e;"># pkg_add -u
+</span></code></pre>
+<h3 id="upgrade-openbsd-version">Upgrade OpenBSD Version</h3>
+<p>First check the upgrade guide for the version you are upgrading too. Sometimes there are manual changes that must be done.</p>
+<p>Then simply run <a href="https://man.openbsd.org/sysupgrade.8">sysupgrade(8)</a>:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#75715e;"># sysupgrade
+</span></code></pre>
+<p>After the upgrade is complete, make sure to run <a href="https://man.openbsd.org/sysmerge.8">sysmerge(8)</a> in case any config files have changed:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#75715e;"># sysmerge
+</span></code></pre>
+
+
+    </main>
+    <div id="footer">
+      <a href="http://www.laydros.net/">&#169; 2025 jwh</a> &nbsp - &nbsp <b>contact</b>: jwh at laydros dot net
+    </div>
+  </body>
+</html>

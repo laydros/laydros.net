@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Unix Notes - Jason Hamilton</title>
+    <meta name="description" content="Personal website of Jason Hamilton">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/normalize.css" type="text/css">
+    <link rel="stylesheet" href="/css/sakura.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="/">home</a></li>
+        <li><a href="/blog/">blog</a></li>
+        <li><a href="/docs/">docs</a></li>
+        <li><a href="/search/">search</a></li>
+        <li><a href="http://git.laydros.net">repo</a></li>
+        <li><a href="/about/">about</a></li>
+      </ul>
+    </nav>
+    <br />
+    <main>
+      
+<h1 id="random-unix-nix-notes">Random Unix/*nix Notes</h1>
+<p>There is a lot of stuff I end up wanting to refer to later. I'm putting some here.</p>
+<p><strong>Related Pages:</strong></p>
+<ul>
+<li><a href="/docs/firefox/">Firefox stuff</a></li>
+<li><a href="/docs/thinkpad/">Thinkpad stuff</a></li>
+<li><a href="/docs/vi/">vi stuff</a></li>
+</ul>
+<h2 id="set-caps-as-ctrl">Set Caps as Ctrl</h2>
+<p>Doing it this way seems to work across the console and X:</p>
+<p>Edit <code>/etc/default/keyboard</code> and set:</p>
+<pre style="background-color:#272822;color:#f8f8f2;"><code><span>XKBOPTIONS=ctrl:nocaps
+</span></code></pre>
+<p>If you already have XKBOPTIONS set, append <code>ctrl:nocaps</code> to its existing value using a comma for separator, e.g.:</p>
+<pre style="background-color:#272822;color:#f8f8f2;"><code><span>XKBOPTIONS=&quot;terminate:ctrl_alt_bksp,ctrl:nocaps&quot;
+</span></code></pre>
+<p>Should be effective after next reboot or issuing the <code>setupcon</code> command.</p>
+<h2 id="debian">Debian</h2>
+<h3 id="enable-auto-upgrades">Enable auto upgrades</h3>
+<p>Install unattended-upgrades package:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>sudo apt install unattended-upgrades
+</span></code></pre>
+<p>To activate unattended-upgrades, you need the apt configuration stub <code>/etc/apt/apt.conf.d/20auto-upgrades</code> has the correct lines. This can be done automatically by running:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>sudo dpkg-reconfigure</span><span style="font-style:italic;color:#fd971f;"> -plow</span><span> unattended-upgrades
+</span></code></pre>
+<p>Or to run it non-interactively:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#66d9ef;">echo</span><span> unattended-upgrades unattended-upgrades/enable_auto_updates boolean true </span><span style="color:#f92672;">| </span><span>debconf-set-selections
+</span><span>dpkg-reconfigure</span><span style="font-style:italic;color:#fd971f;"> -f</span><span> noninteractive unattended-upgrades
+</span></code></pre>
+<h2 id="keychron-f-keys-under-linux">Keychron F-Keys under Linux</h2>
+<ul>
+<li>
+<p><strong>Problem 1:</strong> In wired mode the fn keys don't work correctly<br />
+Fix: Set <code>/sys/module/hid_apple/parameters/fnmode</code> to 0 or 2</p>
+</li>
+<li>
+<p><strong>Problem 2:</strong> In bluetooth mode none of the keys work correctly<br />
+Fix: Set <code>/sys/module/hid_apple/parameters/fnmode</code> to 0</p>
+</li>
+<li>
+<p><strong>Command to use:</strong></p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#66d9ef;">echo</span><span> 0 </span><span style="color:#f92672;">| </span><span>sudo tee /sys/modules/hid_apple/parameters/fnmode
+</span></code></pre>
+</li>
+</ul>
+<h3 id="making-sys-module-hid-apple-parameters-fnmode-changes-persistent">Making <code>/sys/module/hid_apple/parameters/fnmode</code> changes persistent</h3>
+<ul>
+<li>
+<p>Create a file <code>/etc/modprobe.d/hid_apple.conf</code> with content:</p>
+<pre style="background-color:#272822;color:#f8f8f2;"><code><span>options hid_apple fnmode=0
+</span></code></pre>
+</li>
+<li>
+<p>After this run the following command:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#75715e;"># Ubuntu:
+</span><span>sudo update-initramfs</span><span style="font-style:italic;color:#fd971f;"> -u
+</span><span>
+</span><span style="color:#75715e;"># Arch:
+</span><span>sudo mkinitcpio</span><span style="font-style:italic;color:#fd971f;"> -P</span><span> linux
+</span></code></pre>
+</li>
+</ul>
+<h2 id="merge-or-split-pdf-files">Merge or split PDF files</h2>
+<p>Install <code>poppler-tools</code> from package manager.</p>
+<p>To concatenate first.pdf and second.pdf into full.pdf:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>pdfunite first.pdf second.pdf full.pdf
+</span></code></pre>
+<p>To split a full.pdf into a pdf for each page:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>pdfseparate full.pdf page-%d.pdf
+</span></code></pre>
+<h2 id="my-tmux-setup">My tmux setup</h2>
+<p>Allows <code>mosh host -- tmux a</code>. Uses C-z</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>curl https://laydros.net/docs/conf/tmux.conf</span><span style="font-style:italic;color:#fd971f;"> -o </span><span>~/.tmux.conf
+</span></code></pre>
+<h2 id="macos">macOS</h2>
+<ul>
+<li>OS X - pipe to <code>pbcopy</code> for clipboard</li>
+<li>OS X - sharing:<br />
+Create share points for afp, ftp and smb services.<br />
+A new utility on OS X Mountain Lion which lets you quickly share directories from the command line, e.g.:<br />
+<code>sudo sharing -a /Users/you/yourshare</code></li>
+</ul>
+<h2 id="random-commands">Random Commands</h2>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#75715e;"># list directory sizes
+</span><span>$ du</span><span style="font-style:italic;color:#fd971f;"> -sh </span><span style="color:#f92672;">*
+</span><span>
+</span><span style="color:#75715e;"># count all occurrences of a string in a directory
+</span><span>$ grep</span><span style="font-style:italic;color:#fd971f;"> -roh</span><span> lorem . </span><span style="color:#f92672;">| </span><span>wc</span><span style="font-style:italic;color:#fd971f;"> -w
+</span><span>
+</span><span style="color:#75715e;"># watch a remote log
+</span><span>$ ssh user@server </span><span style="color:#e6db74;">&quot;tail -f /var/log/apache2/error.log&quot;
+</span><span>
+</span><span style="color:#75715e;"># Create directories a through z inside log/users/, creating any 
+</span><span style="color:#75715e;"># parent directories that don&#39;t exist yet too.
+</span><span>$ mkdir</span><span style="font-style:italic;color:#fd971f;"> -p</span><span> log/users/{a..z}
+</span><span>
+</span><span style="color:#75715e;"># brace expansion example
+</span><span>$ mkdir</span><span style="font-style:italic;color:#fd971f;"> -p</span><span> drupal/sites/all/modules/{contrib,custom,patched,features}
+</span><span>
+</span><span style="color:#75715e;"># launch program and ditch so term can be closed
+</span><span>$ </span><span style="color:#f92672;">&lt;</span><span>command</span><span style="color:#f92672;">&gt; &amp; </span><span style="color:#66d9ef;">disown
+</span><span>
+</span><span style="color:#75715e;"># df with posix mode, don&#39;t make 80 columns wide
+</span><span>$ df</span><span style="font-style:italic;color:#fd971f;"> -hP
+</span><span>
+</span><span>cat </span><span style="color:#f92672;">&lt;</span><span>file</span><span style="color:#f92672;">&gt; | </span><span>tee output.txt </span><span style="color:#f92672;">| </span><span>grep </span><span style="color:#f92672;">&lt;</span><span>term</span><span style="color:#f92672;">&gt;
+</span><span>
+</span><span>- grep</span><span style="font-style:italic;color:#fd971f;"> -r -i</span><span> somethingtosearchfor ./
+</span><span>- pgrep - search processes
+</span><span>- ngrep - monitor network activity
+</span></code></pre>
+<h2 id="audio-conversion">Audio Conversion</h2>
+<h3 id="wav-to-flac">wav to flac</h3>
+<p>Create a flac with the same name:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>$ flac inputfile.wav
+</span></code></pre>
+<p>Create an MP3:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>$ ffmpeg</span><span style="font-style:italic;color:#fd971f;"> -i</span><span> inputfile.wav</span><span style="font-style:italic;color:#fd971f;"> -acodec</span><span> mp3 outputfile.mp3
+</span></code></pre>
+<p>Set bitrate with -ab:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>$ ffmpeg</span><span style="font-style:italic;color:#fd971f;"> -i</span><span> inputfile.wav</span><span style="font-style:italic;color:#fd971f;"> -acodec</span><span> mp3</span><span style="font-style:italic;color:#fd971f;"> -ab</span><span> 64k outputfile.mp3
+</span></code></pre>
+<h2 id="splitting-files">Splitting files</h2>
+<p>Split a file called largefile into 1 gigabyte pieces called split-xaa, split-xab, split-xac ...</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>$ split</span><span style="font-style:italic;color:#fd971f;"> -b</span><span> 1G verylargefile split
+</span></code></pre>
+<p>Join the splits back together:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>$ cat split-xaa split-xab split-xac </span><span style="color:#f92672;">&gt;</span><span> rejoinedlargefile
+</span></code></pre>
+<p>Join the files together with brace expansion. Be mindful of filenames and order:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>$ cat split-xa{a,b,c} </span><span style="color:#f92672;">&gt;</span><span> rejoinedlargefile
+</span></code></pre>
+<h2 id="disable-ssh-access-except-for-key">Disable SSH access except for key</h2>
+<p>Update /etc/ssh/sshd_config with the following:</p>
+<pre style="background-color:#272822;color:#f8f8f2;"><code><span>PermitRootLogin no
+</span><span>PasswordAuthentication no
+</span><span>ChallengeResponseAuthentication no
+</span><span>UsePAM no
+</span></code></pre>
+<p>Restart the service:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#75715e;"># debian, arch, other systemd
+</span><span>systemctl restart sshd
+</span><span>
+</span><span style="color:#75715e;"># OpenBSD
+</span><span>rcctl restart sshd
+</span></code></pre>
+<h2 id="openbsd">OpenBSD</h2>
+<h3 id="caps-lock-as-control">Caps Lock as Control</h3>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#75715e;"># wsconsctl keyboard.map+=&quot;keysym Caps_Lock = Control_L&quot;
+</span></code></pre>
+<p>To make this run at boot, add <code>keyboard.map+=&quot;keysym Caps_Lock = Control_L&quot;</code> to /etc/wsconsctl.conf.</p>
+<p>Still need to add the following to .xsession when you are using <a href="https://www.xenocara.org/">xenocara</a>:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>setxkbmap</span><span style="font-style:italic;color:#fd971f;"> -option </span><span style="color:#e6db74;">&#39;ctrl:nocaps&#39;
+</span></code></pre>
+<h2 id="fio-flexible-io-tester">fio - flexible io tester</h2>
+<p>fio is a tool for testing disk speed. It is probably easiest to use with the included job files in the <a href="https://github.com/axboe/fio/tree/master/examples">examples</a> directory. You can also use <code>--showcmd=&lt;jobfile&gt;</code> to extract the commands from a job file. However here are a few sample commands:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#75715e;"># random write test
+</span><span>sudo fio</span><span style="font-style:italic;color:#fd971f;"> --name</span><span style="color:#f92672;">=</span><span>randwrite</span><span style="font-style:italic;color:#fd971f;"> --ioengine</span><span style="color:#f92672;">=</span><span>libaio</span><span style="font-style:italic;color:#fd971f;"> --iodepth</span><span style="color:#f92672;">=</span><span>1</span><span style="font-style:italic;color:#fd971f;"> --rw</span><span style="color:#f92672;">=</span><span>randwrite</span><span style="font-style:italic;color:#fd971f;"> --bs</span><span style="color:#f92672;">=</span><span>4k</span><span style="font-style:italic;color:#fd971f;"> --direct</span><span style="color:#f92672;">=</span><span>0</span><span style="font-style:italic;color:#fd971f;"> --size</span><span style="color:#f92672;">=</span><span>512M</span><span style="font-style:italic;color:#fd971f;"> --numjobs</span><span style="color:#f92672;">=</span><span>2</span><span style="font-style:italic;color:#fd971f;"> --runtime</span><span style="color:#f92672;">=</span><span>240</span><span style="font-style:italic;color:#fd971f;"> --group_reporting
+</span><span>
+</span><span style="color:#75715e;"># random read test
+</span><span>sudo fio</span><span style="font-style:italic;color:#fd971f;"> --name</span><span style="color:#f92672;">=</span><span>randread</span><span style="font-style:italic;color:#fd971f;"> --ioengine</span><span style="color:#f92672;">=</span><span>libaio</span><span style="font-style:italic;color:#fd971f;"> --iodepth</span><span style="color:#f92672;">=</span><span>16</span><span style="font-style:italic;color:#fd971f;"> --rw</span><span style="color:#f92672;">=</span><span>randread</span><span style="font-style:italic;color:#fd971f;"> --bs</span><span style="color:#f92672;">=</span><span>4k</span><span style="font-style:italic;color:#fd971f;"> --direct</span><span style="color:#f92672;">=</span><span>0</span><span style="font-style:italic;color:#fd971f;"> --size</span><span style="color:#f92672;">=</span><span>512M</span><span style="font-style:italic;color:#fd971f;"> --numjobs</span><span style="color:#f92672;">=</span><span>4</span><span style="font-style:italic;color:#fd971f;"> --runtime</span><span style="color:#f92672;">=</span><span>240</span><span style="font-style:italic;color:#fd971f;"> --group_reporting
+</span><span>
+</span><span style="color:#75715e;"># read write performance test
+</span><span>sudo fio</span><span style="font-style:italic;color:#fd971f;"> --randrepeat</span><span style="color:#f92672;">=</span><span>1</span><span style="font-style:italic;color:#fd971f;"> --ioengine</span><span style="color:#f92672;">=</span><span>libaio</span><span style="font-style:italic;color:#fd971f;"> --direct</span><span style="color:#f92672;">=</span><span>1</span><span style="font-style:italic;color:#fd971f;"> --gtod_reduce</span><span style="color:#f92672;">=</span><span>1</span><span style="font-style:italic;color:#fd971f;"> --name</span><span style="color:#f92672;">=</span><span>test</span><span style="font-style:italic;color:#fd971f;"> --filename</span><span style="color:#f92672;">=</span><span>random_read_write.fio</span><span style="font-style:italic;color:#fd971f;"> --bs</span><span style="color:#f92672;">=</span><span>4k</span><span style="font-style:italic;color:#fd971f;"> --iodepth</span><span style="color:#f92672;">=</span><span>64</span><span style="font-style:italic;color:#fd971f;"> --size</span><span style="color:#f92672;">=</span><span>4G</span><span style="font-style:italic;color:#fd971f;"> --readwrite</span><span style="color:#f92672;">=</span><span>randrw</span><span style="font-style:italic;color:#fd971f;"> --rwmixread</span><span style="color:#f92672;">=</span><span>75
+</span></code></pre>
+<p>The <code>ioengine</code> setting must be changed for different systems. The <code>libaio</code> engine is specific to Linux. On macOS you may want to use <code>psync</code> or <code>posixaio</code>.</p>
+<p>Also consider hdparm, Bonnie++, and using dd to create a file with <code>if=/dev/zero</code>.</p>
+<h2 id="rsync">rsync</h2>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>/usr/local/bin/rsync</span><span style="font-style:italic;color:#fd971f;"> --info</span><span style="color:#f92672;">=</span><span>progress2</span><span style="font-style:italic;color:#fd971f;"> --modify-window</span><span style="color:#f92672;">=</span><span>1</span><span style="font-style:italic;color:#fd971f;"> -rltvh --no-perms</span><span> /var/run/importcopy/tmpdir/dev/da3p1/ /mnt/storpool/share
+</span></code></pre>
+<p><code>rsync -essh -rtpvz</code> rocks. Really, there's nothing more to say. Learn it. Use it. Love it. Here's a good rsync anecdote: in my last job, I worked on a project that was doing daily (and sometimes more-than-once-per-day) builds of a 100 MB installer. Near the end of the release cycle, we were putting each daily build on a private web server for the client to download and test. Uploading the entire build took over a hour on my capped DSL line. It turns out that the fastest way to do this is to ssh into the server, duplicate yesterday's build to a file with today's date, then rsync today's build up to the server. rsync magically figures out which parts of the installer have changed (usually not more than a few KB) and synchronizes the build in under a minute. I have no idea how it does that. I read once that it was somebody's PhD project. Thank God for smart people.</p>
+<h2 id="gnome-taskbar-icon-duplication">Gnome taskbar icon duplication</h2>
+<p>If Gnome doesn't recognize an application, it will spawn a new icon for every window instead of collapsing them into the app icon.</p>
+<p>First find the window class by running:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>xprop WM_CLASS
+</span></code></pre>
+<p>This creates a crosshair, click on the window and it will list a window class. In the .desktop file for the program add:</p>
+<pre style="background-color:#272822;color:#f8f8f2;"><code><span>StartupWMClass=st-256-color
+</span></code></pre>
+<p>replacing 'st-256-color' with the class you got from xprop.</p>
+<h2 id="git">Git</h2>
+<h3 id="updating-a-fork-from-upstream">Updating a fork from upstream</h3>
+<p><strong>From: <a href="https://stackoverflow.com/questions/7244321/how-do-i-update-a-github-forked-repository">SO</a></strong></p>
+<p>In your local clone of your forked repository, you can add the original GitHub repository as a &quot;remote&quot;. (&quot;Remotes&quot; are like nicknames for the URLs of repositories - <code>origin</code> is one, for example.) Then you can fetch all the branches from that upstream repository, and rebase your work to continue working on the upstream version. In terms of commands that might look like:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#75715e;"># Add the remote, call it &quot;upstream&quot;:
+</span><span>git remote add upstream https://github.com/whoever/whatever.git
+</span><span>
+</span><span style="color:#75715e;"># Fetch all the branches of that remote into remote-tracking branches,
+</span><span style="color:#75715e;"># such as upstream/master:
+</span><span>git fetch upstream
+</span><span>
+</span><span style="color:#75715e;"># Make sure that you&#39;re on your master branch:
+</span><span>git checkout master
+</span><span>
+</span><span style="color:#75715e;"># Rewrite your master branch so that any commits of yours that
+</span><span style="color:#75715e;"># aren&#39;t already in upstream/master are replayed on top of that
+</span><span style="color:#75715e;"># other branch:
+</span><span>git rebase upstream/master
+</span></code></pre>
+<p>If you don't want to rewrite the history of your master branch, (for example because other people may have cloned it) then you should replace the last command with <code>git merge upstream/master</code>. However, for making further pull requests that are as clean as possible, it's probably better to rebase.</p>
+<hr />
+<p>If you've rebased your branch onto <code>upstream/master</code> you may need to force the push in order to push it to your own forked repository on GitHub. You'd do that with:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>$ git push</span><span style="font-style:italic;color:#fd971f;"> -f</span><span> origin master
+</span></code></pre>
+<p>You only need to use the <code>-f</code> the first time after you've rebased.</p>
+<h3 id="shallow-clone-for-large-repo">Shallow clone for large repo</h3>
+<p>With the depth parameter as:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>$ git clone</span><span style="font-style:italic;color:#fd971f;"> --depth</span><span style="color:#f92672;">=</span><span>1 https://github.com/mozilla/gecko-dev
+</span></code></pre>
+<p>Once you have shallow clone, you can deepen it. To fetch 100 commits use:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>$ git fetch</span><span style="font-style:italic;color:#fd971f;"> --depth</span><span style="color:#f92672;">=</span><span>100
+</span></code></pre>
+<p>or if you want to get all commits then simply use:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>$ git fetch</span><span style="font-style:italic;color:#fd971f;"> --unshallow
+</span></code></pre>
+<p>and that would fetch all the commits and make your repo similar to what you do in the initial place like using git clone simply.</p>
+<h2 id="emacs">Emacs</h2>
+<h3 id="directly-launching-emacs-to-a-particular-mode">Directly launching emacs to a particular mode</h3>
+<p>Use the command:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>$ emacsclient</span><span style="font-style:italic;color:#fd971f;"> -c -a </span><span style="color:#e6db74;">&#39; &#39;</span><span style="font-style:italic;color:#fd971f;"> --eval </span><span style="color:#e6db74;">&#39;(ibuffer)&#39;
+</span></code></pre>
+<p>replacing &quot;ibuffer&quot; with something like &quot;mu4e,&quot; &quot;elfeed&quot;, &quot;eshell,&quot; or &quot;dired nil&quot;</p>
+<h2 id="kvm-and-virsh">KVM and virsh</h2>
+<h3 id="convert-ova-to-use-with-kvm">Convert ova to use with KVM</h3>
+<p>From <a href="https://wiki.hackzine.org/sysadmin/kvm-import-ova.html">here</a>:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#75715e;"># untar the archive 
+</span><span>% tar xvf some-vm.ova
+</span><span>
+</span><span style="color:#75715e;"># check that qemu-img supports required image types
+</span><span>% qemu-img</span><span style="font-style:italic;color:#fd971f;"> -h </span><span style="color:#f92672;">| </span><span>tail</span><span style="font-style:italic;color:#fd971f;"> -n1
+</span><span>
+</span><span style="color:#75715e;"># convert image to qcow2
+</span><span>% qemu-img convert</span><span style="font-style:italic;color:#fd971f;"> -O</span><span> qcow2 some-vm-disk1.vmdk some-vm.qcow2
+</span></code></pre>
+<p>Use the new file as the disk for your VM. Check some-vm.ovf for information on settings for the VM.</p>
+
+
+    </main>
+    <div id="footer">
+      <a href="http://www.laydros.net/">&#169; 2025 jwh</a> &nbsp - &nbsp <b>contact</b>: jwh at laydros dot net
+    </div>
+  </body>
+</html>

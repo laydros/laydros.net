@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Moving to Zola and GitHub Pages - Jason Hamilton</title>
+    <meta name="description" content="Moving to a Zola-powered Site">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/normalize.css" type="text/css">
+    <link rel="stylesheet" href="/css/sakura.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="/">home</a></li>
+        <li><a href="/blog/">blog</a></li>
+        <li><a href="/docs/">docs</a></li>
+        <li><a href="/search/">search</a></li>
+        <li><a href="http://git.laydros.net">repo</a></li>
+        <li><a href="/about/">about</a></li>
+      </ul>
+    </nav>
+    <br />
+    <main>
+      
+<article>
+  <header>
+    <h1>Moving to Zola and GitHub Pages</h1>
+    <div class="meta">
+      <time datetime="2025-07-28">July 28, 2025</time>
+      
+        <div class="tags">
+          
+            <a href="https://laydros.github.io/tags/meta/" class="tag">#meta</a>
+          
+            <a href="https://laydros.github.io/tags/zola/" class="tag">#zola</a>
+          
+            <a href="https://laydros.github.io/tags/blogging/" class="tag">#blogging</a>
+          
+            <a href="https://laydros.github.io/tags/github/" class="tag">#github</a>
+          
+            <a href="https://laydros.github.io/tags/privacy/" class="tag">#privacy</a>
+          
+            <a href="https://laydros.github.io/tags/ai/" class="tag">#ai</a>
+          
+            <a href="https://laydros.github.io/tags/vultr/" class="tag">#vultr</a>
+          
+        </div>
+      
+    </div>
+  </header>
+  
+  <div class="content">
+    <p>This site (laydros.net) has taken many forms over the years. It's been hosted on the wonderful <a href="https://sdf.org">Super Dimensional Fortress</a>, on a <a href="https://www.debian.org">Debian</a> box at my house, on the sadly now-defunct devio.us, later on Linode, and eventually on <a href="https://www.vultr.com">Vultr</a> when I was set on using OpenBSD again.</p>
+<p>Now I’m trying something different—not because it’s better, but because I'm lazy...</p>
+<span id="continue-reading"></span>
+<p>I considered leaving Vultr back when they pulled <a href="https://arstechnica.com/tech-policy/2024/03/after-overreaching-tos-angers-users-cloud-provider-vultr-backs-off/">some nonsense</a>, but they walked it back, and I didn’t follow through. Lately though, for mostly unrelated reasons, I’ve finally decided to move the site.</p>
+<p>I’ve been into open source my whole adult life, and my concern for privacy grew sharply after the Snowden revelations. That concern deepened in 2020 when I heard an <a href="https://inteltechniques.com/blog/2019/03/01/the-privacy-security-osint-show-episode-113/">episode</a> of the (now sadly defunct) <a href="https://inteltechniques.com/podcast.html">Privacy and Security Podcast</a> that laid out just how much data Apple collects. I already knew it in theory, but hearing it spelled out like that was jarring.</p>
+<p>That kicked off a deeper effort to reduce my online footprint and double down on open source and self-hosted tools. I still bounced between Mac and Linux, but avoided most of the big platforms.</p>
+<h2 id="the-ai-influence">The AI Influence</h2>
+<p>Then came the recent wave of so-called “AI.” There’s plenty to criticize, but I haven’t been this excited about new tools since smartphones settled into their current form. That excitement has softened my hard lines on privacy and hosting.</p>
+<p>After flirting with self-hosting my git repos, I eventually settled on <a href="https://sr.ht">sourcehut</a>, which I still recommend. But now, the convenience of telling <a href="https://chatgpt.com/codex">ChatGPT Codex</a> to tweak a repo on GitHub while I’m heading out the door—and having it done by the time I get home—is hard to beat.</p>
+<p>So I moved my site to GitHub Pages and decided to finally use a site generator. I'm also done hand-editing HTML for the smallest change, so a static site generator made sense.</p>
+<h2 id="why-zola">Why Zola?</h2>
+<p>I spent about five minutes researching static site generators—by which I mean I asked ChatGPT and Claude what might work for me. Even though I’ve accepted Microsoft-run GitHub for now, I still want tools I can mostly understand. So I wanted something simple.</p>
+<p><a href="https://jekyllrb.com/">Jekyll</a> is the GitHub Pages default. It’s fine, but it’s Ruby-based, and I never really got into Ruby. I respect the language, but it came along at a time when I wasn’t chasing new tech. Now it feels like a dead end.</p>
+<p>I also looked at <a href="https://gohugo.io/">Hugo</a>. I’ve played with it a bit and I like <a href="https://go.dev/">Go</a>. Hugo is powerful, but not quite the lightweight setup I was looking for.</p>
+<p>Then I came across <a href="https://www.getzola.org/">Zola</a>. It’s written in <a href="https://www.rust-lang.org/">Rust</a>, which I’m curious about, and it’s designed to be a simple, single-binary tool. That appealed to me immediately.</p>
+<p>After a few rounds of trial and error with the Claude and Gemini CLI tools, I had the site mostly converted. Zola itself is solid. It doesn’t try to do too much but handles the basics well. The tricky part has been getting GitHub CI to build it consistently. I’ve changed my Codex environment setup three times already and still hit the occasional snag.</p>
+
+  </div>
+</article>
+
+<nav class="post-nav">
+  
+  
+</nav>
+
+    </main>
+    <div id="footer">
+      <a href="http://www.laydros.net/">&#169; 2025 jwh</a> &nbsp - &nbsp <b>contact</b>: jwh at laydros dot net
+    </div>
+  </body>
+</html>

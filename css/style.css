@@ -1,0 +1,35 @@
+nav li {
+  float: left;
+  display: block;
+  margin-right: 1em;
+//  margin: 0 1em 0 0;
+  font-family: Courier New, Courier, monospace;
+}
+
+nav:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  margin-bottom: 1em;
+}
+
+#footer {
+  margin-top: 2em;
+  font-size:0.8em;
+}
+
+.note {
+  font-size:0.7em;
+}
+
+.monospace {
+  font-family: Courier New, Courier, monospace;
+}
