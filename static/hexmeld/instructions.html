@@ -1,0 +1,166 @@
+<!--
+/*
+ * Hexmeld - A hex grid puzzle game
+ * Copyright (c) 2025 Jason Hamilton
+ *
+ * Licensed under the BSD 3-Clause License.
+ * See LICENSE file for details.
+ */
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hexmeld - How to Play</title>
+    <link rel="icon" href="assets/hexmeld-icon.svg" type="image/svg+xml">
+    <link rel="mask-icon" href="assets/hexmeld-icon.svg" color="#5b7fff">
+    <meta name="theme-color" content="#0b1020">
+    <link rel="manifest" href="assets/manifest.webmanifest">
+    <style>
+        :root{color-scheme:dark light;--bg-dark:#0b1020;--panel-dark:#11182a;--text-dark:#e8ebf0;--muted-dark:#93a0b4;--bg-light:#f6f7fb;--panel-light:#fff;--text-light:#0f1422;--muted-light:#5b667a;--primary:#5b7fff;--gap:18px}
+        *,*::before,*::after{box-sizing:border-box}
+        body{margin:0;min-height:100vh;display:flex;justify-content:center;align-items:flex-start;padding:var(--gap);font:15px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Arial;--bg:var(--bg-dark);--panel:var(--panel-dark);--text:var(--text-dark);--muted:var(--muted-dark);background:var(--bg);color:var(--text)}
+        body.theme-dark{color-scheme:dark;--bg:var(--bg-dark);--panel:var(--panel-dark);--text:var(--text-dark);--muted:var(--muted-dark)}
+        body.theme-light{color-scheme:light;--bg:var(--bg-light);--panel:var(--panel-light);--text:var(--text-light);--muted:var(--muted-light)}
+        @media (prefers-color-scheme: light){body:not(.theme-dark){color-scheme:light;--bg:var(--bg-light);--panel:var(--panel-light);--text:var(--text-light);--muted:var(--muted-light)}}
+        .panel{max-width:660px;width:100%;background:var(--panel);padding:28px;border-radius:12px;box-shadow:0 12px 28px rgba(0,0,0,.25)}
+
+        h1{margin:0 0 12px;font-size:2rem}
+        h2{margin:2rem 0 1rem;font-size:1.35rem}
+        h3{margin:1.5rem 0 .75rem;font-size:1.1rem;color:var(--muted)}
+        p,li{color:var(--text)}
+        ul{padding-left:1.25rem}
+        a{color:var(--primary)}
+        .button{display:inline-block;padding:.5rem .75rem;border-radius:8px;border:0;font-weight:600;color:#fff;background:var(--primary);text-decoration:none;cursor:pointer}
+        .button:hover{filter:brightness(1.08)}
+        .button:active{filter:brightness(.95)}
+        .button.danger{background:#ff6b6b}
+        .color-demo{display:inline-block;width:16px;height:16px;border-radius:50%;border:2px solid rgba(0,0,0,.4);margin-right:6px;vertical-align:middle}
+        footer{margin-top:2rem;text-align:center;font-size:.85rem;color:var(--muted);display:flex;flex-direction:column;gap:4px;align-items:center}
+        footer a{color:inherit;text-decoration:none}
+        footer a:hover{text-decoration:underline}
+        .source-link{font-size:.7rem;opacity:.72}
+        @media (max-width:768px){
+            body{padding:16px 0 24px;}
+            .panel{border-radius:0;}
+        }
+    </style>
+</head>
+<body>
+    <main class="panel">
+        <h1>Hexmeld - How to Play</h1>
+        <p><a href="index.html" class="button">Play Game</a></p>
+
+        <h2>Objective</h2>
+        <p>Create groups of 6 or more balls of the same color by moving balls across the hexagonal board. The larger the group, the more points you score!</p>
+
+        <h2>How to Play</h2>
+
+        <h3>Moving Balls</h3>
+        <ul>
+            <li><strong>Select:</strong> Click on any ball to select it.</li>
+            <li><strong>Move:</strong> Click on an empty hex to move the selected ball there.</li>
+            <li><strong>Path:</strong> Balls can only move to cells they can reach via empty hexes (no jumping over other balls). If the path is blocked, the ball cannot move.</li>
+        </ul>
+
+        <h3>Scoring</h3>
+        <ul>
+            <li>Connect <strong>6 or more</strong> balls of the same color to score points.</li>
+            <li>Groups must be adjacent (touching each other on hex edges).</li>
+            <li>Points formula: <strong>6 balls = 6 points</strong>, <strong>7 balls = 8 points</strong>, <strong>8 balls = 11 points</strong>, etc.</li>
+            <li>The score increases faster with larger groups!</li>
+            <li><strong>Combo bonus:</strong> Clear groups on consecutive moves to earn score multipliers. The combo resets when you make a move that doesn't clear any balls.</li>
+        </ul>
+
+        <h3>New Ball Spawning</h3>
+        <ul>
+            <li>After each move that doesn't form a group, new balls spawn in random empty locations.</li>
+            <li>The <strong>"Next:"</strong> preview shows which colors will spawn next.</li>
+            <li>The number of balls that spawn increases over time as the difficulty ramps up.</li>
+            <li>If spawned balls form a group, they are removed immediately, starting a new combo.</li>
+        </ul>
+
+        <h3>Restarting</h3>
+        <p>Use <strong>New Game</strong> to start fresh.</p>
+
+        <h3>Undo</h3>
+        <p>Made a mistake? Tap <strong>Undo</strong> to rewind the most recent completed turn.</p>
+
+        <h3>Reset All Data</h3>
+        <p>If you'd like to start completely fresh, you can reset all game data. This will clear your saved game, high score, theme preference, and all other settings.</p>
+        <p><button id="resetDataButton" class="button danger">Reset All Data</button></p>
+
+        <h3>Theme Options</h3>
+        <p>Use the <strong>Theme</strong> button to cycle between dark, light, and high-contrast themes. The high-contrast theme features maximum contrast colors with enhanced visibility, including brighter ball colors and bold borders to improve accessibility.</p>
+
+        <h3>Colors</h3>
+        <p>The game starts with several colors, including:</p>
+        <ul>
+            <li><span class="color-demo" style="background-color: #0000FF;"></span> Blue</li>
+            <li><span class="color-demo" style="background-color: #FFFF00;"></span> Yellow</li>
+            <li><span class="color-demo" style="background-color: #FF0000;"></span> Red</li>
+            <li><span class="color-demo" style="background-color: #00FF00;"></span> Green</li>
+            <li><span class="color-demo" style="background-color: #FFA500;"></span> Orange</li>
+            <li><span class="color-demo" style="background-color: #800080;"></span> Purple</li>
+        </ul>
+        <p>As the game progresses, additional colors are introduced to increase the challenge:</p>
+        <ul>
+            <li><span class="color-demo" style="background-color: #FFFFFF;"></span> White</li>
+            <li><span class="color-demo" style="background-color: #00FFFF;"></span> Turquoise</li>
+        </ul>
+
+        <h2>Game Over</h2>
+        <p>The game ends when there's not enough space to spawn new balls. Try to keep the board from filling up by creating groups!</p>
+
+        <h2>Strategy Tips</h2>
+        <ul>
+            <li>Plan ahead - look at the "Next" preview to see what colors are coming.</li>
+            <li>Try to build groups near each other so you can merge them.</li>
+            <li>Don't let one color dominate the board - clear groups regularly.</li>
+            <li>Larger groups give more points - aim for big combos!</li>
+            <li>Work with naturally occurring clusters rather than trying to organize balls by color - moves are a limited resource.</li>
+            <li>Keep pathways open so balls can reach where they need to go.</li>
+        </ul>
+
+        <footer>
+            <div>
+                <a href="index.html">Play Game</a>
+            </div>
+            <div class="source-link">
+                <a href="https://github.com/laydros/hexmeld" target="_blank" rel="noopener">View Source (AGPL-3.0)</a>
+            </div>
+        </footer>
+    </main>
+    <script type="module">
+        (()=>{const v=localStorage.getItem('hexmeld-theme');if(v){document.body.classList.add('theme-'+v);}})();
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js').catch((error) => {
+                console.error('Hexmeld service worker registration failed:', error);
+            });
+        }
+
+        // Reset all data button
+        const resetButton = document.getElementById('resetDataButton');
+        if (resetButton) {
+            resetButton.addEventListener('click', () => {
+                if (confirm('Reset all game data? This will clear your saved game, high score, theme preference, and all settings. This action cannot be undone.')) {
+                    try {
+                        localStorage.removeItem('hexmeldGameState');
+                        localStorage.removeItem('hexmeldHighScore');
+                        localStorage.removeItem('hexmeldFirstVisit');
+                        localStorage.removeItem('hexmeld-theme');
+                        localStorage.removeItem('hexmeldRngState');
+                        alert('All data has been reset. Returning to the game...');
+                        window.location.href = 'index.html';
+                    } catch (err) {
+                        alert('Failed to reset data. Please try clearing your browser cache manually.');
+                        console.error('Reset failed:', err);
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
