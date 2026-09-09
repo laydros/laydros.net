@@ -4,7 +4,7 @@ Personal website, blog, and documentation built with [Zola](https://www.getzola.
 
 ## Live Site
 
-Visit: [https://laydros.github.io](https://laydros.github.io)
+Visit: [https://laydros.net](https://laydros.net)
 
 ## Features
 
@@ -22,7 +22,7 @@ Visit: [https://laydros.github.io](https://laydros.github.io)
 ### Prerequisites
 
 - [Zola](https://www.getzola.org/documentation/getting-started/installation/) static site generator
-- Or run `scripts/setup_zola.sh` to download a prebuilt binary
+- Or run `scripts/setup_zola.sh` to install the same Zola release used in CI
 
 ### Development Workflow
 
