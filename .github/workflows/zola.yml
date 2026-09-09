@@ -16,14 +16,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
-      - name: Check site
-        uses: shalzz/zola-deploy-action@v0.23.1
-        env:
-          CHECK: true
-      - name: Build with Zola
+      - name: Check and build site
         uses: shalzz/zola-deploy-action@v0.23.1
         env:
           BUILD_ONLY: true
+          CHECK_LINKS: true
 
   build_and_deploy:
     runs-on: ubuntu-latest
@@ -34,11 +31,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
-      - name: Check site before deploy
+      - name: Check, build, and deploy
         uses: shalzz/zola-deploy-action@v0.23.1
         env:
-          CHECK: true
-      - name: Build and deploy
-        uses: shalzz/zola-deploy-action@v0.23.1
-        env:
+          CHECK_LINKS: true
           PAGES_BRANCH: gh-pages

@@ -17,9 +17,6 @@ description = "Documentation and reference materials"
 ## Static Resources & Archives
 
 - **[Essential C (PDF)](/docs/EssentialC.pdf)** - C programming basics from Stanford
-- **[Sony A300 Field Guide](/docs/sonyA300.pdf)** - Camera reference
-- **[Jargon File](/docs/jargon-4.4.7/html/)** - The New Hacker's Dictionary
-- **[History and Spirit of C](/media/video/History_and_Spirit_of_C_-Olve_Maudal.mp4)** - Video - the history and spirit of C - Olve Maudal
 
 ## Unconverted HTML Pages
 
