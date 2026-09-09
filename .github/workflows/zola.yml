@@ -17,11 +17,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
       - name: Check site
-        uses: shalzz/zola-deploy-action@v0.17.2
+        uses: shalzz/zola-deploy-action@v0.23.1
         env:
           CHECK: true
       - name: Build with Zola
-        uses: shalzz/zola-deploy-action@v0.17.2
+        uses: shalzz/zola-deploy-action@v0.23.1
         env:
           BUILD_ONLY: true
 
@@ -35,10 +35,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
       - name: Check site before deploy
-        uses: shalzz/zola-deploy-action@v0.17.2
+        uses: shalzz/zola-deploy-action@v0.23.1
         env:
           CHECK: true
       - name: Build and deploy
-        uses: shalzz/zola-deploy-action@v0.17.2
+        uses: shalzz/zola-deploy-action@v0.23.1
         env:
           PAGES_BRANCH: gh-pages

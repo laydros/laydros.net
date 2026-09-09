@@ -14,8 +14,10 @@ taxonomies = [
 ]
 
 [markdown]
-highlight_code = true
-highlight_theme = "monokai"
+
+[markdown.highlighting]
+style = "inline"
+theme = "monokai"
 
 [extra]
 
