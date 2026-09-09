@@ -15,6 +15,12 @@ const index = elasticlunr.Index.load(window.searchIndex);
 const search = document.getElementById('search');
 const results = document.getElementById('results');
 
+function escapeHtml(value) {
+  const element = document.createElement('div');
+  element.textContent = value;
+  return element.innerHTML;
+}
+
 search.addEventListener('input', function() {
   const query = this.value.trim();
 
@@ -40,8 +46,8 @@ search.addEventListener('input', function() {
   const limitedResults = searchResults.slice(0, 10);
   results.innerHTML = limitedResults.map(result => {
     const url = result.ref;
-    const title = url.split('/').pop() || url;
-    const displayTitle = title.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    const indexedDocument = index.documentStore.getDoc(url);
+    const displayTitle = escapeHtml(indexedDocument?.title || url);
     
     return `<div style="margin-bottom: 1em;">
       <h3><a href="${url}">${displayTitle}</a></h3>

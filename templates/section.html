@@ -19,7 +19,7 @@
         {% endif %}
       </div>
       {% if page.summary %}
-        <p>{{ page.summary | safe }}</p>
+        {{ page.summary | safe }}
       {% endif %}
     </article>
   {% endfor %}
