@@ -56,4 +56,6 @@ best left as faithful static archives unless conversion materially improves them
 - Removed unreferenced backup and editor files from the published tree.
 - Removed unused jQuery 3.4.1 copies.
 - Removed dead documentation-index entries for files absent from the repository.
-- Removed the process core dump from the current branch. History cleanup remains.
+- Removed the process core dump from all writable branches and local Git history.
+- GitHub's read-only snapshots for merged pull requests 1–5 still retain their old
+  commits; complete provider-side removal requires a GitHub Support request.
