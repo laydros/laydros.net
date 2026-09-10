@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Jason Hamilton</title>
+    <subtitle>Personal website of Jason Hamilton</subtitle>
+    <link rel="self" type="application/atom+xml" href="https://laydros.net/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://laydros.net"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2025-07-28T00:00:00+00:00</updated>
+    <id>https://laydros.net/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Moving to Zola and GitHub Pages</title>
+        <published>2025-07-28T00:00:00+00:00</published>
+        <updated>2025-07-28T00:00:00+00:00</updated>
+        
+        <author>
+          <name>Unknown</name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://laydros.net/blog/zola-and-ghpages-move/"/>
+        <id>https://laydros.net/blog/zola-and-ghpages-move/</id>
+        
+        <summary type="html">&lt;p&gt;This site (laydros.net) has taken many forms over the years. It&#39;s been hosted on the wonderful &lt;a rel=&quot;external&quot; href=&quot;https://sdf.org&quot;&gt;Super Dimensional Fortress&lt;/a&gt;, on a &lt;a rel=&quot;external&quot; href=&quot;https://www.debian.org&quot;&gt;Debian&lt;/a&gt; box at my house, on the sadly now-defunct devio.us, later on Linode, and eventually on &lt;a rel=&quot;external&quot; href=&quot;https://www.vultr.com&quot;&gt;Vultr&lt;/a&gt; when I was set on using OpenBSD again.&lt;/p&gt;
+&lt;p&gt;Now I’m trying something different—not because it’s better, but because I&#39;m lazy...&lt;/p&gt;</summary>
+        
+    </entry>
+</feed>

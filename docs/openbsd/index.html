@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OpenBSD Notes - Jason Hamilton</title>
+    <meta name="description" content="Personal website of Jason Hamilton">
+    <link rel="canonical" href="https://laydros.net/docs/openbsd/">
+    <link rel="alternate" type="application/atom+xml" title="Jason Hamilton" href="https://laydros.net/atom.xml">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/normalize.css" type="text/css">
+    <link rel="stylesheet" href="/css/sakura.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="/">home</a></li>
+        <li><a href="/blog/">blog</a></li>
+        <li><a href="/docs/">docs</a></li>
+        <li><a href="/search/">search</a></li>
+        <li><a href="https://github.com/laydros">repo</a></li>
+        <li><a href="/about/">about</a></li>
+      </ul>
+    </nav>
+    <br />
+    <main>
+      
+<h1 id="notes-on-openbsd-setup-and-usage">Notes on OpenBSD Setup and Usage</h1>
+<p>There are a few things I do on any OpenBSD desktop, I'm collecting many of them here. This is borrowed from several sources including:</p>
+<ul>
+<li><a rel="external" href="https://romanzolotarev.com/openbsd/install.html">romanzolotarev.com</a></li>
+<li><a rel="external" href="https://www.c0ffee.net/blog/openbsd-on-a-laptop">c0ffee.net</a></li>
+</ul>
+<h2 id="set-caps-as-ctrl">Set Caps as Ctrl</h2>
+<pre class="giallo" style="color: #F8F8F2; background-color: #272822;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #88846F;"># wsconsctl keyboard.map+=&quot;keysym Caps_Lock = Control_L&quot;</span></span></code></pre>
+<p>To make this run at boot, add <code>keyboard.map+="keysym Caps_Lock = Control_L"</code> to /etc/wsconsctl.conf.</p>
+<p>Still need to add the following to .xsession when you are using <a rel="external" href="https://www.xenocara.org/">xenocara</a>:</p>
+<pre class="giallo" style="color: #F8F8F2; background-color: #272822;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #A6E22E;">setxkbmap</span><span style="color: #AE81FF;"> -option</span><span style="color: #E6DB74;"> &#39;ctrl:nocaps&#39;</span></span></code></pre><h2 id="thinkpad-trackpoint-scrolling">ThinkPad TrackPoint Scrolling</h2>
+<p>Enable middle button scrolling with the trackpoint</p>
+<p>Add the following to .xsession:</p>
+<pre class="giallo" style="color: #F8F8F2; background-color: #272822;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #A6E22E;">xinput</span><span style="color: #E6DB74;"> set-prop &quot;/dev/wsmouse&quot; &quot;WS Pointer Wheel Emulation&quot;</span><span style="color: #AE81FF;"> 1</span></span>
+<span class="giallo-l"><span style="color: #A6E22E;">xinput</span><span style="color: #E6DB74;"> set-prop &quot;/dev/wsmouse&quot; &quot;WS Pointer Wheel Emulation Button&quot;</span><span style="color: #AE81FF;"> 2</span></span>
+<span class="giallo-l"><span style="color: #A6E22E;">xinput</span><span style="color: #E6DB74;"> set-prop &quot;/dev/wsmouse&quot; &quot;WS Pointer Wheel Emulation Axes&quot;</span><span style="color: #AE81FF;"> 6 7 4 5</span></span></code></pre><h2 id="disable-x-console">Disable X Console</h2>
+<p>By default xconsole is on the xenocara login screen and stays into X11</p>
+<pre class="giallo" style="color: #F8F8F2; background-color: #272822;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #A6E22E;">sed</span><span style="color: #AE81FF;"> -i</span><span style="color: #E6DB74;"> &#39;s/xconsole/#xconsole/&#39; /etc/X11/xenodm/Xsetup_0</span></span>
+<span class="giallo-l"><span style="color: #66D9EF;">echo</span><span style="color: #E6DB74;"> &#39;xset b off&#39;</span><span style="color: #F92672;"> &gt;&gt;</span><span style="color: #E6DB74;"> /etc/X11/xenodm/Xsetup_0</span></span></code></pre><h2 id="update-fstab-to-add-noatime">Update fstab to add noatime</h2>
+<p>Update <a rel="external" href="https://man.openbsd.org/fstab.5">fstab(5)</a> to add <em>noatime</em>:</p>
+<pre class="giallo" style="color: #F8F8F2; background-color: #272822;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #88846F;"># cp /etc/fstab /etc/fstab.bak</span></span>
+<span class="giallo-l"><span style="color: #88846F;"># sed -i &#39;s/rw/rw,softdep,noatime/&#39; /etc/fstab</span></span></code></pre><h2 id="enable-apmd">Enable apmd</h2>
+<p>Enable <a rel="external" href="https://man.openbsd.org/apmd.8">apmd(8)</a>:</p>
+<p>For a laptop enable power management.</p>
+<pre class="giallo" style="color: #F8F8F2; background-color: #272822;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #88846F;"># rcctl enable apmd</span></span>
+<span class="giallo-l"><span style="color: #88846F;"># rcctl set apmd flags -A -z 7</span></span>
+<span class="giallo-l"><span style="color: #88846F;"># rcctl start apmd</span></span>
+<span class="giallo-l"><span style="color: #A6E22E;">ampd</span><span> (ok)</span></span></code></pre>
+<p>To check current battery life run <a rel="external" href="https://man.openbsd.org/apm.8">apm(8)</a></p>
+<h2 id="user-settings">User Settings</h2>
+<h3 id="add-your-username-to-etc-doas-conf">Add your username to /etc/doas.conf</h3>
+<pre class="giallo" style="color: #F8F8F2; background-color: #272822;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #88846F;"># echo &#39;permit persist keepenv username&#39; &gt; /etc/doas.conf</span></span></code></pre><h3 id="add-your-user-to-staff-group">Add your user to staff group</h3>
+<p>Add your user to the staff group. This group has higher resource limits in login.conf. You'll need to log out and back in for this change to take effect.</p>
+<pre class="giallo" style="color: #F8F8F2; background-color: #272822;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #A6E22E;">usermod</span><span style="color: #AE81FF;"> -G</span><span style="color: #E6DB74;"> staff YOUR_USERNAME</span></span></code></pre><h2 id="fix-screen-tearing-intel-only">Fix Screen Tearing (Intel only)</h2>
+<p>Pasted from <a rel="external" href="https://www.c0ffee.net/blog/openbsd-on-a-laptop#x11">c0ffee.net</a></p>
+<p>The default modesetting driver doesn't use vsync, so you'll get a lot of tearing when scrolling webpages or watching videos. If you have an Intel-based video chipset, you can switch to the <code>intel</code> driver to get smooth video.</p>
+<p>Create the <code>/etc/X11/xorg.conf.d</code> directory:</p>
+<pre class="giallo" style="color: #F8F8F2; background-color: #272822;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #A6E22E;">mkdir</span><span style="color: #E6DB74;"> /etc/X11/xorg.conf.d</span></span></code></pre>
+<p>Then, create <code>intel.conf</code> with the following contents:</p>
+<pre class="giallo" style="color: #F8F8F2; background-color: #272822;" ><code data-lang="plain"><span class="giallo-l"><span>Section &quot;Device&quot;</span></span>
+<span class="giallo-l"><span>  Identifier &quot;drm&quot;</span></span>
+<span class="giallo-l"><span>  Driver &quot;intel&quot;</span></span>
+<span class="giallo-l"><span>  Option &quot;TearFree&quot; &quot;true&quot;</span></span>
+<span class="giallo-l"><span>EndSection</span></span></code></pre>
+<p>Restart <code>xenodm</code> to restart the X server:</p>
+<pre class="giallo" style="color: #F8F8F2; background-color: #272822;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #A6E22E;">rcctl</span><span style="color: #E6DB74;"> restart xenodm</span></span></code></pre><h2 id="my-tmux-setup">My tmux setup</h2>
+<p>Allows <code>mosh host -- tmux a</code>. Uses C-z</p>
+<pre class="giallo" style="color: #F8F8F2; background-color: #272822;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #A6E22E;">curl</span><span style="color: #E6DB74;"> https://laydros.net/docs/conf/tmux.conf</span><span style="color: #AE81FF;"> -o</span><span style="color: #E6DB74;"> ~/.tmux.conf</span></span></code></pre><h2 id="disable-ssh-access-except-for-key">Disable SSH access except for key</h2>
+<p>Update /etc/ssh/sshd_config with the following:</p>
+<pre class="giallo" style="color: #F8F8F2; background-color: #272822;" ><code data-lang="plain"><span class="giallo-l"><span>PermitRootLogin no</span></span>
+<span class="giallo-l"><span>PasswordAuthentication no</span></span>
+<span class="giallo-l"><span>ChallengeResponseAuthentication no</span></span>
+<span class="giallo-l"><span>UsePAM no</span></span></code></pre>
+<p>Then run:</p>
+<pre class="giallo" style="color: #F8F8F2; background-color: #272822;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #A6E22E;">rcctl</span><span style="color: #E6DB74;"> restart sshd</span></span></code></pre><h2 id="updating">Updating</h2>
+<h3 id="update-patch-system">Update/Patch System</h3>
+<p>Update the base system with <a rel="external" href="https://man.openbsd.org/syspatch.8">syspatch(8)</a>:</p>
+<pre class="giallo" style="color: #F8F8F2; background-color: #272822;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #88846F;"># syspatch</span></span></code></pre><h3 id="update-packages">Update Packages</h3>
+<p>Update packages with <a rel="external" href="https://man.openbsd.org/pkg_add">pkg_add(1)</a> -u:</p>
+<pre class="giallo" style="color: #F8F8F2; background-color: #272822;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #88846F;"># pkg_add -u</span></span></code></pre><h3 id="upgrade-openbsd-version">Upgrade OpenBSD Version</h3>
+<p>First check the upgrade guide for the version you are upgrading too. Sometimes there are manual changes that must be done.</p>
+<p>Then simply run <a rel="external" href="https://man.openbsd.org/sysupgrade.8">sysupgrade(8)</a>:</p>
+<pre class="giallo" style="color: #F8F8F2; background-color: #272822;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #88846F;"># sysupgrade</span></span></code></pre>
+<p>After the upgrade is complete, make sure to run <a rel="external" href="https://man.openbsd.org/sysmerge.8">sysmerge(8)</a> in case any config files have changed:</p>
+<pre class="giallo" style="color: #F8F8F2; background-color: #272822;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #88846F;"># sysmerge</span></span></code></pre>
+
+    </main>
+    <div id="footer">
+      <a href="https://laydros.net/">&#169; 2026 jwh</a> &nbsp;&mdash;&nbsp; <b>contact</b>: jwh at laydros dot net
+    </div>
+  </body>
+</html>

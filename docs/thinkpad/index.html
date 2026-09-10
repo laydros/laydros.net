@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ThinkPad Notes - Jason Hamilton</title>
+    <meta name="description" content="Personal website of Jason Hamilton">
+    <link rel="canonical" href="https://laydros.net/docs/thinkpad/">
+    <link rel="alternate" type="application/atom+xml" title="Jason Hamilton" href="https://laydros.net/atom.xml">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/normalize.css" type="text/css">
+    <link rel="stylesheet" href="/css/sakura.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="/">home</a></li>
+        <li><a href="/blog/">blog</a></li>
+        <li><a href="/docs/">docs</a></li>
+        <li><a href="/search/">search</a></li>
+        <li><a href="https://github.com/laydros">repo</a></li>
+        <li><a href="/about/">about</a></li>
+      </ul>
+    </nav>
+    <br />
+    <main>
+      
+<h1 id="thinkpad-specific">ThinkPad Specific</h1>
+<h2 id="battery-threshold">Battery Threshold</h2>
+<p>In Windows use Lenovo Vantage to set maximum battery at 80% to preserve battery life.</p>
+<p>In Linux write to <code>/sys/class/power_supply/BAT0/charge_stop_threshold</code> and <code>/sys/class/power_supply/BAT0/charge_start_threshold</code></p>
+<p>Can also use TLP with the tp-smapi kernel module (tp-smapi-dkms package in debian, for example)</p>
+<hr />
+<p>You can let tlp take care of that for you like so:</p>
+<pre class="giallo" style="color: #F8F8F2; background-color: #272822;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #F92672;">~</span><span> ❯❯❯ egrep </span><span style="color: #E6DB74;">&quot;BAT[0,1]&quot;</span><span> /etc/tlp.conf</span></span>
+<span class="giallo-l"><span style="color: #88846F;"># auto = mid on BAT, high on AC.</span></span>
+<span class="giallo-l"><span>START_CHARGE_THRESH_BAT0</span><span style="color: #F92672;">=</span><span style="color: #E6DB74;">75</span></span>
+<span class="giallo-l"><span>STOP_CHARGE_THRESH_BAT0</span><span style="color: #F92672;">=</span><span style="color: #E6DB74;">80</span></span>
+<span class="giallo-l"><span>START_CHARGE_THRESH_BAT1</span><span style="color: #F92672;">=</span><span style="color: #E6DB74;">75</span></span>
+<span class="giallo-l"><span>STOP_CHARGE_THRESH_BAT1</span><span style="color: #F92672;">=</span><span style="color: #E6DB74;">80</span></span>
+<span class="giallo-l"></span>
+<span class="giallo-l"><span style="color: #F92672;">~</span><span> ❯❯❯ sudo systemctl restart tlp</span></span>
+<span class="giallo-l"><span style="color: #A6E22E;">   egrep</span><span style="color: #E6DB74;"> &quot;BAT[0,1]&quot; /etc/tlp.conf</span></span></code></pre>
+<p>Works like a charm. I put the TLP config in /etc/tlp.d instead though.</p>
+<h2 id="thinkpad-trackpoint">ThinkPad TrackPoint</h2>
+<p>Edit the file <code>/etc/tmpfiles.d/tpoint.conf</code></p>
+<p>Add the lines:</p>
+<pre class="giallo" style="color: #F8F8F2; background-color: #272822;" ><code data-lang="plain"><span class="giallo-l"><span>w /sys/devices/platform/i8042/serio1/speed - - - - 255</span></span>
+<span class="giallo-l"><span>w /sys/devices/platform/i8042/serio1/sensitivity - - - - 255</span></span>
+<span class="giallo-l"><span>w /sys/devices/platform/i8042/serio1/inertia - - - - 6</span></span>
+<span class="giallo-l"><span>w /sys/devices/platform/i8042/serio1/press_to_select - - - - 0</span></span></code></pre>
+<p>May need to use <code>/sys/devices/platform/i8042/serio1/serio2</code> instead</p>
+<p>To make changes take effect before next reboot:</p>
+<pre class="giallo" style="color: #F8F8F2; background-color: #272822;" ><code data-lang="shellscript"><span class="giallo-l"><span style="color: #A6E22E;">sudo</span><span style="color: #E6DB74;"> systemd-tmpfiles</span><span style="color: #AE81FF;"> --prefix=/sys --create</span></span></code></pre>
+
+    </main>
+    <div id="footer">
+      <a href="https://laydros.net/">&#169; 2026 jwh</a> &nbsp;&mdash;&nbsp; <b>contact</b>: jwh at laydros dot net
+    </div>
+  </body>
+</html>

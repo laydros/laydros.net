@@ -1,0 +1,9 @@
+<h1 id="post-install-script-to-run-as-root">post-install script to run as root</h1>
+<p>ftp -V https://raw.githubusercontent.com/laydros/dotfiles/main/bin/obsd-post.sh</p>
+<h1 id="grab-dotfiles-for-user">grab dotfiles for user</h1>
+<p>init and clone directory</p>
+<pre><code>cd ~
+git init
+git remote add origin https://github.com/laydros/dotfiles.git
+git fetch
+git checkout -f main</code></pre>

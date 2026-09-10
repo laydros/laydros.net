@@ -1,0 +1,122 @@
+:root {
+  color-scheme: light dark;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+body {
+  margin: 0;
+  background: Canvas;
+  color: CanvasText;
+}
+
+a { color: LinkText; }
+
+header,
+main {
+  width: min(1100px, calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+header {
+  padding-block: 1.5rem 1rem;
+  border-bottom: 1px solid color-mix(in srgb, CanvasText 20%, transparent);
+}
+
+header h1,
+#photo-title { margin-bottom: 0.25rem; }
+
+.muted {
+  color: color-mix(in srgb, CanvasText 65%, transparent);
+  margin-block: 0.25rem;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(180px, 260px) minmax(0, 1fr);
+  gap: 2rem;
+  padding-block: 1.5rem;
+}
+
+.thumbnails {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+  align-content: start;
+}
+
+.thumbnail {
+  border: 2px solid transparent;
+  border-radius: 0.4rem;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.thumbnail[aria-current="true"] { border-color: Highlight; }
+
+.thumbnail img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.photo {
+  display: block;
+  max-width: 100%;
+  max-height: 75vh;
+  width: auto;
+  height: auto;
+}
+
+.details section { margin-top: 1.5rem; }
+.details h3 { margin-bottom: 0.4rem; }
+.details ul { margin-top: 0.4rem; }
+
+.comments {
+  padding: 0;
+  list-style: none;
+}
+
+.comments li {
+  padding-block: 0.6rem;
+  border-top: 1px solid color-mix(in srgb, CanvasText 15%, transparent);
+}
+
+.album-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  padding-block: 1.5rem 3rem;
+}
+
+.album-card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  border: 1px solid color-mix(in srgb, CanvasText 20%, transparent);
+  border-radius: 0.6rem;
+  overflow: hidden;
+}
+
+.album-card:hover { border-color: Highlight; }
+
+.album-card img,
+.album-placeholder {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: color-mix(in srgb, CanvasText 8%, Canvas);
+}
+
+.album-card div { padding: 0.8rem; }
+.album-card h2 { margin: 0; font-size: 1.1rem; }
+.album-card p { margin: 0.25rem 0 0; }
+
+@media (max-width: 700px) {
+  .layout { grid-template-columns: 1fr; }
+  .thumbnails { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Photo archive</title>
+  <link rel="stylesheet" href="../viewer.css">
+  <script src="album.json"></script>
+  <script src="../viewer.js" defer></script>
+</head>
+<body>
+  <header>
+    <p><a href="../">All albums</a></p>
+    <h1 id="album-title">Photo archive</h1>
+    <p id="album-owner" class="muted"></p>
+    <p id="album-description"></p>
+  </header>
+  <main class="layout">
+    <nav id="thumbnails" class="thumbnails" aria-label="Photos"></nav>
+    <p id="empty"></p>
+    <article id="details" class="details">
+      <img id="photo" class="photo" alt="">
+      <h2 id="photo-title"></h2>
+      <p id="photo-date" class="muted"></p>
+      <section id="tags-section" hidden>
+        <h3>Tagged</h3>
+        <ul id="tags"></ul>
+      </section>
+      <section id="comments-section" hidden>
+        <h3>Comments</h3>
+        <ul id="comments" class="comments"></ul>
+      </section>
+    </article>
+  </main>
+</body>
+</html>
